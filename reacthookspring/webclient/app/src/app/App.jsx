@@ -6,11 +6,10 @@ import ErrorHandler from "./commons/errorHandler/ErrorHandler";
 import {appMenuItems} from "./AppConfig";
 
 function App() {
-
     return (
         <React.Fragment>
             <ErrorHandler>
-                <div className={appStyles.background}>
+                <div>
                     <CssBaseline/>
                     <AppHeader menuItems={appMenuItems}/>
                     <MainContentRouter/>
