@@ -1,4 +1,4 @@
-package de.xyz.persistence.config;
+package de.starwit.persistence.config;
 
 import org.hibernate.boot.model.naming.Identifier;
 import org.hibernate.boot.model.naming.PhysicalNamingStrategy;

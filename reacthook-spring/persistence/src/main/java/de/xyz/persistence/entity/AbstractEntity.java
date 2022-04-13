@@ -1,4 +1,4 @@
-package de.xyz.persistence.entity;
+package de.starwit.persistence.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
