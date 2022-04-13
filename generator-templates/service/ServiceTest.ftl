@@ -1,8 +1,8 @@
 package de.${app.packagePrefix?lower_case}.service;
 
-import de.${app.packagePrefix?lower_case}.persistence.entity.${domain.name}Entity;
-import de.${app.packagePrefix?lower_case}.persistence.repository.${domain.name}Repository;
-import de.${app.packagePrefix?lower_case}.service.impl.${domain.name}Service;
+import de.${app.packagePrefix?lower_case}.persistence.entity.${entity.name}Entity;
+import de.${app.packagePrefix?lower_case}.persistence.repository.${entity.name}Repository;
+import de.${app.packagePrefix?lower_case}.service.impl.${entity.name}Service;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,10 +22,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
- * Tests for ${domain.name}Service
+ * Tests for ${entity.name}Service
  */
 @RunWith(SpringRunner.class)
-public class ${domain.name}ServiceTest {
+public class ${entity.name}ServiceTest {
 
     /**
      * <pre>
@@ -35,22 +35,22 @@ public class ${domain.name}ServiceTest {
      * </pre>
      */
     @TestConfiguration
-    static class ${domain.name}ServiceTestConfiguration {
+    static class ${entity.name}ServiceTestConfiguration {
 
         @Bean
-        public ${domain.name}Service create${domain.name}Service() {
-            return new ${domain.name}Service();
+        public ${entity.name}Service create${entity.name}Service() {
+            return new ${entity.name}Service();
         }
     }
 
     @Autowired
-    private ${domain.name}Service ${domain.name?lower_case}Service;
+    private ${entity.name}Service ${entity.name?lower_case}Service;
 
     /**
      * Create a mock.
      */
     @MockBean
-    private ${domain.name}Repository ${domain.name?lower_case}Repository;
+    private ${entity.name}Repository ${entity.name?lower_case}Repository;
 
     @Before
     public void setUp() {

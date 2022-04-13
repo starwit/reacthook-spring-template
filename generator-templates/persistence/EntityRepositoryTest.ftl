@@ -1,9 +1,9 @@
-package de.starwit.persistence.repository;
+package de.${app.packagePrefix?lower_case}.persistence.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import de.starwit.persistence.entity.${entity.name};
+import de.${app.packagePrefix?lower_case}.persistence.entity.${entity.name};
 
 import java.util.ArrayList;
 import java.util.List;
