@@ -32,4 +32,8 @@ public abstract class AbstractEntity<PK extends Serializable> {
         return this.id;
     }
 
+    public void setId(PK id) {
+        this.id = id;
+    }
+
 }
