@@ -9,8 +9,8 @@ import GitDataButtonStyles from "./GitDataButtonStyles";
 
 function GitDataButton(props) {
     const {credentialsRequired, handleGit, handleAfterSuccess, buttonIcon, buttonName, buttonVariant} = props;
-    const authUser= "/^[a-zA-Z0-9!@#$%^&()*./_-]{2,20}$/";
-    const authPassword= "/^[a-zA-Z0-9!@#$%^&()*./_-]{6,100}$/";
+    const authUser= /^[a-zA-Z0-9!@#$%^&()*./_-]{2,20}$/;
+    const authPassword= /^[a-zA-Z0-9!@#$%^&()*./_-]{6,100}$/;
 
     const gitDataButtonStyles = GitDataButtonStyles();
     const [hasFormError, setHasFormError] = React.useState(false);
@@ -114,7 +114,7 @@ function GitDataButton(props) {
                     />
                     <DialogActions>
                         <Button onClick={onClose}>{t("button.cancel")}</Button>
-                        <Button disabled={hasFormError} onClick={handleAppTemplateReload} autoFocus>
+                        <Button disabled={hasFormError} onClick={handleSuccess} autoFocus>
                             {t("button.ok")}
                         </Button>
                     </DialogActions>
