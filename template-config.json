@@ -2,6 +2,37 @@
   "templateName": "reacthookspring",
   "packagePlaceholder": "starwit",
   "imageUrl": "https://raw.githubusercontent.com/starwit/reacthook-spring-template/main/screenshot.png",
-  "templateFiles": []
+  "templateFiles": [
+    {
+      "fileName": "${entity.name}Entity.java",
+      "templatePath": "persistence/Entity.ftl",
+      "targetPath": "persistence/src/main/java/de/${app.packagePrefix?lower_case}/persistence/entity/",
+      "category": "ENTITY"
+    },
+    {
+      "fileName": "application.properties",
+      "templatePath": "application/properties.ftl",
+      "targetPath": "application/src/main/resources/",
+      "category": "ENTITY"
+    },
+    {
+      "fileName": "${entity.name}Repository.java",
+      "templatePath": "persistence/EntityRepository.ftl",
+      "targetPath": "persistence/src/main/java/de/${app.packagePrefix?lower_case}/persistence/repository/",
+      "category": "ENTITY"
+    },
+    {
+      "fileName": "${entity.name}RepositoryTest.java",
+      "templatePath": "persistence/EntityRepositoryTest.ftl",
+      "targetPath": "persistence/src/test/java/de/${app.packagePrefix?lower_case}/persistence/repository/",
+      "category": "ENTITY"
+    },
+    {
+      "fileName": "V1_0__init.sql",
+      "templatePath": "flyway/V1_0__init.ftl",
+      "targetPath": "persistence/src/main/resources/db/migration/",
+      "category": "ENTITY"
+    }
+  ]
 }
 

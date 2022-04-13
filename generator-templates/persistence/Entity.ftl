@@ -9,82 +9,83 @@ ${import}
 </#list>
 
 /**
- * ${domain.name} Entity class
+ * ${entity.name} Entity class
  */
+@XmlRootElement
 @Entity
-@Table(name = "${domain.name?upper_case}")
-public class ${domain.name}Entity extends AbstractEntity<Long> {
+@Table(name = "${entity.name?upper_case}")
+public class ${entity.name}Entity extends AbstractEntity<Long> {
 
-//domain attributes
-	<#list (domain.getAttributes()) as attribute> 
-		<#if attribute.pattern?? && attribute.pattern?length &gt; 0 && attribute.dataType == "String">
-	@Pattern(regexp = "${attribute.pattern}")
+//entity fields
+	<#list (entity.fields) as field> 
+		<#if field.fieldValidateRulesPattern?? && field.fieldValidateRulesPattern?length &gt; 0 && field.fieldType == "String">
+	@Pattern(regexp = "${field.fieldValidateRulesPattern}")
 		</#if>	
-		<#if attribute.dataType == "String">
-			<#if !attribute.nullable>
+		<#if field.fieldType == "String">
+			<#if field.required>
 	@NotBlank
 			</#if>
-			<#if attribute.min?? && attribute.max??>
-	@Size(min = ${attribute.min}, max = ${attribute.max})
+			<#if field.fieldValidateRulesMinlength?? && field.fieldValidateRulesMaxlength??>
+	@Length(min = ${field.fieldValidateRulesMinlength}, max = ${field.fieldValidateRulesMaxlength})
 			</#if>
-			<#if attribute.min?? && !attribute.max??>
-	@Size(min = ${attribute.min})
+			<#if field.fieldValidateRulesMinlength?? && !field.fieldValidateRulesMaxlength??>
+	@Size(min = ${field.fieldValidateRulesMinlength})
 			</#if>
-			<#if !attribute.min?? && attribute.max??>
-	@Size(max = ${attribute.max})
+			<#if !field.fieldValidateRulesMinlength?? && field.fieldValidateRulesMaxlength??>
+	@Size(max = ${field.mfieldValidateRulesMaxlengthax})
 			</#if>
 		<#else>
-			<#if !attribute.nullable>
+			<#if field.required>
 	@NotNull
 			</#if>
-			<#if attribute.min??>
-	@Min(value = ${attribute.min})
+			<#if field.fieldValidateRulesMin??>
+	@Min(value = ${field.fieldValidateRulesMin})
 			</#if>
-			<#if attribute.max??>
-	@Max(value = ${attribute.max})
+			<#if field.fieldValidateRulesMax??>
+	@Max(value = ${field.fieldValidateRulesMax})
 			</#if>
 		</#if>
-	<#if attribute.dataType == "Date" || attribute.dataType == "Time" || attribute.dataType == "Timestamp">
-    @Temporal(TemporalType.${attribute.dataType?upper_case})
-    @Column(name="${attribute.name?upper_case}"<#if !attribute.nullable>, nullable = false</#if>)
-	private Date ${attribute.name};
+	<#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp">
+    @Temporal(TemporalType.${field.fieldType?upper_case})
+    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+	private Date ${field.fieldName};
 	<#else>
-        <#if attribute.dataType == "String"> 
-    @Column(name="${attribute.name?upper_case}"<#if !attribute.nullable>, nullable = false</#if><#if attribute.max??>, length=${attribute.max}</#if>)
+        <#if field.fieldType == "String"> 
+    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if><#if field.max??>, length=${field.max}</#if>)
         </#if>
-        <#if attribute.dataType == "Integer"> 
-    @Column(name="${attribute.name?upper_case}"<#if !attribute.nullable>, nullable = false</#if>)
+        <#if field.fieldType == "Integer"> 
+    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
-        <#if attribute.dataType == "BigDecimal"> 
-    @Column(name="${attribute.name?upper_case}"<#if !attribute.nullable>, nullable = false</#if>)
+        <#if field.fieldType == "BigDecimal"> 
+    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
-        <#if attribute.dataType == "Double"> 
-    @Column(name="${attribute.name?upper_case}"<#if !attribute.nullable>, nullable = false</#if>)
+        <#if field.fieldType == "Double"> 
+    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
-        <#if attribute.dataType == "Enum"> 
+        <#if field.fieldType == "Enum"> 
     @Enumerated(EnumType.STRING)
-    @Column(name="${attribute.name?upper_case}"<#if !attribute.nullable>, nullable = false</#if>)
+    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
-	private ${attribute.dataType} ${attribute.name};
+	private ${field.fieldType} ${field.fieldName};
 	</#if>
 	
     </#list>
-    <#list (domain.getAttributes()) as attribute> 
-        <#if attribute.dataType == "Date" || attribute.dataType == "Time" || attribute.dataType == "Timestamp"> 
-    public Date get${attribute.name?cap_first}() {
-        return ${attribute.name};
+    <#list (entity.fields) as field> 
+        <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp"> 
+    public Date get${field.fieldName?cap_first}() {
+        return ${field.fieldName};
     }
 
-    public void set${attribute.name?cap_first}(Date ${attribute.name}) {
-        this.${attribute.name} = ${attribute.name};
+    public void set${field.fieldName?cap_first}(Date ${field.fieldName}) {
+        this.${field.fieldName} = ${field.fieldName};
     }
         <#else>
-    public ${attribute.dataType} get${attribute.name?cap_first}() {
-        return ${attribute.name};
+    public ${field.fieldType} get${field.fieldName?cap_first}() {
+        return ${field.fieldName};
     }
 
-    public void set${attribute.name?cap_first}(${attribute.dataType} ${attribute.name}) {
-        this.${attribute.name} = ${attribute.name};
+    public void set${field.fieldName?cap_first}(${field.fieldType} ${field.fieldName}) {
+        this.${field.fieldName} = ${field.fieldName};
     }
         </#if>
         
