@@ -1,6 +1,7 @@
 {
   "templateName": "reacthookspring",
   "packagePlaceholder": "starwit",
-  "imageUrl": "https://github.com/starwit/reacthook-spring-template/blob/main/reacthookspring/screenshot.png"
+  "imageUrl": "https://github.com/starwit/reacthook-spring-template/blob/main/reacthookspring/screenshot.png",
+  "templateFiles": []
 }
 
