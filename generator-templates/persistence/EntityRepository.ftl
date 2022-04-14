@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * ${field.name} Repository class
+ * ${entity.name} Repository class
  */
 @Repository
-public interface ${field.name}Repository extends JpaRepository<${field.name}Entity, Long> {
+public interface ${entity.name}Repository extends JpaRepository<${entity.name}Entity, Long> {
 
 }
