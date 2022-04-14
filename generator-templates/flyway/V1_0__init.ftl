@@ -1,4 +1,4 @@
-<#list app.getEntities() as domain>
+<#list app.entities as entity>
 CREATE TABLE IF NOT EXISTS `${entity.name?upper_case}`
 (
     `ID`      bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
