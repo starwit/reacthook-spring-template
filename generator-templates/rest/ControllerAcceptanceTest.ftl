@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import de.${app.packageName?lower_case}.persistence.entity.${entity.name};
+import de.${app.packageName?lower_case}.persistence.entity.${entity.name}Entity;
 /**
  * Acceptance tests for ${entity.name}Controller
  */

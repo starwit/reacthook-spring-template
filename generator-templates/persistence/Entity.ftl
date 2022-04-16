@@ -3,6 +3,7 @@ package de.${app.packageName?lower_case}.persistence.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 <#list (imports) as import> 
 ${import}

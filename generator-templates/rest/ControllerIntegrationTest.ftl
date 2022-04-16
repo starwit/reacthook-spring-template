@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import de.${app.packageName?lower_case}.persistence.entity.${entity.name};
+import de.${app.packageName?lower_case}.persistence.entity.${entity.name}Entity;
 import de.${app.packageName?lower_case}.rest.controller.${entity.name}Controller;
 import de.${app.packageName?lower_case}.service.impl.${entity.name}Service;
 
