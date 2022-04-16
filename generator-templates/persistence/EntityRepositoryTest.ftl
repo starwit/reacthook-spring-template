@@ -32,7 +32,7 @@ public class ${entity.name}RepositoryTest {
 
     @Test
     public void testFindAll() {
-        List<${entity.name}> ${entity.name?lower_case}s = repository.findAll();
+        List<${entity.name}Entity> ${entity.name?lower_case}s = repository.findAll();
         assertTrue(apps.isEmpty());
     }
 }
