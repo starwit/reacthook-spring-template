@@ -1,7 +1,7 @@
-package de.${app.packagePrefix?lower_case}.rest.controller;
+package de.${app.packageName?lower_case}.rest.controller;
 
-import de.${app.packagePrefix?lower_case}.persistence.entity.${domain.name}Entity;
-import de.${app.packagePrefix?lower_case}.service.impl.${domain.name}Service;
+import de.${app.packageName?lower_case}.persistence.entity.${domain.name}Entity;
+import de.${app.packageName?lower_case}.service.impl.${domain.name}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

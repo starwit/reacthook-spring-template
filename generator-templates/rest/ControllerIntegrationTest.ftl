@@ -1,4 +1,4 @@
-package de.${app.packagePrefix?lower_case}.rest.integration;
+package de.${app.packageName?lower_case}.rest.integration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -14,9 +14,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import de.${app.packagePrefix?lower_case}.persistence.entity.${entity.name};
-import de.${app.packagePrefix?lower_case}.rest.controller.${entity.name}Controller;
-import de.${app.packagePrefix?lower_case}.service.impl.${entity.name}Service;
+import de.${app.packageName?lower_case}.persistence.entity.${entity.name};
+import de.${app.packageName?lower_case}.rest.controller.${entity.name}Controller;
+import de.${app.packageName?lower_case}.service.impl.${entity.name}Service;
 
 /**
  * Tests for ${entity.name}Controller

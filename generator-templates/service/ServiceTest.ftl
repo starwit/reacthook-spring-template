@@ -1,8 +1,8 @@
-package de.${app.packagePrefix?lower_case}.service;
+package de.${app.packageName?lower_case}.service;
 
-import de.${app.packagePrefix?lower_case}.persistence.entity.${entity.name}Entity;
-import de.${app.packagePrefix?lower_case}.persistence.repository.${entity.name}Repository;
-import de.${app.packagePrefix?lower_case}.service.impl.${entity.name}Service;
+import de.${app.packageName?lower_case}.persistence.entity.${entity.name}Entity;
+import de.${app.packageName?lower_case}.persistence.repository.${entity.name}Repository;
+import de.${app.packageName?lower_case}.service.impl.${entity.name}Service;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

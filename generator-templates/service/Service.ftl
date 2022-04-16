@@ -1,7 +1,7 @@
-package de.${app.packagePrefix?lower_case}.service.impl;
+package de.${app.packageName?lower_case}.service.impl;
 
-import de.${app.packagePrefix?lower_case}.persistence.entity.${entity.name}Entity;
-import de.${app.packagePrefix?lower_case}.persistence.repository.${entity.name}Repository;
+import de.${app.packageName?lower_case}.persistence.entity.${entity.name}Entity;
+import de.${app.packageName?lower_case}.persistence.repository.${entity.name}Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

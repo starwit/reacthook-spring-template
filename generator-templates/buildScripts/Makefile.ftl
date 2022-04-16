@@ -1,5 +1,5 @@
 VERSION   	   := $(shell (mvn help:evaluate -Dexpression=app.version -q -DforceStdout))
-HELM_CHART_NAME	:= ${app.title?lower_case}
+HELM_CHART_NAME	:= ${app.baseName?lower_case}
 HELM_PATH      	:= helm/$(HELM_CHART_NAME)
 HELM_VERSION   	:= $(shell (yq read $(HELM_PATH)/Chart.yaml version))
 BUILD          = $(shell pwd)
@@ -62,7 +62,7 @@ docker-build: guard-BUILD_USER guard-BUILD_PASSWORD guard-HTTP_PROXY guard-VERSI
   # TODO: use wget to download the previously uploaded jar 
   # TODO: Add your docker repository
 	wget --user=$(BUILD_USER) --password=$(BUILD_PASSWORD) <DOWNLOAD-LINK-TO-JAR> -O application.jar
-	docker build --no-cache -t <YOUR-DOCKER-REPO>/${app.title?lower_case}:$(VERSION) --build-arg http_proxy=$(HTTP_PROXY) --build-arg https_proxy=$(HTTP_PROXY) .
+	docker build --no-cache -t <YOUR-DOCKER-REPO>/${app.baseName?lower_case}:$(VERSION) --build-arg http_proxy=$(HTTP_PROXY) --build-arg https_proxy=$(HTTP_PROXY) .
 
 unset-proxy:
 	unset http_proxy
@@ -72,4 +72,4 @@ docker-push: guard-BUILD_USER guard-BUILD_PASSWORD
   # TODO: Login to your Docker repo
   # TODO: Push the build container with the tag from docker-build
 	docker login -u $(BUILD_USER) -p $(BUILD_PASSWORD) <YOUR-DOCKER-REPO>
-	docker push <YOUR-DOCKER-REPO>/${app.title?lower_case}:$(VERSION)
+	docker push <YOUR-DOCKER-REPO>/${app.baseName?lower_case}:$(VERSION)

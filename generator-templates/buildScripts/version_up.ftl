@@ -2,7 +2,7 @@
 
 pattern_release='^[0-9]+\.[0-9]+\.[0-9]+$'
 pattern_dev='^[0-9]+\.[0-9]+\.[0-9]+\.dev$'
-helm_chart_dir=helm/${app.title?lower_case}
+helm_chart_dir=helm/${app.baseName?lower_case}
 
 function log {
   echo "[$(date --rfc-3339=seconds)]: $*"

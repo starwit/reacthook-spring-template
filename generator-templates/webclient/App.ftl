@@ -37,7 +37,7 @@ class App extends Component {
                     <div className="App">
                         <div className={classes.root}>
                             <CssBaseline />
-                            <AppHeader handleDrawerToggle={this.handleDrawerToggle} title={t('app.title')} />
+                            <AppHeader handleDrawerToggle={this.handleDrawerToggle} title={t('app.baseName')} />
                             <AppNavigationMenu mobileOpen={mobileOpen} />
                             <MainContentRouter />
                         </div>

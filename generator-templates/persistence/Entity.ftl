@@ -1,4 +1,4 @@
-package de.${app.packagePrefix?lower_case}.persistence.entity;
+package de.${app.packageName?lower_case}.persistence.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

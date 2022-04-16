@@ -1,4 +1,4 @@
-package de.${app.packagePrefix?lower_case}.rest.acceptance;
+package de.${app.packageName?lower_case}.rest.acceptance;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import de.${app.packagePrefix?lower_case}.persistence.entity.${entity.name};
+import de.${app.packageName?lower_case}.persistence.entity.${entity.name};
 /**
  * Acceptance tests for ${entity.name}Controller
  */
