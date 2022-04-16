@@ -33,6 +33,6 @@ public class ${entity.name}RepositoryTest {
     @Test
     public void testFindAll() {
         List<${entity.name}Entity> ${entity.name?lower_case}s = repository.findAll();
-        assertTrue(${entity.name}s.isEmpty());
+        assertTrue(${entity.name?lower_case}s.isEmpty());
     }
 }
