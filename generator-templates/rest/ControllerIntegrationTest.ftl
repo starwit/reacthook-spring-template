@@ -37,8 +37,8 @@ public class ${entity.name}ControllerIntegrationTest extends AbstractControllerI
     private static final String restpath = "/api/${entity.name?lower_case}s/";
 
     @Override
-    public Class<AppDto> getEntityClass() {
-        return AppDto.class;
+    public Class<${entity.name}Entity> getEntityClass() {
+        return ${entity.name}Entity.class;
     }
 
     @Override
