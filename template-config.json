@@ -6,7 +6,7 @@
     {
       "fileName": "${entity.name}Entity.java",
       "templatePath": "persistence/Entity.ftl",
-      "targetPath": "persistence/src/main/java/de/${app.packagePrefix?lower_case}/persistence/entity/",
+      "targetPath": "persistence/src/main/java/de/${app.packageName?lower_case}/persistence/entity/",
       "category": "ENTITY"
     },
     {
@@ -18,13 +18,13 @@
     {
       "fileName": "${entity.name}Repository.java",
       "templatePath": "persistence/EntityRepository.ftl",
-      "targetPath": "persistence/src/main/java/de/${app.packagePrefix?lower_case}/persistence/repository/",
+      "targetPath": "persistence/src/main/java/de/${app.packageName?lower_case}/persistence/repository/",
       "category": "ENTITY"
     },
     {
       "fileName": "${entity.name}RepositoryTest.java",
       "templatePath": "persistence/EntityRepositoryTest.ftl",
-      "targetPath": "persistence/src/test/java/de/${app.packagePrefix?lower_case}/persistence/repository/",
+      "targetPath": "persistence/src/test/java/de/${app.packageName?lower_case}/persistence/repository/",
       "category": "ENTITY"
     },
     {
