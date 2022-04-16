@@ -14,7 +14,7 @@ management.info.git.mode=full
 spring.datasource.hikari.connection-timeout=10000
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.url=jdbc:mysql://localhost:3306/${app.title?lower_case}?useLegacyDatetimeCode=false&serverTimezone=CET
-spring.jpa.hibernate.naming.physical-strategy=de.${app.packagePrefix?lower_case}.persistence.config.UpperSnakeCasePhysicalNamingStrategy
+spring.jpa.hibernate.naming.physical-strategy=de.${app.packageName?lower_case}.persistence.config.UpperSnakeCasePhysicalNamingStrategy
 #spring.jpa.hibernate.ddl-auto=create
 spring.datasource.username=${app.title?lower_case}
 spring.datasource.password=${app.title?lower_case}
