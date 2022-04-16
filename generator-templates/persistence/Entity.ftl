@@ -17,6 +17,7 @@ ${import}
 public class ${entity.name}Entity extends AbstractEntity<Long> {
 
 //entity fields
+<#if entity.fields??>
 	<#list (entity.fields) as field> 
 		<#if field.fieldValidateRulesPattern?? && field.fieldValidateRulesPattern?length &gt; 0 && field.fieldType == "String">
 	@Pattern(regexp = "${field.fieldValidateRulesPattern}")
@@ -90,4 +91,5 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
         </#if>
         
     </#list>
+</#if>
 }
