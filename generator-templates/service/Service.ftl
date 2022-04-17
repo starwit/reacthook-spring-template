@@ -14,7 +14,7 @@ import java.util.List;
  *
  */
 @Service
-public class ${entity.name}Service implements ServiceInterface<App, AppRepository> {
+public class ${entity.name}Service implements ServiceInterface<${entity.name}Entity, ${entity.name}Repository> {
 
     @Autowired
     private ${entity.name}Repository ${entity.name?lower_case}Repository;
