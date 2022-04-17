@@ -65,7 +65,7 @@ public class ${entity.name}Controller {
 
     @Operation(summary = "Delete {entity.name?lower_case}")
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable("id") Long id){
+    public void delete(@PathVariable("id") Long id) throws NotificationException {
         this.${entity.name?lower_case}Service.delete(id);
     }
 
