@@ -28,7 +28,7 @@ public class ${entity.name}RepositoryTest {
     private TestEntityManager entityManager;
 
     @Autowired
-    private ${entity.name}Repository ${entity.name?lower_case}Repository;
+    private ${entity.name}Repository repository;
 
     @Test
     public void testFindAll() {
