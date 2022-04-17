@@ -22,7 +22,7 @@ public class ${entity.name}ControllerAcceptanceTest extends AbstractControllerAc
     private static final String data = "testdata/${entity.name?lower_case}/";
     private static final String restpath = "/api/${entity.name?lower_case}s/";
 
-    private JacksonTester<SaveAppTemplateDto> jsonTester;
+    private JacksonTester<${entity.name}Entity> jsonTester;
 
     @Override
     public Class<${entity.name}Entity> getEntityClass() {
