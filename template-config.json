@@ -54,13 +54,13 @@
     {
       "fileName": "${entity.name}ControllerAcceptanceTest.java",
       "templatePath": "rest/ControllerAcceptanceTest.ftl",
-      "targetPath": "rest/src/test/java/de/${app.packageName?lower_case}/acceptance/",
+      "targetPath": "rest/src/test/java/de/${app.packageName?lower_case}/rest/acceptance/",
       "category": "REST"
     },
     {
       "fileName": "${entity.name}ControllerIntegrationTest.java",
       "templatePath": "rest/ControllerIntegrationTest.ftl",
-      "targetPath": "rest/src/test/java/de/${app.packageName?lower_case}/integration/",
+      "targetPath": "rest/src/test/java/de/${app.packageName?lower_case}/rest/integration/",
       "category": "REST"
     }
   ]

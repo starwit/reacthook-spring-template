@@ -34,7 +34,7 @@ import io.swagger.v3.oas.annotations.Operation;
 @RequestMapping("${r"${rest.base-path}"}/${entity.name?lower_case}")
 public class ${entity.name}Controller {
 
-    static final Logger LOG = LoggerFactory.getLogger(AppController.class);
+    static final Logger LOG = LoggerFactory.getLogger(${entity.name}Controller.class);
 
     @Autowired
     private ${entity.name}Service ${entity.name?lower_case}Service;
