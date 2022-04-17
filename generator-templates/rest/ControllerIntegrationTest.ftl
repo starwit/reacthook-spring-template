@@ -26,7 +26,7 @@ import de.${app.packageName?lower_case}.service.impl.${entity.name}Service;
  * easy testing MVC controllers without starting a full HTTP server.
  * </pre>
  */
-@WebMvcTest(contollers = ${entity.name}Controller.class)
+@WebMvcTest(controllers = ${entity.name}Controller.class)
 public class ${entity.name}ControllerIntegrationTest extends AbstractControllerIntegrationTest<${entity.name}Entity> {
 
     @MockBean
