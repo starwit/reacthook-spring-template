@@ -56,9 +56,5 @@
       <groupId>de.starwit</groupId>
       <artifactId>service</artifactId>
     </dependency>
-    <dependency>
-      <groupId>de.starwit</groupId>
-      <artifactId>generator</artifactId>
-    </dependency>
   </dependencies>
 </project>
