@@ -48,7 +48,7 @@
     {
       "fileName": "${entity.name}Controller.java",
       "templatePath": "rest/Controller.ftl",
-      "targetPath": "rest/src/main/java/de/${app.packageName?lower_case}/controller/",
+      "targetPath": "rest/src/main/java/de/rest/${app.packageName?lower_case}/controller/",
       "category": "REST"
     },
     {
