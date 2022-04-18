@@ -83,7 +83,7 @@
     },
     {
       "fileName": "MainContentRouter.jsx",
-      "templatePath": "MainContentRouter.ftl",
+      "templatePath": "webclient/MainContentRouter.ftl",
       "targetPath": "webclient/app/src/app/",
       "category": "FRONTEND"
     },
