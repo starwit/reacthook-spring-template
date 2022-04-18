@@ -1,4 +1,4 @@
-const translationsEnEN = {
+const translationEnEN = {
     "app.baseName":"${app.baseName}",
 <#if app.entities??>
 <#list app.entities as entity>
@@ -13,4 +13,4 @@ const translationsEnEN = {
 </#list>
 </#if>
 };
-export default translationsEnEN;
+export default translationEnEN;

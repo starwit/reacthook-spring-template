@@ -1,10 +1,10 @@
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
-import translationsEnEN from "./translation-en-EN";
+import translationEnEN from "./translation-en-EN";
 
 const resources = {
-    "en-US": {translation: translationsEnEN}
+    "en-US": {translation: translationEnEN}
 };
 
 const lngDetectinOptions = {
