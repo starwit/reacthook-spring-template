@@ -7,7 +7,7 @@ const translationsEnEN = {
     "${entity.name?uncap_first}.id": "id",
 <#if entity.fields??>
 <#list (entity.fields) as field> 
-    "${entity.name?uncap_first}.${field.name}": "${field.name}",
+    "${entity.name?uncap_first}.${field.fieldName}": "${field.fieldName}",
 </#list>
 </#if>
 </#list>
