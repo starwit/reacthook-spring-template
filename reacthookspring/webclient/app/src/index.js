@@ -6,7 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import {HashRouter as Router} from "react-router-dom";
 import "./localization/i18n";
 import {SnackbarProvider} from "notistack";
-import MainTheme from "./app/commons/MainTheme/MainTheme";
+import MainTheme from "./app/commons/mainTheme/MainTheme";
 
 ReactDOM.render((
     <Router>
