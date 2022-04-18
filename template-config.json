@@ -62,6 +62,24 @@
       "templatePath": "rest/ControllerIntegrationTest.ftl",
       "targetPath": "rest/src/test/java/de/${app.packageName?lower_case}/rest/integration/",
       "category": "REST"
+    },
+    {
+      "fileName": "AppConfig.js",
+      "templatePath": "webclient/AppConfig.ftl",
+      "targetPath": "webclient/app/src/app/",
+      "category": "FRONTEND"
+    },
+    {
+      "fileName": "translation-en-EN.js",
+      "templatePath": "webclient/translationEnEN.ftl",
+      "targetPath": "webclient/app/src/localization/",
+      "category": "FRONTEND"
+    },
+    {
+      "fileName": "${entity.name}Rest.js",
+      "templatePath": "webclient/EntityRest.ftl",
+      "targetPath": "webclient/app/src/app/services/",
+      "category": "FRONTEND"
     }
   ]
 }

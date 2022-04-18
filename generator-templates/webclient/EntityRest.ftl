@@ -1,11 +1,11 @@
 import CrudRest from "./CrudRest";
 
-class ${domain.name}Rest extends CrudRest {
+class ${entity.name}Rest extends CrudRest {
 
     constructor() {
-        super(window.location.pathname + "api/${domain.name?lower_case}");
+        super(window.location.pathname + "api/${entity.name?lower_case}s");
     }
 
 }
 
-export default ${domain.name}Rest;
+export default ${entity.name}Rest;
