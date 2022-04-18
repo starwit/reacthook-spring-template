@@ -89,13 +89,13 @@
     },
     {
       "fileName": "${entity.name}Detail.jsx",
-      "templatePath": "EntityDetail.ftl",
+      "templatePath": "webclient/EntityDetail.ftl",
       "targetPath": "webclient/app/src/features/${entity.name?uncap_first}/",
       "category": "FRONTEND"
     },
     {
       "fileName": "${entity.name}Overview.jsx",
-      "templatePath": "EntityOverview.ftl",
+      "templatePath": "webclient/EntityOverview.ftl",
       "targetPath": "webclient/app/src/features/${entity.name?uncap_first}/",
       "category": "FRONTEND"
     }
