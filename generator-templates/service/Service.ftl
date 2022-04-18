@@ -5,9 +5,6 @@ import de.${app.packageName?lower_case}.persistence.repository.${entity.name}Rep
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
-
 /**
  * 
  * ${entity.name} Service class
