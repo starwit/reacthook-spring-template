@@ -2,7 +2,7 @@ import {Container, Typography} from "@mui/material";
 import React from "react";
 import {useTranslation} from "react-i18next";
 
-function Home() {
+function ${entity.name}Detail() {
     const {t} = useTranslation();
 
     return (
@@ -15,4 +15,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default ${entity.name}Detail;
