@@ -1,7 +1,11 @@
 import React from "react";
 import {Route} from "react-router-dom";
+<#if app.entities??>
+<#list app.entities as entity>
 import ${entity.name}Overview from "./features/${entity.name?uncap_first}/${entity.name}Overview";
 import ${entity.name}Detail from "./features/${domain.name?uncap_first}/${entity.name}Detail";
+</#list>
+</#if>
 import Home from "./features/home/Home";
 
 function MainContentRouter() {
