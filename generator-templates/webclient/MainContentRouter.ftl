@@ -11,6 +11,8 @@ function MainContentRouter() {
 <#list app.entities as entity>
             <Route exact path={"/${entity.name?lower_case}s/:id"} component={${entity.name}Detail}/>
             <Route exact path={"/${entity.name?lower_case}s/"} component={${entity.name}Overview}/>
+</#list>
+</#if>
             <Route exact path={"/"} component={Home}/>
             <Route path="/logout" component={() => {
                 window.location.href = window.location.pathname + "api/user/logout";
@@ -19,6 +21,5 @@ function MainContentRouter() {
         </>
     );
 }
-</#list>
-</#if>
+
 export default MainContentRouter;
