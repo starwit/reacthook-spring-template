@@ -80,6 +80,24 @@
       "templatePath": "webclient/EntityRest.ftl",
       "targetPath": "webclient/app/src/app/services/",
       "category": "FRONTEND"
+    },
+    {
+      "fileName": "MainContentRouter.jsx",
+      "templatePath": "MainContentRouter.ftl",
+      "targetPath": "webclient/app/src/app/",
+      "category": "FRONTEND"
+    },
+    {
+      "fileName": "${entity.name}Detail.jsx",
+      "templatePath": "EntityDetail.ftl",
+      "targetPath": "webclient/app/src/features/${entity.name?uncap_first}/",
+      "category": "FRONTEND"
+    },
+    {
+      "fileName": "${entity.name}Overview.jsx",
+      "templatePath": "EntityOverview.ftl",
+      "targetPath": "webclient/app/src/features/${entity.name?uncap_first}/",
+      "category": "FRONTEND"
     }
   ]
 }
