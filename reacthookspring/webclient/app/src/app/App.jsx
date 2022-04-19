@@ -3,7 +3,6 @@ import AppHeader from "./commons/appHeader/AppHeader";
 import MainContentRouter from "./MainContentRouter";
 import {CssBaseline} from "@mui/material";
 import ErrorHandler from "./commons/errorHandler/ErrorHandler";
-import {appItems} from "./AppConfig";
 import {useTranslation} from "react-i18next";
 
 function App() {
@@ -14,7 +13,7 @@ function App() {
             <ErrorHandler>
                 <div>
                     <CssBaseline/>
-                    <AppHeader menuItems={appItems} title={t("app.baseName")} />
+                    <AppHeader menuItems={[]} title={t("app.baseName")} />
                     <MainContentRouter/>
                 </div>
             </ErrorHandler>

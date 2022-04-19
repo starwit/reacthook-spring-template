@@ -1,5 +1,4 @@
 const translationEnEN = {
-    "app.baseName":"${app.baseName}",
 <#if app.entities??>
 <#list app.entities as entity>
     "${entity.name?uncap_first}": "${entity.name}",
@@ -12,5 +11,8 @@ const translationEnEN = {
 </#if>
 </#list>
 </#if>
+    "app.baseName": "${app.baseName}",
+    "home.title": "Welcome",
+    "home.welcome": "Welcome to ${app.baseName}"
 };
 export default translationEnEN;
