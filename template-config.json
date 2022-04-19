@@ -88,6 +88,12 @@
       "category": "FRONTEND"
     },
     {
+      "fileName": "${entity.name}Main.jsx",
+      "templatePath": "webclient/EntityMain.ftl",
+      "targetPath": "webclient/app/src/app/features/${entity.name?uncap_first}/",
+      "category": "FRONTEND"
+    },
+    {
       "fileName": "${entity.name}Detail.jsx",
       "templatePath": "webclient/EntityDetail.ftl",
       "targetPath": "webclient/app/src/app/features/${entity.name?uncap_first}/",

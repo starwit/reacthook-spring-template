@@ -1,5 +1,5 @@
 import React from "react";
-import {Route} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 <#if app.entities??>
 <#list app.entities as entity>
 import ${entity.name}Overview from "./features/${entity.name?uncap_first}/${entity.name}Overview";
@@ -12,10 +12,11 @@ function MainContentRouter() {
     return (
         <>
 <#if app.entities??>
+            <Switch>
 <#list app.entities as entity>
-            <Route exact path={"/${entity.name?lower_case}s/:id"} component={${entity.name}Detail}/>
-            <Route exact path={"/${entity.name?lower_case}s/"} component={${entity.name}Overview}/>
+                <Route path="{"/${entity.name?lower_case}" component={{${entity.name}Main}/>
 </#list>
+            </Switch>
 </#if>
             <Route exact path={"/"} component={Home}/>
             <Route path="/logout" component={() => {
