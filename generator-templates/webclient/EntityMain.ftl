@@ -1,7 +1,7 @@
 import React from "react";
 import {Route} from "react-router-dom";
 import ${entity.name}Overview from "./${entity.name}Overview";
-import ${entity.name}Overview from "./${entity.name}Detail";
+import ${entity.name}Detail from "./${entity.name}Detail";
 
 function ${entity.name}Main() {
     return (

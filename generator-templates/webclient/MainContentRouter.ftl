@@ -14,7 +14,7 @@ function MainContentRouter() {
 <#if app.entities??>
             <Switch>
 <#list app.entities as entity>
-                <Route path="{"/${entity.name?lower_case}" component={{${entity.name}Main}/>
+                <Route path={"/${entity.name?lower_case}"} component={${entity.name}Main}/>
 </#list>
             </Switch>
 </#if>
