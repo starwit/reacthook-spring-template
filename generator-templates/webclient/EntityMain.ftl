@@ -11,6 +11,7 @@ function ${entity.name}Main() {
             <Route exact path="/${entity.name?lower_case}/create" component={${entity.name}Detail}/>
             <Route exact path="/${entity.name?lower_case}/update/:id" component={${entity.name}Detail}/>
           </React.Fragment>
+        </>
     );
 }
 
