@@ -82,6 +82,12 @@
       "category": "FRONTEND"
     },
     {
+      "fileName": "${entity.name}Modifier.js",
+      "templatePath": "webclient/EntityModifier.ftl",
+      "targetPath": "webclient/app/src/app/modifiers/",
+      "category": "FRONTEND"
+    },
+    {
       "fileName": "MainContentRouter.jsx",
       "templatePath": "webclient/MainContentRouter.ftl",
       "targetPath": "webclient/app/src/app/",
