@@ -9,7 +9,7 @@ import {${entity.name?uncap_first}Fields} from "../../modifiers/${entity.name}Mo
 function UserOverview() {
     const [selected, setSelected] = useState(undefined);
     const {t} = useTranslation();
-    const ${entity.name?lower_case}Rest = useMemo(() => new UserRest(), []);
+    const ${entity.name?lower_case}Rest = useMemo(() => new ${entity.name}Rest(), []);
     const history = useHistory();
     const [${entity.name?uncap_first}All, set${entity.name}All] = useState();
 
