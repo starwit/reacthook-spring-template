@@ -38,7 +38,7 @@ public class ${entity.name}Controller {
 
     @Autowired
     private ${entity.name}Service ${entity.name?lower_case}Service;
-    
+
     @Operation(summary = "Get all ${entity.name?lower_case}s")
     @GetMapping
     public List<${entity.name}Entity> findAll() {
