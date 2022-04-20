@@ -10,7 +10,7 @@ const ${entity.name?uncap_first}Default = {
 const ${entity.name?uncap_first}Fields = [
 <#if entity.fields??>
 <#list (entity.fields) as field>
-    {name: "${field.fieldName}", type: "${field.fieldType?lower_case}", regex: ${field.fieldValidateRulesPattern}},
+    {name: "${field.fieldName}", type: "${field.fieldType?lower_case}", regex: <#if field.fieldValidateRulesPattern>${field.fieldValidateRulesPattern}</#if>},
 </#list>
 </#if>
 ];
