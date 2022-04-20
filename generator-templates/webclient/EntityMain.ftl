@@ -7,9 +7,9 @@ function ${entity.name}Main() {
     return (
         <>
             <React.Fragment>
-                <Route exact path="/${entity.name?lower_case}s" component={${entity.name}Overview}/>
-                <Route exact path="/${entity.name?lower_case}s/create" component={${entity.name}Detail}/>
-                <Route exact path="/${entity.name?lower_case}s/update/:id" component={${entity.name}Detail}/>
+                <Route exact path="/${entity.name?lower_case}" component={${entity.name}Overview}/>
+                <Route exact path="/${entity.name?lower_case}/create" component={${entity.name}Detail}/>
+                <Route exact path="/${entity.name?lower_case}/update/:id" component={${entity.name}Detail}/>
             </React.Fragment>
         </>
     );
