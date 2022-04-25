@@ -10,7 +10,7 @@ function isValid(fields, data) {
         return true;
     }
     for (const element of fields) {
-        if (!element.regex.test(data[element.name])) {
+        if (!!element.regex && !element.regex.test(data[element.name])) {
             return false;
         }
     }
