@@ -3,7 +3,7 @@ import {Button} from "@mui/material";
 import {useTranslation} from "react-i18next";
 import UpdateFormStyles from "./UpdateFormStyles";
 import {isValid} from "../../modifiers/DefaultModifier";
-import ValidatedTextField from "../inputfields/validatedTextField/ValidatedTextField";
+import ValidatedTextField from "../inputFields/validatedTextField/ValidatedTextField";
 
 function UpdateForm(props) {
     const {entity, fields, prefix, handleSubmit, handleChange} = props;

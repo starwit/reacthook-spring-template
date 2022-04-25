@@ -4,7 +4,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import {useTranslation} from "react-i18next";
 import {Close, CloudSync} from "@mui/icons-material";
-import ValidatedTextField from "../../inputfields/validatedTextField/ValidatedTextField";
+import ValidatedTextField from "../../inputFields/validatedTextField/ValidatedTextField";
 import GitDataButtonStyles from "./GitDataButtonStyles";
 
 function GitDataButton(props) {
