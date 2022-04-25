@@ -38,8 +38,8 @@ springdoc.swagger-ui.csrf.enabled=true
 #logging.level.org.springframework.security=DEBUG
 
 keycloak.auth-server-url=http://localhost:8080/auth
-keycloak.realm=reacthookspring
-keycloak.resource=reacthookspring
+keycloak.realm=${app.baseName?lower_case}
+keycloak.resource=${app.baseName?lower_case}
 keycloak.principal-attribute=preferred_username
 keycloak.public-client=true
 keycloak.enabled=true

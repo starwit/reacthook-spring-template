@@ -1,7 +1,7 @@
 <#list app.entities as entity>
 CREATE TABLE IF NOT EXISTS `${entity.name?upper_case}`
 (
-    `ID`      bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `ID` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     <#list entity.fields as field>
     <#if field.fieldType == "String"> 
     `${field.fieldName?upper_case}` varchar(255)<#if !field.required> NOT NULL </#if><#sep>,</#sep>

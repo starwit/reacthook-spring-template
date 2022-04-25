@@ -38,7 +38,7 @@ public class ${entity.name}Controller {
 
     @Autowired
     private ${entity.name}Service ${entity.name?lower_case}Service;
-    
+
     @Operation(summary = "Get all ${entity.name?lower_case}s")
     @GetMapping
     public List<${entity.name}Entity> findAll() {
@@ -60,13 +60,13 @@ public class ${entity.name}Controller {
     @Operation(summary = "Update {entity.name?lower_case}")
     @PutMapping
     public ${entity.name}Entity update(@Valid @RequestBody ${entity.name}Entity entity) {
-        return update(entity);
+        return ${entity.name?lower_case}Service.saveOrUpdate(entity);
     }
 
     @Operation(summary = "Delete {entity.name?lower_case}")
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable("id") Long id) throws NotificationException {
-        this.${entity.name?lower_case}Service.delete(id);
+        ${entity.name?lower_case}Service.delete(id);
     }
 
     @ExceptionHandler(value = { EntityNotFoundException.class })
