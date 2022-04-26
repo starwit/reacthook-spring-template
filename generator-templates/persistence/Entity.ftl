@@ -10,7 +10,7 @@ ${import}
 </#list>
 
 /**
- * ${entity.name} Entity class ddd
+ * ${entity.name} Entity class
  */
 @XmlRootElement
 @Entity
@@ -91,6 +91,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID", referencedColumnName = "ID")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
+
     <#else>
     @OneToOne(mappedBy = "${relation.otherEntityRelationshipName}")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
@@ -98,9 +99,9 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     </#if>
   <#elseif relation.relationshipType == "ManyToMany">
     <#if relation.ownerSide>
-    @ManyToMany(mappedBy="${relation.otherEntityRelationshipName}")
+    @ManyToMany
     @JoinTable(
-        name = "${relation.relationshipName}", 
+        name = "${entity.name?upper_case}_${relation.relationshipName?upper_case}", 
         joinColumns = @JoinColumn(name = "${entity.name?upper_case}_ID"), 
         inverseJoinColumns = @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID"))
     private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
