@@ -106,7 +106,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     <#else>
     @ManyToMany(mappedBy="${relation.otherEntityRelationshipName}")
     private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
-
+    </#if>
   </#if>
   </#list>
 </#if>
