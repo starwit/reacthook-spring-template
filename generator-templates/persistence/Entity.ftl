@@ -19,11 +19,11 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 
 //entity fields
 <#if entity.fields??>
-    <#list (entity.fields) as field> 
-        <#if field.fieldValidateRulesPattern?? && field.fieldValidateRulesPattern?length &gt; 0 && field.fieldType == "String">
+  <#list (entity.fields) as field> 
+  <#if field.fieldValidateRulesPattern?? && field.fieldValidateRulesPattern?length &gt; 0 && field.fieldType == "String">
     @Pattern(regexp = "${field.fieldValidateRulesPattern}")
-        </#if>    
-        <#if field.fieldType == "String">
+  </#if>    
+  <#if field.fieldType == "String">
             <#if field.required>
     @NotBlank
             </#if>
@@ -46,12 +46,12 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
             <#if field.fieldValidateRulesMax??>
     @Max(value = ${field.fieldValidateRulesMax})
             </#if>
-        </#if>
-    <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp">
+  </#if>
+  <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp">
     @Temporal(TemporalType.${field.fieldType?upper_case})
     @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
     private Date ${field.fieldName};
-    <#else>
+  <#else>
         <#if field.fieldType == "String"> 
     @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if><#if field.max??>, length=${field.max}</#if>)
         </#if>
@@ -70,10 +70,50 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
         </#if>
     private ${field.fieldType} ${field.fieldName};
 
+  </#if>
+  </#list>
+</#if>
+<#if entity.relationships??>
+  <#list (entity.relationships) as relation>
+  <#if relation == "one-to-many">
+    @OneToMany(mappedBy="${relation.otherEntityRelationshipName}")
+    private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
+
+  <#elseif relation == "many-to-one">
+    @ManyToOne
+    @JoinColumn(name="${relation.otherEntityName?upper_case}_ID")
+    private ${relation.otherEntityName}Entity ${relation.relationshipName};
+
+  <#elseif relation == "one-to-one">
+    <#if relation.ownerSide>
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID", referencedColumnName = "ID")
+    private ${relation.otherEntityName}Entity ${relation.relationshipName};
+
+    <#else>
+    @OneToOne(mappedBy = "${relation.otherEntityRelationshipName}")
+    private ${relation.otherEntityName}Entity ${relation.relationshipName};
+
     </#if>
-    </#list>
-    <#list (entity.fields) as field> 
-        <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp"> 
+  <#elseif relation == "many-to-many">
+    <#if relation.ownerSide>
+    @ManyToMany(mappedBy="${relation.otherEntityRelationshipName}")
+    @JoinTable(
+        name = "${relation.relationshipName}", 
+        joinColumns = @JoinColumn(name = "${entity.name?upper_case}_ID"), 
+        inverseJoinColumns = @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID"))
+    private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
+
+    <#else>
+    @ManyToMany(mappedBy="${relation.otherEntityRelationshipName}")
+    private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
+    </#if>
+  </#if>
+  </#list>
+</#if>
+<#if entity.fields??>
+  <#list (entity.fields) as field> 
+  <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp"> 
     public Date get${field.fieldName?cap_first}() {
         return ${field.fieldName};
     }
@@ -81,7 +121,8 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     public void set${field.fieldName?cap_first}(Date ${field.fieldName}) {
         this.${field.fieldName} = ${field.fieldName};
     }
-        <#else>
+
+  <#else>
     public ${field.fieldType} get${field.fieldName?cap_first}() {
         return ${field.fieldName};
     }
@@ -90,7 +131,30 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
         this.${field.fieldName} = ${field.fieldName};
     }
 
-        </#if>
-    </#list>
+  </#if>
+  </#list>
+</#if>
+<#if entity.relationships??>
+  <#list (entity.relationships) as relation>
+  <#if relation == "one-to-many" || relation == "many-to-many">
+    public Set<${relation.otherEntityName}Entity> get${relation.relationshipName?cap_first}() {
+        return ${relation.relationshipName};
+    }
+
+    public void set${relation.relationshipName?cap_first}(Set<${relation.otherEntityName}Entity> ${relation.relationshipName}) {
+        this.${relation.relationshipName} = ${relation.relationshipName};
+    }
+
+  <#elseif relation == "one-to-many" || relation == "one-to-one">
+    public <${relation.otherEntityName}Entity> get${relation.relationshipName?cap_first}() {
+        return ${relation.relationshipName};
+    }
+
+    public void set${relation.relationshipName?cap_first}(${relation.otherEntityName}Entity ${relation.relationshipName}) {
+        this.${relation.relationshipName} = ${relation.relationshipName};
+    }
+
+  </#if>
+  </#list>
 </#if>
 }
