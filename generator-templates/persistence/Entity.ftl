@@ -72,43 +72,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 
     </#if>
     </#list>
-<#if entity.relationships??>
-  <#list (entity.relationships) as relation>
-  <#if relation == "one-to-many">
-    @OneToMany(mappedBy="${relation.otherEntityRelationshipName}")
-    private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
 
-  <#elseif relation == "many-to-one">
-    @ManyToOne
-    @JoinColumn(name="${relation.otherEntityName?upper_case}_ID")
-    private ${relation.otherEntityName}Entity ${relation.relationshipName};
-
-  <#elseif relation == "one-to-one">
-    <#if relation.ownerSide>
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID", referencedColumnName = "ID")
-    private ${relation.otherEntityName}Entity ${relation.relationshipName};
-
-    <#else>
-    @OneToOne(mappedBy = "${relation.otherEntityRelationshipName}")
-    private ${relation.otherEntityName}Entity ${relation.relationshipName};
-
-    </#if>
-  <#elseif relation == "many-to-many">
-    <#if relation.ownerSide>
-    @ManyToMany(mappedBy="${relation.otherEntityRelationshipName}")
-    @JoinTable(
-        name = "${relation.relationshipName}", 
-        joinColumns = @JoinColumn(name = "${entity.name?upper_case}_ID"), 
-        inverseJoinColumns = @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID"))
-    private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
-
-    <#else>
-    @ManyToMany(mappedBy="${relation.otherEntityRelationshipName}")
-    private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
-    </#if>
-  </#if>
-  </#list>
 </#if>
   <#list (entity.fields) as field> 
         <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp"> 
@@ -130,28 +94,4 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 
         </#if>
     </#list>
-
-<#if entity.relationships??>
-  <#list (entity.relationships) as relation>
-  <#if relation == "one-to-many" || relation == "many-to-many">
-    public Set<${relation.otherEntityName}Entity> get${relation.relationshipName?cap_first}() {
-        return ${relation.relationshipName};
-    }
-
-    public void set${relation.relationshipName?cap_first}(Set<${relation.otherEntityName}Entity> ${relation.relationshipName}) {
-        this.${relation.relationshipName} = ${relation.relationshipName};
-    }
-
-  <#elseif relation == "one-to-many" || relation == "one-to-one">
-    public <${relation.otherEntityName}Entity> get${relation.relationshipName?cap_first}() {
-        return ${relation.relationshipName};
-    }
-
-    public void set${relation.relationshipName?cap_first}(${relation.otherEntityName}Entity ${relation.relationshipName}) {
-        this.${relation.relationshipName} = ${relation.relationshipName};
-    }
-
-  </#if>
-  </#list>
-</#if>
 }
