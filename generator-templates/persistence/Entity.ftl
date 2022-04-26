@@ -92,7 +92,8 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID", referencedColumnName = "ID")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
-
+  <#elseif relation == "one-to-one">
+    //in one-to-one
     <#else>
     @OneToOne(mappedBy = "${relation.otherEntityRelationshipName}")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
