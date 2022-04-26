@@ -69,8 +69,8 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
     private ${field.fieldType} ${field.fieldName};
+
     </#if>
-    
     </#list>
     <#list (entity.fields) as field> 
         <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp"> 
@@ -89,8 +89,8 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     public void set${field.fieldName?cap_first}(${field.fieldType} ${field.fieldName}) {
         this.${field.fieldName} = ${field.fieldName};
     }
+
         </#if>
-        
     </#list>
 </#if>
 }
