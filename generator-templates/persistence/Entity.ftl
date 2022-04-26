@@ -76,6 +76,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 //relations
 <#if entity.relationships??>
 //in if relations
+//${relation.relationshipType}
   <#list (entity.relationships) as relation>
   <#if relation == "OneToMany">
     @OneToMany(mappedBy="${relation.otherEntityRelationshipName}")
