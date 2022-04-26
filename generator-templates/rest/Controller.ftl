@@ -39,7 +39,7 @@ public class ${entity.name}Controller {
     @Autowired
     private ${entity.name}Service ${entity.name?lower_case}Service;
 
-    @Operation(summary = "Get all ${entity.name?lower_case}s")
+    @Operation(summary = "Get all ${entity.name?lower_case}")
     @GetMapping
     public List<${entity.name}Entity> findAll() {
         return this.${entity.name?lower_case}Service.findAll();
@@ -51,19 +51,19 @@ public class ${entity.name}Controller {
         return this.${entity.name?lower_case}Service.findById(id);
     }
 
-    @Operation(summary = "Create {entity.name?lower_case}")
+    @Operation(summary = "Create ${entity.name?lower_case}")
     @PostMapping
     public ${entity.name}Entity save(@Valid @RequestBody ${entity.name}Entity entity) {
         return update(entity);
     }
 
-    @Operation(summary = "Update {entity.name?lower_case}")
+    @Operation(summary = "Update ${entity.name?lower_case}")
     @PutMapping
     public ${entity.name}Entity update(@Valid @RequestBody ${entity.name}Entity entity) {
         return ${entity.name?lower_case}Service.saveOrUpdate(entity);
     }
 
-    @Operation(summary = "Delete {entity.name?lower_case}")
+    @Operation(summary = "Delete ${entity.name?lower_case}")
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable("id") Long id) throws NotificationException {
         ${entity.name?lower_case}Service.delete(id);
