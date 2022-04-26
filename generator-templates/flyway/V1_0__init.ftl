@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `${entity.name?upper_case}`
     `${relation.otherEntityName?upper_case}_ID` bigint,
   <#elseif relation.relationshipType == "OneToOne">
     <#if relation.ownerSide>
-        `${relation.otherEntityName?upper_case}_ID` bigint,
+    `${relation.otherEntityName?upper_case}_ID` bigint,
     </#if>
   </#if>
   </#list>
@@ -47,31 +47,37 @@ CREATE TABLE IF NOT EXISTS `${entity.name?upper_case}`
   <#list entity.relationships as relation>
   <#if relation.relationshipType == "OneToMany">
   <#elseif relation.relationshipType == "ManyToOne">
-    ALTER TABLE `${entity.name?upper_case}`
-       ADD CONSTRAINT `FK_${entity.name?upper_case}_${relation.relationshipName?upper_case}`
-       FOREIGN KEY (`${relation.otherEntityName?upper_case}_ID`) 
-       REFERENCES `${relation.otherEntityName?upper_case}` (`ID`);
+ALTER TABLE `${entity.name?upper_case}`
+    ADD CONSTRAINT `FK_${entity.name?upper_case}_${relation.relationshipName?upper_case}`
+    FOREIGN KEY (`${relation.otherEntityName?upper_case}_ID`) 
+    REFERENCES `${relation.otherEntityName?upper_case}` (`ID`);
 
   <#elseif relation.relationshipType == "OneToOne">
     <#if relation.ownerSide>
-    ALTER TABLE `${entity.name?upper_case}`
-       ADD CONSTRAINT `FK_${entity.name?upper_case}_${relation.relationshipName?upper_case}`
-       FOREIGN KEY (`${relation.otherEntityName?upper_case}_ID`) 
-       REFERENCES `${relation.otherEntityName?upper_case}` (`ID`);
+ALTER TABLE `${entity.name?upper_case}`
+    ADD CONSTRAINT `FK_${entity.name?upper_case}_${relation.relationshipName?upper_case}`
+    FOREIGN KEY (`${relation.otherEntityName?upper_case}_ID`) 
+    REFERENCES `${relation.otherEntityName?upper_case}` (`ID`);
 
     <#else>
     </#if>
   <#elseif relation.relationshipType == "ManyToMany">
     <#if relation.ownerSide>
-    ALTER TABLE `${entity.name?upper_case}_${relation.relationshipName?upper_case}`
-       ADD CONSTRAINT `FK_${entity.name?upper_case}_${relation.relationshipName?upper_case}`
-       FOREIGN KEY (`${entity.name?upper_case}_ID`) 
-       REFERENCES `${entity.name?upper_case}` (`ID`);
+CREATE TABLE `${entity.name?upper_case}_${relation.relationshipName?upper_case}` (
+    `${entity.name?upper_case}_ID` BIGINT NOT NULL,
+    `${relation.otherEntityName?upper_case}_ID` BIGINT NOT NULL,
+    PRIMARY KEY (`${entity.name?upper_case}_ID`, `${relation.otherEntityName?upper_case}_ID`)
+);
 
-    ALTER TABLE `${entity.name?upper_case}_${relation.relationshipName?upper_case}`
-       ADD CONSTRAINT `FK_${relation.otherEntityName?upper_case}_${relation.relationshipName?upper_case}`
-       FOREIGN KEY (`${relation.otherEntityName?upper_case}_ID`) 
-       REFERENCES `${relation.otherEntityName?upper_case}` (`ID`);
+ALTER TABLE `${entity.name?upper_case}_${relation.relationshipName?upper_case}`
+    ADD CONSTRAINT `FK_${entity.name?upper_case}_${relation.relationshipName?upper_case}`
+    FOREIGN KEY (`${entity.name?upper_case}_ID`) 
+    REFERENCES `${entity.name?upper_case}` (`ID`);
+
+ALTER TABLE `${entity.name?upper_case}_${relation.relationshipName?upper_case}`
+    ADD CONSTRAINT `FK_${relation.otherEntityName?upper_case}_${relation.relationshipName?upper_case}`
+    FOREIGN KEY (`${relation.otherEntityName?upper_case}_ID`) 
+    REFERENCES `${relation.otherEntityName?upper_case}` (`ID`);
 
     </#if>
   </#if>
