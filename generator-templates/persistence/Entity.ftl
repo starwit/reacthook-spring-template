@@ -75,16 +75,16 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 </#if>
 <#if entity.relationships??>
   <#list (entity.relationships) as relation>
-  <#if relation == "one-to-many">
+  <#if relation == "OneToMany">
     @OneToMany(mappedBy="${relation.otherEntityRelationshipName}")
     private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
 
-  <#elseif relation == "many-to-one">
+  <#elseif relation == "ManyToOne">
     @ManyToOne
     @JoinColumn(name="${relation.otherEntityName?upper_case}_ID")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
-  <#elseif relation == "one-to-one">
+  <#elseif relation == "OneToOne">
     <#if relation.ownerSide>
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID", referencedColumnName = "ID")
@@ -95,7 +95,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
     </#if>
-  <#elseif relation == "many-to-many">
+  <#elseif relation == "ManyToMany">
     <#if relation.ownerSide>
     @ManyToMany(mappedBy="${relation.otherEntityRelationshipName}")
     @JoinTable(
@@ -136,7 +136,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 </#if>
 <#if entity.relationships??>
   <#list (entity.relationships) as relation>
-  <#if relation == "one-to-many" || relation == "many-to-many">
+  <#if relation == "OneToMany" || relation == "ManyToMany">
     public Set<${relation.otherEntityName}Entity> get${relation.relationshipName?cap_first}() {
         return ${relation.relationshipName};
     }
@@ -145,7 +145,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
         this.${relation.relationshipName} = ${relation.relationshipName};
     }
 
-  <#elseif relation == "one-to-many" || relation == "one-to-one">
+  <#elseif relation == "OneToMany" || relation == "OneToOne">
     public <${relation.otherEntityName}Entity> get${relation.relationshipName?cap_first}() {
         return ${relation.relationshipName};
     }
