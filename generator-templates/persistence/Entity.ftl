@@ -72,9 +72,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 
     </#if>
     </#list>
-
-</#if>
-  <#list (entity.fields) as field> 
+    <#list (entity.fields) as field> 
         <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp"> 
     public Date get${field.fieldName?cap_first}() {
         return ${field.fieldName};
@@ -94,4 +92,5 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 
         </#if>
     </#list>
+</#if>
 }
