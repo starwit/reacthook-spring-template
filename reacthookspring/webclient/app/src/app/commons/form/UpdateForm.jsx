@@ -26,7 +26,7 @@ function UpdateForm(props) {
             onSubmit={handleSubmit}>
 
             {fields.map(field =>
-                <React.Fragment key={field.name}>
+                <Container key={field.name}>
                     <ValidatedTextField
                         inputProps={field.inputProps}
                         key={field.name}
@@ -43,7 +43,7 @@ function UpdateForm(props) {
                         regex={field.regex}
                     />
                     <br/>
-                </React.Fragment>
+                </Container>
             )}
             <br/>
             <Button type="submit" variant="contained" color="primary" disabled={hasFormError} >

@@ -14,12 +14,20 @@ const translationEnEN = {
 </#if>
 </#list>
 </#if>
+<#if entity.relationships??>
+  <#list (entity.relationships) as relation>
+  <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
+    "${entity.name?uncap_first}.${relation.relationshipName}": "${relation.relationshipName}",
+  </#if>
+  </#list>
+</#if>
     "app.baseName": "${app.baseName}",
     "home.title": "Welcome",
     "home.welcome": "Welcome to ${app.baseName}",
     "button.submit": "OK",
     "button.create": "Add",
     "button.update": "Edit",
-    "button.delete": "Delete"
+    "button.delete": "Delete",
+    "select.none": "None"
 };
 export default translationEnEN;

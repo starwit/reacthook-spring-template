@@ -1,63 +1,83 @@
-import {Container, Typography} from "@mui/material";
-import React, {useState, useMemo, useEffect} from "react";
+import React, {useMemo, useEffect} from "react";
+import {useParams} from "react-router";
 import {useImmer} from "use-immer";
-import {useTranslation} from "react-i18next";
-import UpdateForm from "./../../commons/form/UpdateForm";
-import {useParams, useHistory} from "react-router";
-import ${entity.name}Rest from "../../services/${entity.name}Rest";
-import {handleChange} from "../../modifiers/DefaultModifier";
-import {${entity.name?uncap_first}Fields, ${entity.name?uncap_first}Default} from "../../modifiers/${entity.name}Modifier";
+import ${entity.name}Rest  from "../../services/${entity.name}Rest ";
+<#if entity.relationships??>
+//entity relations
+  <#list (entity.relationships) as relation>
+  <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
+import ${relation.otherEntityName}Rest from "../../services/${relation.otherEntityName}Rest";
+  </#if>
+  </#list>
+</#if>
+import {
+    entityDefault,
+    entityFields
+} from "../../modifiers/${entity.name}Modifier";
+import EntityDetail from "../../commons/form/EntityDetail";
+import {addSelectLists} from "../../modifiers/DefaultModifier";
 
 function ${entity.name}Detail() {
-    const {t} = useTranslation();
-    const history = useHistory();
-    const ${entity.name?lower_case}Rest = useMemo(() => new ${entity.name}Rest(), []);
-
-    const [${entity.name?uncap_first}, set${entity.name}] = useImmer(${entity.name?uncap_first}Default);
-    const [titleKey, setTitleKey] = useState(null);
+    const [entity, setEntity] = useImmer(entityDefault);
+    const [fields, setFields] = useImmer(entityFields);
+    const entityRest = useMemo(() => new ${entity.name}Rest(), []);
+<#if entity.relationships??>
+  <#list (entity.relationships) as relation>
+  <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
+    const ${relation.otherEntityName?lower_case}Rest = useMemo(() => new ${relation.otherEntityName}Rest(), []);
+  </#if>
+  </#list>
+</#if>
+    const userRest = useMemo(() => new UserRest(), []);
     const {id} = useParams();
 
     useEffect(() => {
-        onIdChange();
+        reloadSelectLists();
     }, [id]);
 
-    function onIdChange() {
-        if (!id) {
-            setTitleKey("${entity.name?uncap_first}.create.title");
-        } else {
-            setTitleKey("${entity.name?uncap_first}.update.title");
-            ${entity.name?lower_case}Rest.findById(id).then(response => {
-                set${entity.name}(response.data);
-            });
-        }
+    function reloadSelectLists() {
+        const selectLists = [];
+        const functions = [
+<#if entity.relationships??>
+  <#list (entity.relationships) as relation>
+  <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
+            ${relation.otherEntityName?lower_case}Rest.findAll(),
+  </#if>
+  </#list>
+</#if>
+        ];
+        Promise.all(functions).then(values => {
+<#if entity.relationships??>
+  <#list (entity.relationships) as relation>
+  <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
+            selectLists.push({name: "${relation.relationshipName}", data: values[${relation?index}].data});
+  </#if>
+  </#list>
+</#if>
+            if (id) {
+                entityRest.findById(id).then(response => {
+                    setEntity(response.data);
+                    addSelectLists(response.data, fields, setFields, selectLists);
+                });
+            } else {
+                addSelectLists(entity, fields, setFields, selectLists);
+            }
+        });
     }
-
-    function handleSubmit(event) {
-    // turn off page reload
-        event.preventDefault();
-
-        if (!id) {
-            ${entity.name?lower_case}Rest.create(${entity.name?uncap_first}).then(goBack);
-        } else {
-            ${entity.name?lower_case}Rest.update(${entity.name?uncap_first}).then(goBack);
-        }
-    }
-
-    const goBack = () => {
-        history.push("/${entity.name?lower_case}");
-    };
 
     return (
-        <Container>
-            <Typography variant="h1" color="primary">{t(titleKey)}</Typography>
-            <UpdateForm
-                entity={${entity.name?uncap_first}}
-                fields={${entity.name?uncap_first}Fields}
-                prefix='${entity.name?uncap_first}'
-                handleSubmit={handleSubmit}
-                handleChange={e => handleChange(e, set${entity.name})}
+        <>
+            <EntityDetail
+                id={id}
+                entity={entity}
+                setEntity={setEntity}
+                fields={fields}
+                setFields={setFields}
+                entityRest={entityRest}
+                prefix="${entity.name?uncap_first}"
             />
-        </Container>
+        </>
+
     );
 }
 

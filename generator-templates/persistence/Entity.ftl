@@ -53,20 +53,20 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     private Date ${field.fieldName};
   <#else>
         <#if field.fieldType == "String"> 
-    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if><#if field.max??>, length=${field.max}</#if>)
+    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if><#if field.max??>, length=${field.max}</#if>)
         </#if>
         <#if field.fieldType == "Integer"> 
-    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
         <#if field.fieldType == "BigDecimal"> 
-    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
         <#if field.fieldType == "Double"> 
-    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
         <#if field.fieldType == "Enum"> 
     @Enumerated(EnumType.STRING)
-    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
     private ${field.fieldType} ${field.fieldName};
 
@@ -88,18 +88,21 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 
   <#elseif relation.relationshipType == "OneToOne">
     <#if relation.ownerSide>
-    @OneToOne(cascade = CascadeType.ALL)
+    @JsonFilter("filterId")
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID", referencedColumnName = "ID")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
     <#else>
-    @OneToOne(mappedBy = "${relation.otherEntityRelationshipName}")
+    @JsonFilter("filterId")
+    @OneToOne(mappedBy = "${relation.otherEntityRelationshipName}", fetch = FetchType.LAZY)
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
     </#if>
   <#elseif relation.relationshipType == "ManyToMany">
     <#if relation.ownerSide>
-    @ManyToMany
+    @JsonFilter("filterId")
+    @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(
         name = "${entity.name?upper_case}_${relation.relationshipName?upper_case}", 
         joinColumns = @JoinColumn(name = "${entity.name?upper_case}_ID"), 
@@ -107,6 +110,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
 
     <#else>
+    @JsonFilter("filterId")
     @ManyToMany(mappedBy="${relation.otherEntityRelationshipName}")
     private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
 
