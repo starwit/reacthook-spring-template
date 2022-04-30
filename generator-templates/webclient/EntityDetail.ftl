@@ -6,7 +6,7 @@ import ${entity.name}Rest from "../../services/${entity.name}Rest";
   <#assign seen_rest = []>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
-  <#if relation.isOwnerSide>
+  <#if relation.ownerSide>
   <#if seen_rest?seq_contains(relation.otherEntityName)>
   <#else>
   <#assign seen_rest = seen_rest + [relation.otherEntityName]>
@@ -31,7 +31,7 @@ function ${entity.name}Detail() {
   <#assign seen_rest2 = []>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
-  <#if relation.isOwnerSide>
+  <#if relation.ownerSide>
   <#if seen_rest2?seq_contains(relation.otherEntityName)>
   <#else>
   <#assign seen_rest2 = seen_rest2 + [relation.otherEntityName]>
@@ -54,7 +54,7 @@ function ${entity.name}Detail() {
   <#assign seen_rest3 = []>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
-  <#if relation.isOwnerSide>
+  <#if relation.ownerSide>
   <#if seen_rest3?seq_contains(relation.otherEntityName)>
   <#else>
   <#assign seen_rest3 = seen_rest3 + [relation.otherEntityName]>
