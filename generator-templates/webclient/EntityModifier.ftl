@@ -16,7 +16,7 @@ const entityFields = [
 <#if entity.relationships??>
 <#list (entity.relationships) as relation>
 <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
-<#if isOwnerSide>
+<#if relation.isOwnerSide>
     {
         name: "${relation.relationshipName}",
         type: "${relation.relationshipType}",
