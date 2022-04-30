@@ -35,6 +35,7 @@ function ${entity.name}Detail() {
   <#assign seen_rest = seen_rest + [relation.otherEntityName]>
     const ${relation.otherEntityName?lower_case}Rest = useMemo(() => new ${relation.otherEntityName}Rest(), []);
   </#if>
+  </if>
   </#list>
 </#if>
     const userRest = useMemo(() => new UserRest(), []);
@@ -56,6 +57,7 @@ function ${entity.name}Detail() {
   <#assign seen_rest = seen_rest + [relation.otherEntityName]>
             ${relation.otherEntityName?lower_case}Rest.findAll(),
   </#if>
+  </#if>
   </#list>
 </#if>
         ];
@@ -64,6 +66,7 @@ function ${entity.name}Detail() {
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
             selectLists.push({name: "${relation.relationshipName}", data: values[${relation?index}].data});
+  </#if>
   </#if>
   </#list>
 </#if>
