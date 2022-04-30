@@ -1,7 +1,7 @@
 import React, {useMemo, useEffect} from "react";
 import {useParams} from "react-router";
 import {useImmer} from "use-immer";
-import ${entity.name}Rest  from "../../services/${entity.name}Rest";
+import ${entity.name}Rest from "../../services/${entity.name}Rest";
 <#if entity.relationships??>
   <#assign seen_rest = []>
   <#list (entity.relationships) as relation>
@@ -53,7 +53,7 @@ function ${entity.name}Detail() {
   <#if seen_rest3?seq_contains(relation.otherEntityName)>
   <#else>
   <#assign seen_rest3 = seen_rest3 + [relation.otherEntityName]>
-            ${relation.otherEntityName?lower_case}Rest.findAll(),
+            ${relation.otherEntityName?lower_case}Rest.findAll()<#sep>,</#sep>
   </#if>
   </#if>
   </#list>
