@@ -27,7 +27,7 @@ function ${entity.name}Detail() {
     const [fields, setFields] = useImmer(entityFields);
     const entityRest = useMemo(() => new ${entity.name}Rest(), []);
 <#if entity.relationships??>
-  <#assign seen_rest2 = []>
+  <#assign seen_rest = []>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
   <#if seen_rest?seq_contains(relation.otherEntityName)>
@@ -49,7 +49,7 @@ function ${entity.name}Detail() {
         const selectLists = [];
         const functions = [
 <#if entity.relationships??>
-  <#assign seen_rest3 = []>
+  <#assign seen_rest = []>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
   <#if seen_rest?seq_contains(relation.otherEntityName)>

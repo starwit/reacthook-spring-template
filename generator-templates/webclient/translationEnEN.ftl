@@ -12,14 +12,14 @@ const translationEnEN = {
     "${entity.name?uncap_first}.${field.fieldName}.hint": "has to match validation rules",
 </#list>
 </#if>
-</#list>
-</#if>
 <#if entity.relationships??>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
     "${entity.name?uncap_first}.${relation.relationshipName}": "${relation.relationshipName}",
   </#if>
   </#list>
+</#if>
+</#list>
 </#if>
     "app.baseName": "${app.baseName}",
     "home.title": "Welcome",
