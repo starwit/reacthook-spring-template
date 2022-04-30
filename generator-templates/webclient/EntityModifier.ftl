@@ -16,6 +16,7 @@ const entityFields = [
 <#if entity.relationships??>
 <#list (entity.relationships) as relation>
 <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
+<#if isOwnerSide>
     {
         name: "${relation.relationshipName}",
         type: "${relation.relationshipType}",
@@ -35,7 +36,8 @@ const entityFields = [
 </#if>
         ],
         selectedIds: []
-    },
+    }<#sep>,</#sep>
+</#if>
 </#if>
 </#list>
 </#if>
