@@ -27,10 +27,12 @@ function ${entity.name}Detail() {
     const [fields, setFields] = useImmer(entityFields);
     const entityRest = useMemo(() => new ${entity.name}Rest(), []);
 <#if entity.relationships??>
+  <#assign seen_rest2 = []>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
-  <#if seen_rest?seq_contains(relation.otherEntityName)>
+  <#if seen_rest2?seq_contains(relation.otherEntityName)>
   <#else>
+  <#assign seen_rest2 = seen_rest2 + [relation.otherEntityName]>
     const ${relation.otherEntityName?lower_case}Rest = useMemo(() => new ${relation.otherEntityName}Rest(), []);
   </#if>
   </#if>
@@ -47,11 +49,13 @@ function ${entity.name}Detail() {
         const selectLists = [];
         const functions = [
 <#if entity.relationships??>
+  <#assign seen_rest3 = []>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
-  <#if seen_rest?seq_contains(relation.otherEntityName)>
+  <#if seen_rest3?seq_contains(relation.otherEntityName)>
   <#else>
-              ${relation.otherEntityName?lower_case}Rest.findAll(),
+  <#assign seen_rest3 = seen_rest3 + [relation.otherEntityName]>
+            ${relation.otherEntityName?lower_case}Rest.findAll(),
   </#if>
   </#if>
   </#list>
