@@ -3,7 +3,6 @@ import {useParams} from "react-router";
 import {useImmer} from "use-immer";
 import ${entity.name}Rest  from "../../services/${entity.name}Rest";
 <#if entity.relationships??>
-//entity relations
   <#assign seen_rest = []>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
@@ -38,7 +37,6 @@ function ${entity.name}Detail() {
   </#if>
   </#list>
 </#if>
-    const userRest = useMemo(() => new UserRest(), []);
     const {id} = useParams();
 
     useEffect(() => {
