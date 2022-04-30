@@ -1,12 +1,17 @@
 import React, {useMemo, useEffect} from "react";
 import {useParams} from "react-router";
 import {useImmer} from "use-immer";
-import ${entity.name}Rest  from "../../services/${entity.name}Rest ";
+import ${entity.name}Rest  from "../../services/${entity.name}Rest";
 <#if entity.relationships??>
 //entity relations
+  <#assign seen_rest = []>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
+  <#if seen_rest?seq_contains(relation.otherEntityName)>
+  <#else>
+  <#assign seen_rest = seen_rest + [relation.otherEntityName]>
 import ${relation.otherEntityName}Rest from "../../services/${relation.otherEntityName}Rest";
+  </#if>
   </#if>
   </#list>
 </#if>
@@ -22,8 +27,12 @@ function ${entity.name}Detail() {
     const [fields, setFields] = useImmer(entityFields);
     const entityRest = useMemo(() => new ${entity.name}Rest(), []);
 <#if entity.relationships??>
+  <#assign seen_rest2 = []>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
+  <#if seen_rest?seq_contains(relation.otherEntityName)>
+  <#else>
+  <#assign seen_rest = seen_rest + [relation.otherEntityName]>
     const ${relation.otherEntityName?lower_case}Rest = useMemo(() => new ${relation.otherEntityName}Rest(), []);
   </#if>
   </#list>
@@ -39,8 +48,12 @@ function ${entity.name}Detail() {
         const selectLists = [];
         const functions = [
 <#if entity.relationships??>
+  <#assign seen_rest3 = []>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
+  <#if seen_rest?seq_contains(relation.otherEntityName)>
+  <#else>
+  <#assign seen_rest = seen_rest + [relation.otherEntityName]>
             ${relation.otherEntityName?lower_case}Rest.findAll(),
   </#if>
   </#list>
