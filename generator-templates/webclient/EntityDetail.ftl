@@ -67,7 +67,6 @@ function ${entity.name}Detail() {
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
             selectLists.push({name: "${relation.relationshipName}", data: values[${relation?index}].data});
   </#if>
-  </#if>
   </#list>
 </#if>
             if (id) {
