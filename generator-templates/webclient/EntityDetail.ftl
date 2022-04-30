@@ -35,7 +35,7 @@ function ${entity.name}Detail() {
   <#assign seen_rest = seen_rest + [relation.otherEntityName]>
     const ${relation.otherEntityName?lower_case}Rest = useMemo(() => new ${relation.otherEntityName}Rest(), []);
   </#if>
-  </if>
+  </#if>
   </#list>
 </#if>
     const userRest = useMemo(() => new UserRest(), []);
