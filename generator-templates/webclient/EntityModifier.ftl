@@ -22,7 +22,17 @@ const entityFields = [
         regex: null, 
         selectList: [],
         display: [
-            "name"
+<#if app.entities??>
+<#list app.entities as otherEntity>
+<#if otherEntity.name == relation.otherEntityName>
+<#if otherEntity.fields??>
+<#list (otherEntity.fields) as field>
+    "${field}"<#sep>,</#sep>
+</#list>
+</#if>
+</#if>
+</#list>
+</#if>
         ],
         selectedIds: []
     },
