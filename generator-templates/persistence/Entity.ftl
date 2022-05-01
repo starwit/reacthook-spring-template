@@ -1,10 +1,5 @@
 package de.${app.packageName?lower_case}.persistence.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-
 <#list (imports) as import> 
 ${import}
 </#list>
@@ -95,7 +90,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 
     <#else>
     @JsonFilter("filterId")
-    @OneToOne(mappedBy = "${relation.otherEntityRelationshipName}", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "${relation.otherEntityRelationshipName}")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
     </#if>
