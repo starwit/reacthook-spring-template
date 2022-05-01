@@ -14,9 +14,9 @@ const translationEnEN = {
 </#if>
 <#if entity.relationships??>
   <#list (entity.relationships) as relation>
-  <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
+    <#if relation.ownerSide>
     "${entity.name?uncap_first}.${relation.relationshipName}": "${relation.relationshipName}",
-  </#if>
+    </#if>
   </#list>
 </#if>
 </#list>

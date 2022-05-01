@@ -14,32 +14,30 @@ const entityFields = [
 </#list>
 </#if>
 <#if entity.relationships??>
-<#list (entity.relationships) as relation>
-<#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
-<#if relation.ownerSide>
+  <#list (entity.relationships) as relation>
+    <#if relation.ownerSide>
     {
         name: "${relation.relationshipName}",
         type: "${relation.relationshipType}",
         regex: null, 
         selectList: [],
         display: [
-<#if app.entities??>
-<#list app.entities as otherEntity>
-<#if otherEntity.name == relation.otherEntityName>
-<#if otherEntity.fields??>
-<#list (otherEntity.fields) as field>
+      <#if app.entities??>
+        <#list app.entities as otherEntity>
+        <#if otherEntity.name == relation.otherEntityName>
+        <#if otherEntity.fields??>
+        <#list (otherEntity.fields) as field>
     "${field.fieldName}"<#sep>,</#sep>
-</#list>
-</#if>
-</#if>
-</#list>
-</#if>
+        </#list>
+        </#if>
+        </#if>
+        </#list>
+      </#if>
         ],
         selectedIds: []
     }<#sep>,</#sep>
-</#if>
-</#if>
-</#list>
+    </#if>
+  </#list>
 </#if>
 ];
 

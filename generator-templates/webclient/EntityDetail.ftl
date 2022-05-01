@@ -5,13 +5,11 @@ import ${entity.name}Rest from "../../services/${entity.name}Rest";
 <#if entity.relationships??>
   <#assign seen_rest = []>
   <#list (entity.relationships) as relation>
-  <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
   <#if relation.ownerSide>
   <#if seen_rest?seq_contains(relation.otherEntityName)>
   <#else>
   <#assign seen_rest = seen_rest + [relation.otherEntityName]>
 import ${relation.otherEntityName}Rest from "../../services/${relation.otherEntityName}Rest";
-  </#if>
   </#if>
   </#if>
   </#list>
@@ -30,13 +28,11 @@ function ${entity.name}Detail() {
 <#if entity.relationships??>
   <#assign seen_rest2 = []>
   <#list (entity.relationships) as relation>
-  <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
   <#if relation.ownerSide>
   <#if seen_rest2?seq_contains(relation.otherEntityName)>
   <#else>
   <#assign seen_rest2 = seen_rest2 + [relation.otherEntityName]>
     const ${relation.otherEntityName?lower_case}Rest = useMemo(() => new ${relation.otherEntityName}Rest(), []);
-  </#if>
   </#if>
   </#if>
   </#list>
@@ -53,7 +49,6 @@ function ${entity.name}Detail() {
 <#if entity.relationships??>
   <#assign seen_rest3 = []>
   <#list (entity.relationships) as relation>
-  <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
   <#if relation.ownerSide>
   <#if seen_rest3?seq_contains(relation.otherEntityName)>
   <#else>
@@ -61,15 +56,19 @@ function ${entity.name}Detail() {
             ${relation.otherEntityName?lower_case}Rest.findAll()<#sep>,</#sep>
   </#if>
   </#if>
-  </#if>
   </#list>
 </#if>
         ];
         Promise.all(functions).then(values => {
 <#if entity.relationships??>
+  <#assign seen_rest3 = []>
   <#list (entity.relationships) as relation>
-  <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne" || relation.relationshipType == "ManyToMany">
+  <#if relation.ownerSide>
+  <#if seen_rest3?seq_contains(relation.otherEntityName)>
+  <#else>
+  <#assign seen_rest3 = seen_rest3 + [relation.otherEntityName]>
             selectLists.push({name: "${relation.relationshipName}", data: values[${relation?index}].data});
+  </#if>
   </#if>
   </#list>
 </#if>

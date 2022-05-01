@@ -41,7 +41,7 @@ function isSelect(fieldType) {
 }
 
 function isMultiSelect(fieldType) {
-    return fieldType === "ManyToMany";
+    return fieldType === "ManyToMany" || fieldType === "OneToMany";
 }
 
 function isInput(fieldType) {
