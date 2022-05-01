@@ -13,7 +13,7 @@ ${import}
 public class ${entity.name}Entity extends AbstractEntity<Long> {
 
 <#if entity.fields??>
-//entity fields
+    //entity fields
   <#list (entity.fields) as field> 
   <#if field.fieldValidateRulesPattern?? && field.fieldValidateRulesPattern?length &gt; 0 && field.fieldType == "String">
     @Pattern(regexp = "${field.fieldValidateRulesPattern}")
@@ -70,22 +70,22 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 </#if>
 
 <#if entity.relationships??>
-//entity relations
+    //entity relations
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToMany">
-    @OneToMany(mappedBy="${relation.otherEntityRelationshipName}")
+    @OneToMany(mappedBy = "${relation.otherEntityRelationshipName}")
     private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
 
   <#elseif relation.relationshipType == "ManyToOne">
     @ManyToOne
-    @JoinColumn(name="${relation.otherEntityName?upper_case}_ID")
+    @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
   <#elseif relation.relationshipType == "OneToOne">
     <#if relation.ownerSide>
     @JsonFilter("filterId")
     @OneToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID", referencedColumnName = "ID", unique = true)
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
     <#else>
@@ -114,7 +114,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
   </#list>
 </#if>
 <#if entity.fields??>
-//entity fields getters and setters
+    //entity fields getters and setters
   <#list (entity.fields) as field> 
   <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp"> 
     public Date get${field.fieldName?cap_first}() {
@@ -138,7 +138,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
   </#list>
 </#if>
 <#if entity.relationships??>
-//entity relations getters and setters
+    //entity relations getters and setters
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToMany" || relation.relationshipType == "ManyToMany">
     public Set<${relation.otherEntityName}Entity> get${relation.relationshipName?cap_first}() {

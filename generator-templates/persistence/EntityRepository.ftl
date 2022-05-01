@@ -10,4 +10,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ${entity.name}Repository extends JpaRepository<${entity.name}Entity, Long> {
 
+
+<#if entity.relationships??>
+  <#list (entity.relationships) as relation>
+  <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne">
+    @Query("SELECT e FROM ${entity.name} e WHERE e.${relation.relationshipName} IS NULL")
+    public List<${entity.name}Entity> findAllWithout${relation.relationshipName?cap_first}();
+  </#if>
+  </#list>
+</#if>
+
+
 }

@@ -45,6 +45,16 @@ public class ${entity.name}Controller {
         return this.${entity.name?lower_case}Service.findAll();
     }
 
+<#if entity.relationships??>
+  <#list (entity.relationships) as relation>
+  <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne">
+    public List<${entity.name}Entity> findAllWithout${relation.relationshipName?cap_first}() {
+        return ${entity.name?lower_case}Service.findAllWithout${relation.relationshipName?cap_first}();
+    }
+  </#if>
+  </#list>
+</#if>
+
     @Operation(summary = "Get ${entity.name?lower_case} with id")
     @GetMapping(value = "/{id}")
     public ${entity.name}Entity findById(@PathVariable("id") Long id) {

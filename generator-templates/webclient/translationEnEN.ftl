@@ -28,6 +28,17 @@ const translationEnEN = {
     "button.create": "Add",
     "button.update": "Edit",
     "button.delete": "Delete",
-    "select.none": "None"
+    "select.none": "None",
+    "error.inUse": "More than one row with the given identifier was found",
+    "error.sqlIntegrityConstaint": "Given data is not in the right format to be saved. Please check related entries.",
+    "error.unique": "Entry is already related do another object. Please create a new entry or delete existing relation.",
+    "error.internalServerError": "Internal server error.",
+    "error.accessdenied": "Access denied.",
+    "error.notexists": "Selected entry does not exist.",
+    "error.notfound": "Selected entry does not exist.",
+    "error.badrequest": "Check if there is an unvalid ID declared while object shoud be created.",
+    "error.wrongInputValue": "Wrong input value.",
+    "error.unauthorized": "Unauthorized request.",
+    "error.invalidDefinition": "Invalid definition."
 };
 export default translationEnEN;

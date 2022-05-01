@@ -52,8 +52,12 @@ function ${entity.name}Detail() {
   <#if relation.ownerSide>
   <#if seen_rest3?seq_contains(relation.otherEntityName)>
   <#else>
-  <#assign seen_rest3 = seen_rest3 + [relation.otherEntityName]>
+    <#assign seen_rest3 = seen_rest3 + [relation.otherEntityName]>
+    <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne">
+            ${relation.otherEntityName?lower_case}Rest.findAllWithout${relation.relationshipName?cap_first}()<#sep>,</#sep>
+    <#else>
             ${relation.otherEntityName?lower_case}Rest.findAll()<#sep>,</#sep>
+    </#if>
   </#if>
   </#if>
   </#list>
