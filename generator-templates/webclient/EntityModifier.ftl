@@ -1,4 +1,4 @@
-const EntityDefault = {
+const entityDefault = {
 <#if entity.fields??>
 <#list (entity.fields) as field> 
     ${field.fieldName}: "",
