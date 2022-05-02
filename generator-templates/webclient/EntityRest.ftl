@@ -14,6 +14,5 @@ class ${entity.name}Rest extends CrudRest {
   </#if>
   </#list>
 </#if>
-
 }
 export default ${entity.name}Rest;
