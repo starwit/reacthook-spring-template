@@ -1,4 +1,15 @@
+<#assign addRestCalls = false>
+<#if entity.relationships??>
+  <#list (entity.relationships) as relation>
+  <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne">
+    <#assign addRestCalls = true>
+  </#if>
+  </#list>
+</#if>
 import CrudRest from "./CrudRest";
+<#if addRestCalls>
+import axios from "axios";
+</#if>
 
 class ${entity.name}Rest extends CrudRest {
     constructor() {

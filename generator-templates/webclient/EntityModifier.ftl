@@ -10,7 +10,7 @@ const entityDefault = {
 const entityFields = [
 <#if entity.fields??>
 <#list (entity.fields) as field>
-    {name: "${field.fieldName}", type: "${field.fieldType?lower_case}", regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>},
+    {name: "${field.fieldName}", type: "${field.fieldType?lower_case}", regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>}<#sep>,</#sep>
 </#list>
 </#if>
 <#if entity.relationships??>
