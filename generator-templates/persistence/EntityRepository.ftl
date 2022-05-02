@@ -26,7 +26,6 @@ import de.${app.packageName?lower_case}.persistence.entity.${entity.name}Entity;
 @Repository
 public interface ${entity.name}Repository extends JpaRepository<${entity.name}Entity, Long> {
 
-
 <#if entity.relationships??>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne">
@@ -35,6 +34,4 @@ public interface ${entity.name}Repository extends JpaRepository<${entity.name}En
   </#if>
   </#list>
 </#if>
-
-
 }
