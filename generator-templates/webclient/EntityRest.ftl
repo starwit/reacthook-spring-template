@@ -20,7 +20,7 @@ class ${entity.name}Rest extends CrudRest {
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne">
 
     findAllWithout${relation.relationshipName?cap_first}() {
-        return axios.put(this.baseUrl + "/find-without-${relation.relationshipName}/");
+        return axios.get(this.baseUrl + "/find-without-${relation.relationshipName}/");
     }
   </#if>
   </#list>
