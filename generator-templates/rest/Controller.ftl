@@ -48,6 +48,8 @@ public class ${entity.name}Controller {
 <#if entity.relationships??>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne">
+    @Operation(summary = "Get all ${entity.name?lower_case} without ${relation.relationshipName}")
+    @GetMapping(value = "find-without-${relation.relationshipName}")
     public List<${entity.name}Entity> findAllWithout${relation.relationshipName?cap_first}() {
         return ${entity.name?lower_case}Service.findAllWithout${relation.relationshipName?cap_first}();
     }
