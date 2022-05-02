@@ -4,7 +4,7 @@ import {useTranslation} from "react-i18next";
 import OverviewTable from "../../commons/table/OverviewTable";
 import ${entity.name}Rest from "../../services/${entity.name}Rest";
 import {useHistory} from "react-router";
-import {${entity.name?uncap_first}Fields} from "../../modifiers/${entity.name}Modifier";
+import {${entity.name?uncap_first}OverviewFields} from "../../modifiers/${entity.name}Modifier";
 
 function UserOverview() {
     const [selected, setSelected] = useState(undefined);
@@ -56,7 +56,7 @@ function UserOverview() {
                 prefix={"${entity.name?uncap_first}"}
                 selected={selected}
                 onSelect={setSelected}
-                fields={${entity.name?uncap_first}Fields}/>
+                fields={${entity.name?uncap_first}OverviewFields}/>
         </Container>
     );
 }
