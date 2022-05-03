@@ -1,5 +1,6 @@
 package de.starwit.rest.exception;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,13 +8,16 @@ import javax.persistence.EntityNotFoundException;
 
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 
+import org.hibernate.HibernateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.util.ClassUtils;
 import org.springframework.validation.FieldError;
@@ -77,7 +81,8 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = { InvalidDataAccessApiUsageException.class })
     public ResponseEntity<Object> handleException(InvalidDataAccessApiUsageException ex) {
         LOG.info("{} Check if there is an ID declared while object shoud be created.", ex.getMessage());
-        NotificationDto output = new NotificationDto("error.badrequest", ex.getMessage() + " Check if there is an unvalid ID declared while object shoud be created.");
+        NotificationDto output = new NotificationDto("error.badrequest",
+                ex.getMessage() + " Check if there is an unvalid ID declared while object shoud be created.");
         return new ResponseEntity<>(output, HttpStatus.BAD_REQUEST);
     }
 
@@ -101,6 +106,28 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
         NotificationDto output = new NotificationDto("error.accessdenied", "access denied");
         output.setMessageKey("error.accessdenied");
         return new ResponseEntity<>(output, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(value = { JpaSystemException.class })
+    public ResponseEntity<Object> handleException(HibernateException ex) {
+        if (ex.getMessage().contains("More than one row with the given identifier was found")) {
+            LOG.info(ex.getMessage());
+            NotificationDto output = new NotificationDto("error.inUse",
+                    "More than one row with the given identifier was found");
+            return new ResponseEntity<>(output, HttpStatus.BAD_REQUEST);
+        }
+        NotificationDto output = new NotificationDto("error.internalServerError", "Internal Server Error");
+        return new ResponseEntity<>(output, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = { DataIntegrityViolationException.class })
+    public ResponseEntity<Object> handleException(SQLIntegrityConstraintViolationException ex) {
+        NotificationDto output = new NotificationDto("error.sqlIntegrityConstaint",
+                "Given data is not in the right format to be saved.");
+        if (ex.getMessage().contains("Duplicate entry")) {
+            output.setMessageKey("error.unique");
+        }
+        return new ResponseEntity<>(output, HttpStatus.BAD_REQUEST);
     }
 
     @Override

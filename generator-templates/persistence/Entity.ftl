@@ -1,10 +1,5 @@
 package de.${app.packageName?lower_case}.persistence.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-
 <#list (imports) as import> 
 ${import}
 </#list>
@@ -18,7 +13,7 @@ ${import}
 public class ${entity.name}Entity extends AbstractEntity<Long> {
 
 <#if entity.fields??>
-//entity fields
+    // entity fields
   <#list (entity.fields) as field> 
   <#if field.fieldValidateRulesPattern?? && field.fieldValidateRulesPattern?length &gt; 0 && field.fieldType == "String">
     @Pattern(regexp = "${field.fieldValidateRulesPattern}")
@@ -53,53 +48,55 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     private Date ${field.fieldName};
   <#else>
         <#if field.fieldType == "String"> 
-    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if><#if field.max??>, length=${field.max}</#if>)
+    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if><#if field.max??>, length=${field.max}</#if>)
         </#if>
         <#if field.fieldType == "Integer"> 
-    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
         <#if field.fieldType == "BigDecimal"> 
-    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
         <#if field.fieldType == "Double"> 
-    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
         <#if field.fieldType == "Enum"> 
     @Enumerated(EnumType.STRING)
-    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
     private ${field.fieldType} ${field.fieldName};
 
   </#if>
   </#list>
 </#if>
-
 <#if entity.relationships??>
-//entity relations
+    // entity relations
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToMany">
-    @OneToMany(mappedBy="${relation.otherEntityRelationshipName}")
+    @OneToMany(mappedBy = "${relation.otherEntityRelationshipName}")
     private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
 
   <#elseif relation.relationshipType == "ManyToOne">
     @ManyToOne
-    @JoinColumn(name="${relation.otherEntityName?upper_case}_ID")
+    @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
   <#elseif relation.relationshipType == "OneToOne">
     <#if relation.ownerSide>
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID", referencedColumnName = "ID")
+    @JsonFilter("filterId")
+    @OneToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID", referencedColumnName = "ID", unique = true)
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
     <#else>
+    @JsonFilter("filterId")
     @OneToOne(mappedBy = "${relation.otherEntityRelationshipName}")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
     </#if>
   <#elseif relation.relationshipType == "ManyToMany">
     <#if relation.ownerSide>
-    @ManyToMany
+    @JsonFilter("filterId")
+    @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(
         name = "${entity.name?upper_case}_${relation.relationshipName?upper_case}", 
         joinColumns = @JoinColumn(name = "${entity.name?upper_case}_ID"), 
@@ -107,7 +104,8 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
 
     <#else>
-    @ManyToMany(mappedBy="${relation.otherEntityRelationshipName}")
+    @JsonFilter("filterId")
+    @ManyToMany(mappedBy = "${relation.otherEntityRelationshipName}")
     private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
 
     </#if>
@@ -115,7 +113,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
   </#list>
 </#if>
 <#if entity.fields??>
-//entity fields getters and setters
+    // entity fields getters and setters
   <#list (entity.fields) as field> 
   <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp"> 
     public Date get${field.fieldName?cap_first}() {
@@ -139,7 +137,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
   </#list>
 </#if>
 <#if entity.relationships??>
-//entity relations getters and setters
+    // entity relations getters and setters
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToMany" || relation.relationshipType == "ManyToMany">
     public Set<${relation.otherEntityName}Entity> get${relation.relationshipName?cap_first}() {
