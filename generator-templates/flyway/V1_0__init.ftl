@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `${entity.name?upper_case}`
     `${relation.otherEntityName?upper_case}_ID` bigint,
   <#elseif relation.relationshipType == "OneToOne">
     <#if relation.ownerSide>
-    `${relation.otherEntityName?upper_case}_ID` bigint,
+    `${relation.otherEntityName?upper_case}_ID` bigint UNIQUE,
     </#if>
   </#if>
   </#list>
