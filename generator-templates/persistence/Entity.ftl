@@ -29,7 +29,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     @Size(min = ${field.fieldValidateRulesMinlength})
             </#if>
             <#if !field.fieldValidateRulesMinlength?? && field.fieldValidateRulesMaxlength??>
-    @Size(max = ${field.mfieldValidateRulesMaxlengthax})
+    @Size(max = ${field.fieldValidateRulesMaxlength})
             </#if>
         <#else>
             <#if field.required>
