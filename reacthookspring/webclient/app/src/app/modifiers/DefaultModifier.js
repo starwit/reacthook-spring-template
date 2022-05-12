@@ -45,7 +45,13 @@ function isMultiSelect(fieldType) {
 }
 
 function isInput(fieldType) {
-    return fieldType === "string" || fieldType == "int";
+    return fieldType === "string" ||
+        fieldType == "integer" ||
+        fieldType == "bigdecimal" ||
+        fieldType == "float" ||
+        fieldType == "double" ||
+        fieldType == "boolean" ||
+        fieldType == "long";
 }
 
 function addSelectLists(entity, fields, setFields, selects) {
