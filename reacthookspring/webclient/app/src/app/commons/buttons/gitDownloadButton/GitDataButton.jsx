@@ -67,7 +67,7 @@ function GitDataButton(props) {
     return (
         <Container>
             <Button onClick={handleLogin} startIcon={buttonIcon ? buttonIcon : <CloudSync/>}
-                variant={buttonVariant}>{buttonName}</Button>
+                variant={buttonVariant} color={"secondary"}>{buttonName}</Button>
             <Dialog open={openAuthDialog} onClose={onClose} spacing={2}>
                 <DialogTitle className={gitDataButtonStyles.dialogHeaderBar}>
                     <Typography noWrap variant={"h6"} component={"p"}>
