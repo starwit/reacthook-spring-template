@@ -1,12 +1,12 @@
 import React from "react";
 import {useTranslation} from "react-i18next";
 import ValidatedTextField from "../inputFields/validatedTextField/ValidatedTextField";
-import UpdateFormStyles from "./UpdateFormStyles";
+import UpdateFieldStyles from "./UpdateFieldStyles";
 
 function UpdateField(props) {
     const {entity, field, prefix, handleChange, ...newProps} = props;
     const {t} = useTranslation();
-    const updateFormStyles = UpdateFormStyles();
+    const updateFieldStyles = UpdateFieldStyles();
 
     return (
 
@@ -19,7 +19,7 @@ function UpdateField(props) {
             name={field.name}
             type={field.type}
             value={entity[field.name] !== null ? entity[field.name] : ""}
-            className={updateFormStyles.textField}
+            className={updateFieldStyles.textField}
             onChange={handleChange}
             margin="normal"
             isCreate={!entity?.id}
