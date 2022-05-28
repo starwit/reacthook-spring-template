@@ -165,7 +165,7 @@ function EntityDetail(props) {
                         }
                     })}
                     <FormControl fullWidth >
-                        <Button type="submit" variant="contained" color="primary" disabled={hasFormError} >
+                        <Button type="submit" variant="contained" color="secondary" disabled={hasFormError} >
                             {t("button.submit")}
                         </Button>
                     </FormControl>
