@@ -19,7 +19,7 @@ import HeaderStyles from "../../../assets/styles/HeaderStyles";
 import {useTranslation} from "react-i18next";
 import {useHistory} from "react-router-dom";
 
-function DrawerNavigation(props) {
+function SidebarNavigation(props) {
 
     const headerStyles = HeaderStyles();
     const drawerWidth = 240;
@@ -70,4 +70,4 @@ function DrawerNavigation(props) {
     )
 }
 
-export default DrawerNavigation;
+export default SidebarNavigation;

@@ -1,7 +1,7 @@
 import React from "react";
 import AppHeader from "./appHeader/AppHeader";
 import {useTranslation} from "react-i18next";
-import DrawerNavigation from "./drawerNavigation/DrawerNavigation";
+import SidebarNavigation from "./sidebarNavigation/SidebarNavigation";
 
 function Navigation(props) {
     const {t} = useTranslation();
@@ -9,9 +9,9 @@ function Navigation(props) {
     if (props.sideBar) {
         return (
             <>
-                <DrawerNavigation menuItems={props.menuItems} title={t("app.baseName")}>
+                <SidebarNavigation menuItems={props.menuItems} title={t("app.baseName")}>
                     {props.children}
-                </DrawerNavigation>
+                </SidebarNavigation>
             </>
         )
     }
