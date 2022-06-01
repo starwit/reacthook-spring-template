@@ -10,6 +10,12 @@
       "category": "ENTITY"
     },
     {
+      "fileName": "${enumDef.name}.java",
+      "templatePath": "persistence/Enum.ftl",
+      "targetPath": "persistence/src/main/java/de/${app.packageName?lower_case}/persistence/entity/",
+      "category": "ENTITY"
+    },
+    {
       "fileName": "application.properties",
       "templatePath": "application/properties.ftl",
       "targetPath": "application/src/main/resources/",
