@@ -10,7 +10,16 @@ const entityDefault = {
 const entityFields = [
 <#if entity.fields??>
 <#list (entity.fields) as field>
+    <#if entity.fieldType == "Enum">
+    {
+        name: "${field.fieldName}", 
+        type: "${field.fieldType?lower_case}", 
+        regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>,
+        selectList: [${field.enumDef.selectList}]
+    },
+    <#else>
     {name: "${field.fieldName}", type: "${field.fieldType?lower_case}", regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>},
+    </#if>
 </#list>
 </#if>
 <#if entity.relationships??>
