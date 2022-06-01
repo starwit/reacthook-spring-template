@@ -10,7 +10,7 @@ const entityDefault = {
 const entityFields = [
 <#if entity.fields??>
 <#list (entity.fields) as field>
-    <#if entity.fieldType == "Enum">
+    <#if field.fieldType == "Enum">
     {
         name: "${field.fieldName}", 
         type: "${field.fieldType?lower_case}", 
