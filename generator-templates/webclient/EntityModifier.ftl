@@ -15,7 +15,7 @@ const entityFields = [
         name: "${field.fieldName}", 
         type: "${field.fieldType?lower_case}", 
         regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>,
-        selectList: [<#list (field.enumDef.selectList) as enumItem>"${enumItem}"<#sep>,</#sep></#list>]
+        selectList: [<#list (field.enumDef.selectList) as enumItem>"${enumItem?trim}"<#sep>, </#sep></#list>]
     },
     <#else>
     {name: "${field.fieldName}", type: "${field.fieldType?lower_case}", regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>},
