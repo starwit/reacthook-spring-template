@@ -12,10 +12,12 @@ const entityFields = [
 <#list (entity.fields) as field>
     <#if field.fieldType == "Enum">
     {
-        name: "${field.fieldName}", 
-        type: "${field.fieldType?lower_case}", 
+        name: "${field.fieldName}",
+        type: "${field.fieldType?lower_case}",
         regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>,
-        selectList: [<#list (field.enumDef.selectList) as enumItem>"${enumItem?trim}"<#sep>, </#sep></#list>]
+        selectList: [<#list (field.enumDef.selectList) as enumItem>
+            "${enumItem?trim}"<#sep>,</#sep>
+        </#list>]
     },
     <#else>
     {name: "${field.fieldName}", type: "${field.fieldType?lower_case}", regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>},
