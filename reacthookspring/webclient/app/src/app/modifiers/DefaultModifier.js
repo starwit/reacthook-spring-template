@@ -32,18 +32,32 @@ function isValid(fields, data) {
         if (!!element.regex && !element.regex.test(data[element.name])) {
             return false;
         }
+        if (element.notNull && (!data[element.name] || data[element.name] === "")) {
+            return false;
+        }
+        if (isNumber(element.fieldType) && !!element.min && data[element.name] < element.min) {
+            return false;
+        }
+        if (isNumber(element.fieldType) && !!element.max && data[element.name] > element.max) {
+            return false;
+        }
     }
     return true;
 }
 
+function isEnum(fieldType) {
+    return fieldType === "enum";
+}
+
 function isSelect(fieldType) {
-    return fieldType === "OneToOne" || fieldType == "ManyToOne";
+    return fieldType === "OneToOne" || fieldType === "ManyToOne";
 }
 
 function isMultiSelect(fieldType) {
     return fieldType === "ManyToMany" || fieldType === "OneToMany";
 }
 
+// String, Integer, Long, BigDecimal, Float, Double, Boolean
 function isInput(fieldType) {
     return fieldType === "string" ||
         fieldType == "integer" ||
@@ -52,6 +66,14 @@ function isInput(fieldType) {
         fieldType == "double" ||
         fieldType == "boolean" ||
         fieldType == "long";
+}
+
+function isNumber(fieldType) {
+    return fieldType == "integer" ||
+    fieldType == "bigdecimal" ||
+    fieldType == "float" ||
+    fieldType == "doulbe" ||
+    fieldType == "long";
 }
 
 function addSelectLists(entity, fields, setFields, selects) {
@@ -91,5 +113,6 @@ function prepareForSave(entity, fields) {
 
 export {handleChange, handleSelect, handleMultiSelect, prepareForSave, isValid, addSelectLists,
     isInput,
+    isEnum,
     isSelect,
     isMultiSelect};
