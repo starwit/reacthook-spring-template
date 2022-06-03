@@ -38,7 +38,7 @@ const entityFields = [
     },
     </#if>
 </#list>
-</#if><#if entity.relationships??>,</#if>
+</#if>
 <#if entity.relationships??>
   <#list (entity.relationships) as relation>
     <#if relation.ownerSide>
