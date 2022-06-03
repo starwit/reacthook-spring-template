@@ -97,7 +97,7 @@ function prepareForSave(entity, fields) {
     return produce(entity, draft => {
         fields?.map(field => {
             if (isSelect(field.type)) {
-                if (draft[field.name]?.id == -1) {
+                if (draft[field.name]?.id == -1 || draft[field.name] == "") {
                     draft[field.name] = null;
                 }
             } else if (isMultiSelect(field.type)) {
@@ -106,6 +106,10 @@ function prepareForSave(entity, fields) {
                     selectedEntity.push({id: selectedId});
                 });
                 draft[field.name] = selectedEntity;
+            } else if (isEnum(field.type)) {
+                if (draft[field.name] == "") {
+                    draft[field.name] = null;
+                }
             }
         });
     });
