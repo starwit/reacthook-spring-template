@@ -3,7 +3,7 @@ const translationEnEN = {
 <#if app.enums??>
 <#list (app.enums) as enumDef>
   <#list (enumDef.selectList) as enumItem>
-    "${enumDef.name?trim}.${enumItem?trim}": "${enumItem}",
+    "${enumDef.name?trim?uncap_first}.${enumItem?trim}": "${enumItem}",
   </#list>
 </#list>
 </#if>
