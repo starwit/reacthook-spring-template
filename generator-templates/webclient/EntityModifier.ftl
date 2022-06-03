@@ -23,7 +23,7 @@ const entityFields = [
         selectList: [<#list (field.enumDef.selectList) as enumItem>
             "${enumItem?trim}"<#sep>,</#sep></#list>
         ]
-    },
+    }<#sep>,</#sep>
     <#else>
     {
         name: "${field.fieldName}", 
@@ -34,9 +34,9 @@ const entityFields = [
         </#if><#if field.fieldValidateRulesMinlength??>min: ${field.fieldValidateRulesMinlength},
         </#if><#if field.fieldValidateRulesMaxlength??>max: ${field.fieldValidateRulesMaxlength},
         </#if>notNull: <#if field.required>true<#else>false</#if>
-    }
+    }<#sep>,</#sep>
     </#if>
-</#list>
+</#list><#if entity.relationships??>,</#if>
 </#if>
 <#if entity.relationships??>
   <#list (entity.relationships) as relation>
