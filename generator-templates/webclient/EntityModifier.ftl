@@ -26,8 +26,8 @@ const entityFields = [
     }<#sep>,</#sep>
     <#else>
     {
-        name: "${field.fieldName}", 
-        type: "${field.fieldType?lower_case}", 
+        name: "${field.fieldName}",
+        type: "${field.fieldType?lower_case}",
         regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>,
         <#if field.fieldValidateRulesMin??>min: ${field.fieldValidateRulesMin},
         </#if><#if field.fieldValidateRulesMax??>max: ${field.fieldValidateRulesMax},
