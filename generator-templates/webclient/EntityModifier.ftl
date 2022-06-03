@@ -20,6 +20,7 @@ const entityFields = [
         type: "${field.fieldType?lower_case}",
         regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>,
         notNull: <#if field.required>true<#else>false</#if>,
+        enumName: "${field.enumDef.name}",
         selectList: [<#list (field.enumDef.selectList) as enumItem>
             "${enumItem?trim}"<#sep>,</#sep></#list>
         ]

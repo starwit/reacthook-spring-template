@@ -1,5 +1,12 @@
 /* eslint-disable max-len */
 const translationEnEN = {
+<#if app.enums??>
+<#list (app.enums) as enumDef>
+  <#list (enumDef.selectList) as enumItem>
+    "${enumDef.name}.${enumItem}": "${enumItem}",
+  </#list>
+</#list>
+</#if>
 <#if app.entities??>
 <#list app.entities as entity>
     "${entity.name?uncap_first}": "${entity.name}",
@@ -50,6 +57,6 @@ const translationEnEN = {
     "error.unknown": "An unknown error occurred.",
     "error.apptemplate.notfound": "The Template could not be found.",
     "error.app.notfound": "This App could not be found.",
-    "error.entity.notfound": "This element could not be found.",
+    "error.entity.notfound": "This element could not be found."
 };
 export default translationEnEN;
