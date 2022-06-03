@@ -53,6 +53,12 @@ public class ${entity.name}Controller {
     public List<${entity.name}Entity> findAllWithout${relation.relationshipName?cap_first}() {
         return ${entity.name?lower_case}Service.findAllWithout${relation.relationshipName?cap_first}();
     }
+
+    @Operation(summary = "Get all ${entity.name?lower_case} without other ${relation.relationshipName}")
+    @GetMapping(value = "find-without-other-${relation.relationshipName}")
+    public List<${entity.name}Entity> findAllWithoutOther${relation.relationshipName?cap_first}(@PathVariable("id") Long id) {
+        return ${entity.name?lower_case}Service.findAllWithoutOther${relation.relationshipName?cap_first}(id);
+    }
   </#if>
   </#list>
 </#if>

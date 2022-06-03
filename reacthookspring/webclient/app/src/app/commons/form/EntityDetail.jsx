@@ -63,7 +63,6 @@ function EntityDetail(props) {
     // turn off page reload
         event.preventDefault();
         const tmpOrg = prepareForSave(entity, fields);
-        setEntity(tmpOrg);
         if (!id) {
             entityRest.create(tmpOrg).then(goBack);
         } else {
