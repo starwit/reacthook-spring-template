@@ -55,7 +55,7 @@ public class ${entity.name}Controller {
     }
 
     @Operation(summary = "Get all ${entity.name?lower_case} without other ${relation.relationshipName}")
-    @GetMapping(value = "find-without-other-${relation.relationshipName}")
+    @GetMapping(value = "find-without-other-${relation.relationshipName}/{id}")
     public List<${entity.name}Entity> findAllWithoutOther${relation.relationshipName?cap_first}(@PathVariable("id") Long id) {
         return ${entity.name?lower_case}Service.findAllWithoutOther${relation.relationshipName?cap_first}(id);
     }
