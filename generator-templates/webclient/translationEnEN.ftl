@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const translationEnEN = {
 <#if app.entities??>
 <#list app.entities as entity>
