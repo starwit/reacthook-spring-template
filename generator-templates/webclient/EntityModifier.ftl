@@ -28,11 +28,11 @@ const entityFields = [
         {name: "${field.fieldName}", 
         type: "${field.fieldType?lower_case}", 
         regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>},
-        <#if field.fieldValidateRulesMin??>min: ${field.fieldValidateRulesMin},</#if>
-        <#if field.fieldValidateRulesMax??>max: ${field.fieldValidateRulesMax},</#if>
-        <#if field.fieldValidateRulesMinlength??>min: ${field.fieldValidateRulesMinlength},</#if>
-        <#if field.fieldValidateRulesMaxlength??>max: ${field.fieldValidateRulesMaxlength},</#if>
-        notNull: <#if field.required>true<#else>false</#if>
+        <#if field.fieldValidateRulesMin??>min: ${field.fieldValidateRulesMin},
+        </#if><#if field.fieldValidateRulesMax??>max: ${field.fieldValidateRulesMax},
+        </#if><#if field.fieldValidateRulesMinlength??>min: ${field.fieldValidateRulesMinlength},
+        </#if><#if field.fieldValidateRulesMaxlength??>max: ${field.fieldValidateRulesMaxlength},
+        </#if>notNull: <#if field.required>true<#else>false</#if>
     </#if>
 </#list>
 </#if>
