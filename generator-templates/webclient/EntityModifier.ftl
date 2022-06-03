@@ -2,7 +2,7 @@ const entityDefault = {
 <#if entity.fields??>
 <#list (entity.fields) as field>
     <#if field.fieldType == "Enum">
-    ${field.fieldName}: undefined,
+    ${field.fieldName}: "",
     <#else>
     ${field.fieldName}: "",
     </#if>
