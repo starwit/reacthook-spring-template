@@ -24,6 +24,7 @@ import {
     prepareForSave,
     isInput,
     isEnum,
+    inputType,
     isSelect,
     isMultiSelect
 } from "../../modifiers/DefaultModifier";
@@ -88,6 +89,7 @@ function EntityDetail(props) {
                                         <UpdateField
                                             entity={entity}
                                             field={field}
+                                            type={inputType}
                                             prefix={prefix}
                                             handleChange={e => handleChange(e, setEntity)}
                                             fullWidth

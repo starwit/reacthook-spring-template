@@ -45,6 +45,22 @@ function isValid(fields, data) {
     return true;
 }
 
+function inputType(fieldType) {
+    if(isNumber(fieldType)){
+        return "number";
+    } else if(fieldType == "boolean"){
+        return "checkbox";
+    } else if(fieldType == "date") {
+        return "date";
+    } else if(fieldType == "time") {
+        return "time";
+    } else if (fieldType == "timestamp") {
+        return "datetime-local";
+    } else {
+        return "text";
+    }
+}
+
 function isEnum(fieldType) {
     return fieldType === "enum";
 }
@@ -115,4 +131,5 @@ export {handleChange, handleSelect, handleMultiSelect, prepareForSave, isValid, 
     isInput,
     isEnum,
     isSelect,
+    inputType,
     isMultiSelect};
