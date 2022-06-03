@@ -9,12 +9,7 @@ const translationEnEN = {
 <#if entity.fields??>
 <#list (entity.fields) as field> 
     "${entity.name?uncap_first}.${field.fieldName}": "${field.fieldName}<#if field.required>*</#if>",
-    "${entity.name?uncap_first}.${field.fieldName}.hint": "<#if field.required>Value is required. </#if>
-    <#if field.fieldValidateRulesMin??>Allowed minimum is ${field.fieldValidateRulesMin}. </#if>
-    <#if field.fieldValidateRulesMax??>Allowed maximum is ${field.fieldValidateRulesMax}. </#if>
-    <#if field.fieldValidateRulesMinlength??>Allowed minimum length is ${field.fieldValidateRulesMinlength}. </#if>
-    <#if field.fieldValidateRulesMaxlength??>Allowed maximum length is ${field.fieldValidateRulesMaxlength}. </#if>
-    <#if field.fieldValidateRulesPattern??>Pattern ${field.fieldValidateRulesPattern} has to be matched. </#if>",
+    "${entity.name?uncap_first}.${field.fieldName}.hint": "<#if field.required>Value is required. </#if><#if field.fieldValidateRulesMin??>Allowed minimum is ${field.fieldValidateRulesMin}. </#if><#if field.fieldValidateRulesMax??>Allowed maximum is ${field.fieldValidateRulesMax}. </#if><#if field.fieldValidateRulesMinlength??>Allowed minimum length is ${field.fieldValidateRulesMinlength}. </#if><#if field.fieldValidateRulesMaxlength??>Allowed maximum length is ${field.fieldValidateRulesMaxlength}. </#if><#if field.fieldValidateRulesPattern??>Pattern ${field.fieldValidateRulesPattern} has to be matched. </#if>",
 </#list>
 </#if>
 <#if entity.relationships??>
