@@ -114,7 +114,7 @@ function EntityDetail(props) {
                                         >
                                             {field.selectList?.map(item => (
                                                 <MenuItem value={item} key={item}>
-                                                    {t(prefix + "." + item)}
+                                                    {t(field.enumName + "." + item)}
                                                 </MenuItem>
                                             ))}
                                         </Select>
