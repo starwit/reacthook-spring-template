@@ -1,15 +1,14 @@
 import React from "react";
 import AppHeader from "./appHeader/AppHeader";
-import {useTranslation} from "react-i18next";
 import SidebarNavigation from "./sidebarNavigation/SidebarNavigation";
 
 function Navigation(props) {
-    const {t} = useTranslation();
+    const {menuItems, switchLength, title, logo} = props;
 
-    if (props.sideBar) {
+    if (menuItems.length > switchLength) {
         return (
             <>
-                <SidebarNavigation menuItems={props.menuItems} title={t("app.baseName")}>
+                <SidebarNavigation menuItems={menuItems} title={title} logo={logo}>
                     {props.children}
                 </SidebarNavigation>
             </>
@@ -18,10 +17,17 @@ function Navigation(props) {
 
     return (
         <>
-            <AppHeader menuItems={props.menuItems} title={t("app.baseName")}/>
+            <AppHeader menuItems={menuItems} title={title} logo={logo}/>
             {props.children}
         </>
     )
+
+}
+
+Navigation.defaultProps = {
+    switchLength: 4,
+    title: "New App",
+    menuItems: []
 
 }
 

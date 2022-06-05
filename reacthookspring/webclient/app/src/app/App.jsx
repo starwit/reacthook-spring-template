@@ -5,6 +5,7 @@ import ErrorHandler from "./commons/errorHandler/ErrorHandler";
 import {useTranslation} from "react-i18next";
 import {appItems} from "./AppConfig";
 import Navigation from "./commons/navigation/Navigation";
+import logo from "./assets/images/logo-white.png";
 
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
     return (
         <React.Fragment>
             <ErrorHandler>
-                <Navigation menuItems={appItems} title={t("app.baseName")}>
+                <Navigation menuItems={appItems} title={t("app.baseName")} logo={logo}>
                     <CssBaseline/>
                     <MainContentRouter/>
                 </Navigation>

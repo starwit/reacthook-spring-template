@@ -1,6 +1,5 @@
 import React from "react";
 // Material UI Components
-import logo from "../../../assets/images/logo-white.png";
 import {AppBar, Button, IconButton, Toolbar, Typography} from "@mui/material";
 import HeaderStyles from "../../../assets/styles/HeaderStyles";
 import {useHistory} from "react-router-dom";
@@ -8,7 +7,7 @@ import {useTranslation} from "react-i18next";
 import {Logout} from "@mui/icons-material";
 
 function AppHeader(props) {
-    const {menuItems, title} = props;
+    const {menuItems, title, logo} = props;
     const headerStyles = HeaderStyles();
     const history = useHistory();
     const {t} = useTranslation();

@@ -13,7 +13,6 @@ import {
     Toolbar,
     Typography
 } from "@mui/material";
-import logo from "../../../assets/images/logo-white.png";
 import {Logout} from "@mui/icons-material";
 import HeaderStyles from "../../../assets/styles/HeaderStyles";
 import {useTranslation} from "react-i18next";
@@ -32,7 +31,7 @@ function SidebarNavigation(props) {
             <CssBaseline/>
             <AppBar position="fixed" sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
                 <Toolbar className={headerStyles.toolbar}>
-                        <img className={headerStyles.menuLogoImg} src={logo} alt="Logo of lirejarp"/>
+                        <img className={headerStyles.menuLogoImg} src={props.logo} alt="Logo of lirejarp"/>
                         <Typography variant="h6" noWrap>
                             {props.title}
                         </Typography>
