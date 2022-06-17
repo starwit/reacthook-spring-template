@@ -1,8 +1,8 @@
 import React from "react";
-import AppHeader from "./commons/appHeader/AppHeader";
+import {AppHeader} from "@starwit/react-starwit";
 import MainContentRouter from "./MainContentRouter";
 import {CssBaseline} from "@mui/material";
-import ErrorHandler from "./commons/errorHandler/ErrorHandler";
+import {ErrorHandler} from "@starwit/react-starwit";
 import {useTranslation} from "react-i18next";
 import {appItems} from "./AppConfig";
 
