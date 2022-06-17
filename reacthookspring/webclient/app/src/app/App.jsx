@@ -2,7 +2,7 @@ import React from "react";
 import MainContentRouter from "./MainContentRouter";
 import {CssBaseline} from "@mui/material";
 import {ErrorHandler} from "@starwit/react-starwit";
-import {AppHeader} from "./commons/appHeader";
+import AppHeader from "./commons/appHeader/AppHeader";
 import {useTranslation} from "react-i18next";
 import {appItems} from "./AppConfig";
 
