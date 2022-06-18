@@ -18,8 +18,7 @@ import {
     entityDefault,
     entityFields
 } from "../../modifiers/${entity.name}Modifier";
-import EntityDetail from "../../commons/form/EntityDetail";
-import {addSelectLists} from "../../modifiers/DefaultModifier";
+import {EntityDetail, addSelectLists} from "@starwit/react-starwit";
 
 function ${entity.name}Detail() {
     const [entity, setEntity] = useImmer(entityDefault);
