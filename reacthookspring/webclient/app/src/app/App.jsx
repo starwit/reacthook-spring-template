@@ -1,10 +1,12 @@
 import React from "react";
-import AppHeader from "./commons/appHeader/AppHeader";
 import MainContentRouter from "./MainContentRouter";
 import {CssBaseline} from "@mui/material";
 import ErrorHandler from "./commons/errorHandler/ErrorHandler";
 import {useTranslation} from "react-i18next";
 import {appItems} from "./AppConfig";
+import Navigation from "./commons/navigation/Navigation";
+import logo from "./assets/images/logo-white.png";
+
 
 function App() {
     const {t} = useTranslation();
@@ -12,11 +14,10 @@ function App() {
     return (
         <React.Fragment>
             <ErrorHandler>
-                <div>
+                <Navigation menuItems={appItems} title={t("app.baseName")} logo={logo}>
                     <CssBaseline/>
-                    <AppHeader menuItems={appItems} title={t("app.baseName")} />
                     <MainContentRouter/>
-                </div>
+                </Navigation>
             </ErrorHandler>
         </React.Fragment>
     );
