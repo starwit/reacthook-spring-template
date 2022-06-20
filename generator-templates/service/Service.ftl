@@ -37,6 +37,10 @@ public class ${entity.name}Service implements ServiceInterface<${entity.name}Ent
     public List<${entity.name}Entity> findAllWithout${relation.relationshipName?cap_first}() {
         return ${entity.name?lower_case}Repository.findAllWithout${relation.relationshipName?cap_first}();
     }
+
+    public List<${entity.name}Entity> findAllWithoutOther${relation.relationshipName?cap_first}(Long id) {
+        return ${entity.name?lower_case}Repository.findAllWithoutOther${relation.relationshipName?cap_first}(id);
+    }
   </#if>
   </#list>
 </#if>

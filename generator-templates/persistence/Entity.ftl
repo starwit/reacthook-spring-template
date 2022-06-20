@@ -31,7 +31,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
             <#if !field.fieldValidateRulesMinlength?? && field.fieldValidateRulesMaxlength??>
     @Size(max = ${field.fieldValidateRulesMaxlength})
             </#if>
-        <#else>
+  <#else>
             <#if field.required>
     @NotNull
             </#if>
@@ -63,8 +63,13 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     @Enumerated(EnumType.STRING)
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
+        <#if field.fieldType == "Enum">
+    private ${field.enumDef.name} ${field.fieldName};
+
+        <#else>
     private ${field.fieldType} ${field.fieldName};
 
+        </#if>
   </#if>
   </#list>
 </#if>
@@ -121,6 +126,15 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     }
 
     public void set${field.fieldName?cap_first}(Date ${field.fieldName}) {
+        this.${field.fieldName} = ${field.fieldName};
+    }
+
+  <#elseif field.fieldType == "Enum">
+    public ${field.enumDef.name} get${field.fieldName?cap_first}() {
+        return ${field.fieldName};
+    }
+
+    public void set${field.fieldName?cap_first}(${field.enumDef.name} ${field.fieldName}) {
         this.${field.fieldName} = ${field.fieldName};
     }
 

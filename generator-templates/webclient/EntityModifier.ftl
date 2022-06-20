@@ -1,7 +1,11 @@
 const entityDefault = {
 <#if entity.fields??>
-<#list (entity.fields) as field> 
+<#list (entity.fields) as field>
+    <#if field.fieldType == "Enum">
     ${field.fieldName}: "",
+    <#else>
+    ${field.fieldName}: "",
+    </#if>
 </#list>
 </#if>
     id: undefined
@@ -10,7 +14,29 @@ const entityDefault = {
 const entityFields = [
 <#if entity.fields??>
 <#list (entity.fields) as field>
-    {name: "${field.fieldName}", type: "${field.fieldType?lower_case}", regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>},
+    <#if field.fieldType == "Enum">
+    {
+        name: "${field.fieldName}",
+        type: "${field.fieldType?lower_case}",
+        regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>,
+        notNull: <#if field.required>true<#else>false</#if>,
+        enumName: "${field.enumDef.name?trim?uncap_first}",
+        selectList: [<#list (field.enumDef.selectList) as enumItem>
+            "${enumItem?trim}"<#sep>,</#sep></#list>
+        ]
+    },
+    <#else>
+    {
+        name: "${field.fieldName}",
+        type: "${field.fieldType?lower_case}",
+        regex: <#if field.fieldValidateRulesPattern??>/^${field.fieldValidateRulesPattern}$/<#else>null</#if>,
+        <#if field.fieldValidateRulesMin??>min: ${field.fieldValidateRulesMin},
+        </#if><#if field.fieldValidateRulesMax??>max: ${field.fieldValidateRulesMax},
+        </#if><#if field.fieldValidateRulesMinlength??>min: ${field.fieldValidateRulesMinlength},
+        </#if><#if field.fieldValidateRulesMaxlength??>max: ${field.fieldValidateRulesMaxlength},
+        </#if>notNull: <#if field.required>true<#else>false</#if>
+    },
+    </#if>
 </#list>
 </#if>
 <#if entity.relationships??>

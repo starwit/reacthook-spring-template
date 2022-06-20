@@ -53,7 +53,7 @@ function ${entity.name}Detail() {
   <#else>
     <#assign seen_rest3 = seen_rest3 + [relation.otherEntityName]>
     <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne">
-            ${relation.otherEntityName?lower_case}Rest.findAllWithout${relation.otherEntityRelationshipName?cap_first}()<#sep>,</#sep>
+            ${relation.otherEntityName?lower_case}Rest.findAllWithout${relation.otherEntityRelationshipName?cap_first}(id)<#sep>,</#sep>
     <#else>
             ${relation.otherEntityName?lower_case}Rest.findAll()<#sep>,</#sep>
     </#if>

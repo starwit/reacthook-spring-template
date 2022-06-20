@@ -31,6 +31,9 @@ public interface ${entity.name}Repository extends JpaRepository<${entity.name}En
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne">
     @Query("SELECT e FROM ${entity.name}Entity e WHERE NOT EXISTS (SELECT r FROM e.${relation.relationshipName} r)")
     public List<${entity.name}Entity> findAllWithout${relation.relationshipName?cap_first}();
+
+    @Query("SELECT e FROM ${entity.name}Entity e WHERE NOT EXISTS (SELECT r FROM e.${relation.relationshipName} r WHERE r.id <> ?1)")
+    public List<${entity.name}Entity> findAllWithoutOther${relation.relationshipName?cap_first}(Long id);
   </#if>
   </#list>
 </#if>

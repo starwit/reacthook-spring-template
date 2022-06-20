@@ -1,4 +1,12 @@
+/* eslint-disable max-len */
 const translationEnEN = {
+<#if app.enums??>
+<#list (app.enums) as enumDef>
+  <#list (enumDef.selectList) as enumItem>
+    "${enumDef.name?trim?uncap_first}.${enumItem?trim}": "${enumItem?trim}",
+  </#list>
+</#list>
+</#if>
 <#if app.entities??>
 <#list app.entities as entity>
     "${entity.name?uncap_first}": "${entity.name}",
@@ -8,8 +16,8 @@ const translationEnEN = {
     "${entity.name?uncap_first}.id": "id",
 <#if entity.fields??>
 <#list (entity.fields) as field> 
-    "${entity.name?uncap_first}.${field.fieldName}": "${field.fieldName}",
-    "${entity.name?uncap_first}.${field.fieldName}.hint": "has to match validation rules",
+    "${entity.name?uncap_first}.${field.fieldName}": "${field.fieldName}<#if field.required>*</#if>",
+    "${entity.name?uncap_first}.${field.fieldName}.hint": "<#if field.required>Value is required. </#if><#if field.fieldValidateRulesMin??>Allowed minimum is ${field.fieldValidateRulesMin}. </#if><#if field.fieldValidateRulesMax??>Allowed maximum is ${field.fieldValidateRulesMax}. </#if><#if field.fieldValidateRulesMinlength??>Allowed minimum length is ${field.fieldValidateRulesMinlength}. </#if><#if field.fieldValidateRulesMaxlength??>Allowed maximum length is ${field.fieldValidateRulesMaxlength}. </#if><#if field.fieldValidateRulesPattern??>Pattern ${field.fieldValidateRulesPattern} has to be matched. </#if>",
 </#list>
 </#if>
 <#if entity.relationships??>
@@ -39,6 +47,16 @@ const translationEnEN = {
     "error.badrequest": "Check if there is an unvalid ID declared while object shoud be created.",
     "error.wrongInputValue": "Wrong input value.",
     "error.unauthorized": "Unauthorized request.",
-    "error.invalidDefinition": "Invalid definition."
+    "error.invalidDefinition": "Invalid definition.",
+    "error.general.delete": "This element could not be deleted.",
+    "error.general.create": "This element could not be created.",
+    "error.general.update": "This element could not be updated.",
+    "error.general.get": "This element could not be loaded.",
+    "error.serverOffline": "The server seems to be offline.",
+    "error.userOffline": "You appear to be offline.",
+    "error.unknown": "An unknown error occurred.",
+    "error.apptemplate.notfound": "The Template could not be found.",
+    "error.app.notfound": "This App could not be found.",
+    "error.entity.notfound": "This element could not be found."
 };
 export default translationEnEN;
