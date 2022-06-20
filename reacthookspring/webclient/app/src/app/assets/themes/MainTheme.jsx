@@ -1,6 +1,6 @@
 import React from "react";
 import {ThemeProvider} from "@mui/material";
-import ComponentTheme from "../../assets/themes/ComponentTheme";
+import ComponentTheme from "./ComponentTheme";
 
 function MainTheme(props) {
     return (
