@@ -1,7 +1,7 @@
 import {Container, Typography, Button} from "@mui/material";
 import React, {useState, useMemo, useEffect} from "react";
 import {useTranslation} from "react-i18next";
-import OverviewTable from "../../commons/table/OverviewTable";
+import {OverviewTable} from "@starwit/react-starwit";
 import ${entity.name}Rest from "../../services/${entity.name}Rest";
 import {useHistory} from "react-router";
 import {${entity.name?uncap_first}OverviewFields} from "../../modifiers/${entity.name}Modifier";
