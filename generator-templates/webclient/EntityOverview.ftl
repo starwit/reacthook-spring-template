@@ -44,7 +44,7 @@ function UserOverview() {
     return (
         <Container>
             <Typography variant={"h2"} gutterBottom>{t("${entity.name?uncap_first}.title")}</Typography>
-            <Button onClick={goToCreate} variant="contained" color="primary">{t("button.create")}</Button>
+            <Button onClick={goToCreate} variant="contained" color="secondary">{t("button.create")}</Button>
             <Button onClick={goToUpdate} variant="contained" color="primary" disabled={!selected?.id} >
                 {t("button.update")}
             </Button>
