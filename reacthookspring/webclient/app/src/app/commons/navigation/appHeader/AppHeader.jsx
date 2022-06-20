@@ -1,14 +1,13 @@
 import React from "react";
 // Material UI Components
-import logo from "../../assets/images/logo-white.png";
 import {AppBar, Button, IconButton, Toolbar, Typography} from "@mui/material";
-import HeaderStyles from "./../../assets/styles/HeaderStyles";
+import HeaderStyles from "../../../assets/styles/HeaderStyles";
 import {useHistory} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {Logout} from "@mui/icons-material";
 
 function AppHeader(props) {
-    const {menuItems, title} = props;
+    const {menuItems, title, logo} = props;
     const headerStyles = HeaderStyles();
     const history = useHistory();
     const {t} = useTranslation();
@@ -23,10 +22,10 @@ function AppHeader(props) {
                     </Typography>
                     <div className={headerStyles.spacer}/>
                     {menuItems.map(item => (
-                        <Button key={item.title} color="inherit" disableRipple className={headerStyles.linkButton}
+                        <Button key={item.title} color="secondary" disableRipple className={headerStyles.linkButton}
                             onClick={() => history.push(item.link)}>{t(item.title)}</Button>
                     ))}
-                    <IconButton color="inherit" disableRipple className={headerStyles.linkButton}
+                    <IconButton color="secondary" disableRipple className={headerStyles.linkButton}
                         onClick={() => history.push("/logout")}><Logout/></IconButton>
                 </Toolbar>
             </AppBar>

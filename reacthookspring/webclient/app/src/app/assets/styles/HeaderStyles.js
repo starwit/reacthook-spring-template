@@ -60,6 +60,7 @@ const HeaderStyles = makeStyles(theme => ({
     },
     toolbar: {
         ...theme.mixins.toolbar,
+        height: "2rem"
     },
     linkButton: {
         marginRight: theme.spacing(3),
