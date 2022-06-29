@@ -7,7 +7,7 @@ package de.${app.packageName?lower_case}.service.impl;
     <#assign additionalQueries = true>
   </#if>
   <#if relation.relationshipType == "ManyToOne">
-    <#assign manyToOneRelations += [relation.relationshipName]>
+    <#assign manyToOneRelations += [relation]>
   </#if>
   </#list>
 </#if>
