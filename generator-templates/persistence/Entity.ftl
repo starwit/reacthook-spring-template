@@ -95,7 +95,6 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
     <#else>
-    @JsonFilter("filterId")
     @OneToOne(mappedBy = "${relation.otherEntityRelationshipName}")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
