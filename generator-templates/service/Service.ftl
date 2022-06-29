@@ -86,7 +86,7 @@ public class ${entity.name}Service implements ServiceInterface<${entity.name}Ent
         }
 
         <#list (oneToManyRelations) as oneToMany>
-        entity.set${oneToMany.relationshipName?cap_first}();
+        entity.set${oneToMany.relationshipName?cap_first}(null);
         </#list>
         entity = this.getRepository().save(entity);
         this.getRepository().flush();
