@@ -1,12 +1,14 @@
 package de.${app.packageName?lower_case}.service.impl;
 <#assign additionalQueries = false >
 <#if entity.relationships??>
-  <#assign oneToManyRelations = []>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne">
     <#assign additionalQueries = true>
   </#if>
   <#if relation.relationshipType == "OneToMany">
+  <#if !oneToManyRelations??>
+    <#assign oneToManyRelations = []>
+  </#if>
     <#assign oneToManyRelations += [relation]>
   </#if>
   </#list>
