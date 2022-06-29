@@ -1,6 +1,12 @@
 package de.${app.packageName?lower_case}.service;
 
+<#if entity.relationships??>
+<#list (entity.relationships) as relation>
+<#if relation.relationshipType == "OneToMany">
 import de.${app.packageName?lower_case}.persistence.repository.${relation.otherEntityName}Repository;
+</#if>
+</#list>
+</#if>
 import de.${app.packageName?lower_case}.persistence.repository.${entity.name}Repository;
 import de.${app.packageName?lower_case}.service.impl.${entity.name}Service;
 import org.junit.Before;
