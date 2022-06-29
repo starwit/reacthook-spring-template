@@ -41,6 +41,15 @@ public class ${entity.name}ServiceTest {
      */
     @MockBean
     private ${entity.name}Repository ${entity.name?lower_case}Repository;
+    <#if entity.relationships??>
+    <#list (entity.relationships) as relation>
+    <#if relation.relationshipType == "ManyToOne">
+
+    @MockBean
+    private ${manyToOne.otherEntityName}Repository ${manyToOne.otherEntityName?lower_case}Repository;
+    </#if>
+    </#list>
+    </#if>
 
     @Before
     public void setUp() {
