@@ -43,7 +43,7 @@ public class ${entity.name}ServiceTest {
     private ${entity.name}Repository ${entity.name?lower_case}Repository;
     <#if entity.relationships??>
     <#list (entity.relationships) as relation>
-    <#if relation.relationshipType == "ManyToOne">
+    <#if relation.relationshipType == "OneToMany">
 
     @MockBean
     private ${relation.otherEntityName}Repository ${relation.otherEntityName?lower_case}Repository;

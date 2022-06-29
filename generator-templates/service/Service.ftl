@@ -1,13 +1,13 @@
 package de.${app.packageName?lower_case}.service.impl;
 <#assign additionalQueries = false >
 <#if entity.relationships??>
-  <#assign manyToOneRelations = []>
+  <#assign oneToManyRelations = []>
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne">
     <#assign additionalQueries = true>
   </#if>
-  <#if relation.relationshipType == "ManyToOne">
-    <#assign manyToOneRelations += [relation]>
+  <#if relation.relationshipType == "OneToMany">
+    <#assign oneToManyRelations += [relation]>
   </#if>
   </#list>
 </#if>
@@ -19,11 +19,11 @@ import de.${app.packageName?lower_case}.persistence.repository.${entity.name}Rep
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<#if manyToOneRelations??>
+<#if oneToManyRelations??>
 import java.util.Set;
-<#list (manyToOneRelations) as manyToOne>
-import de.${app.packageName?lower_case}.persistence.entity.${manyToOne.otherEntityName}Entity;
-import de.${app.packageName?lower_case}.persistence.repository.${manyToOne.otherEntityName}Repository;
+<#list (oneToManyRelations) as oneToMany>
+import de.${app.packageName?lower_case}.persistence.entity.${oneToMany.otherEntityName}Entity;
+import de.${app.packageName?lower_case}.persistence.repository.${oneToMany.otherEntityName}Repository;
 </#list>
 </#if>
 
@@ -37,11 +37,11 @@ public class ${entity.name}Service implements ServiceInterface<${entity.name}Ent
 
     @Autowired
     private ${entity.name}Repository ${entity.name?lower_case}Repository;
-    <#if manyToOneRelations??>
-    <#list (manyToOneRelations) as manyToOne>
+    <#if oneToManyRelations??>
+    <#list (oneToManyRelations) as oneToMany>
 
     @Autowired
-    private ${manyToOne.otherEntityName}Repository ${manyToOne.otherEntityName?lower_case}Repository;
+    private ${oneToMany.otherEntityName}Repository ${oneToMany.otherEntityName?lower_case}Repository;
     </#list>
     </#if>
 
@@ -64,37 +64,37 @@ public class ${entity.name}Service implements ServiceInterface<${entity.name}Ent
   </#list>
 </#if>
 
-<#if manyToOneRelations??>
+<#if oneToManyRelations??>
     @Override
     public ${entity.name}Entity saveOrUpdate(${entity.name}Entity entity) {
 
-    <#list (manyToOneRelations) as manyToOne>
-        Set<${manyToOne.otherEntityName}Entity> ${manyToOne.relationshipName}ToSave = entity.get${manyToOne.relationshipName?cap_first}();
+    <#list (oneToManyRelations) as oneToMany>
+        Set<${oneToMany.otherEntityName}Entity> ${oneToMany.relationshipName}ToSave = entity.get${oneToMany.relationshipName?cap_first}();
     </#list>
 
         if (entity.getId() != null) {
             ${entity.name}Entity entityPrev = this.findById(entity.getId());
-            <#list (manyToOneRelations) as manyToOne>
-            for (${manyToOne.otherEntityName}Entity item : entityPrev.get${manyToOne.relationshipName?cap_first}()) {
-                ${manyToOne.otherEntityName}Entity existingItem = ${manyToOne.otherEntityName?lower_case}Repository.getById(item.getId());
-                existingItem.set${manyToOne.otherEntityRelationshipName?cap_first}(null);
-                this.${manyToOne.otherEntityName?lower_case}Repository.save(existingItem);
+            <#list (oneToManyRelations) as oneToMany>
+            for (${oneToMany.otherEntityName}Entity item : entityPrev.get${oneToMany.relationshipName?cap_first}()) {
+                ${oneToMany.otherEntityName}Entity existingItem = ${oneToMany.otherEntityName?lower_case}Repository.getById(item.getId());
+                existingItem.set${oneToMany.otherEntityRelationshipName?cap_first}(null);
+                this.${oneToMany.otherEntityName?lower_case}Repository.save(existingItem);
             }
             </#list>
         }
 
-        <#list (manyToOneRelations) as manyToOne>
-        entity.set${manyToOne.relationshipName?cap_first}();
+        <#list (oneToManyRelations) as oneToMany>
+        entity.set${oneToMany.relationshipName?cap_first}();
         </#list>
         entity = this.getRepository().save(entity);
         this.getRepository().flush();
 
-        <#list (manyToOneRelations) as manyToOne>
-        if (${manyToOne.relationshipName}ToSave != null && !${manyToOne.relationshipName}ToSave.isEmpty()) {
-          for (${manyToOne.otherEntityName}Entity item : ${manyToOne.relationshipName}ToSave) {
-              ${manyToOne.otherEntityName}Entity newItem = ${manyToOne.otherEntityName?lower_case}Repository.getById(item.getId());
-              newItem.set${manyToOne.otherEntityRelationshipName?cap_first}(entity);
-              ${manyToOne.otherEntityName?lower_case}Repository.save(newItem);
+        <#list (oneToManyRelations) as oneToMany>
+        if (${oneToMany.relationshipName}ToSave != null && !${oneToMany.relationshipName}ToSave.isEmpty()) {
+          for (${oneToMany.otherEntityName}Entity item : ${oneToMany.relationshipName}ToSave) {
+              ${oneToMany.otherEntityName}Entity newItem = ${oneToMany.otherEntityName?lower_case}Repository.getById(item.getId());
+              newItem.set${oneToMany.otherEntityRelationshipName?cap_first}(entity);
+              ${oneToMany.otherEntityName?lower_case}Repository.save(newItem);
           }
         }
         </#list>
