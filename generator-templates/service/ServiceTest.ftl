@@ -1,5 +1,6 @@
 package de.${app.packageName?lower_case}.service;
 
+import de.${app.packageName?lower_case}.persistence.repository.${relation.otherEntityName}Repository;
 import de.${app.packageName?lower_case}.persistence.repository.${entity.name}Repository;
 import de.${app.packageName?lower_case}.service.impl.${entity.name}Service;
 import org.junit.Before;
