@@ -58,12 +58,6 @@
       "category": "SERVICE"
     },
     {
-      "fileName": "${entity.name}ServiceTest.java",
-      "templatePath": "service/ServiceTest.ftl",
-      "targetPath": "service/src/test/java/de/${app.packageName?lower_case}/service/",
-      "category": "SERVICE"
-    },
-    {
       "fileName": "${entity.name}Controller.java",
       "templatePath": "rest/Controller.ftl",
       "targetPath": "rest/src/main/java/de/${app.packageName?lower_case}/rest/controller/",
