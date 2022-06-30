@@ -18,9 +18,6 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -66,18 +63,6 @@ public abstract class AbstractControllerAcceptanceTest<ENTITY extends AbstractEn
 
     @Test
     public abstract void canDelete() throws Exception;
-
-    protected ENTITY readFromFile(String path) throws Exception {
-        try {
-            URL res = getClass().getClassLoader().getResource(path);
-            File file = new File(res.getFile());
-            DTO dto = mapper.readValue(file, getDtoClass());
-            return dto;
-        } catch (IOException e) {
-            LOG.error("JSON mapper failed", e);
-            throw new Exception("JSON mapper failed");
-        }
-    }
 
     protected ENTITY readFromFile(String path) throws Exception {
         try {
@@ -134,7 +119,7 @@ public abstract class AbstractControllerAcceptanceTest<ENTITY extends AbstractEn
                 .content(applicationString);
 
         MockHttpServletResponse response = mvc.perform(builder)
-            .andReturn().getResponse();
+                .andReturn().getResponse();
 
         LOG.info(response.getContentAsString());
         return response;
@@ -149,7 +134,7 @@ public abstract class AbstractControllerAcceptanceTest<ENTITY extends AbstractEn
                 .content(applicationString);
 
         MockHttpServletResponse response = mvc.perform(builder)
-            .andReturn().getResponse();
+                .andReturn().getResponse();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 
         LOG.info(response.getContentAsString());
@@ -158,9 +143,9 @@ public abstract class AbstractControllerAcceptanceTest<ENTITY extends AbstractEn
 
     protected MockHttpServletResponse retrieveById(Long id) throws Exception {
         MockHttpServletResponse response = mvc.perform(
-        get(getRestPath() + id)
-            .contentType(MediaType.APPLICATION_JSON))
-            .andReturn().getResponse();
+                get(getRestPath() + id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
 
         LOG.info(response.getContentAsString());
         return response;
@@ -168,10 +153,10 @@ public abstract class AbstractControllerAcceptanceTest<ENTITY extends AbstractEn
 
     protected MockHttpServletResponse delete(Long id) throws Exception {
         MockHttpServletResponse response = mvc.perform(
-            MockMvcRequestBuilders.delete(getRestPath() + id)
-            .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andReturn().getResponse();
+                MockMvcRequestBuilders.delete(getRestPath() + id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn().getResponse();
 
         LOG.info(response.getContentAsString());
         return response;
