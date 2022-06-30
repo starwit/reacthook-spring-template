@@ -38,7 +38,7 @@ CREATE TABLE `${entity.name?upper_case}`
   </#if>
   </#list>
 </#if>
-    `ID` integer NOT NULL AUTO_INCREMENT,
+    `ID` bigint NOT NULL AUTO_INCREMENT,
     PRIMARY KEY (`ID`)
 );
 
