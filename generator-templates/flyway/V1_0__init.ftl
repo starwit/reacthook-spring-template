@@ -1,5 +1,5 @@
 <#list app.entities as entity>
-CREATE TABLE IF NOT EXISTS `${entity.name?upper_case}`
+CREATE TABLE `${entity.name?upper_case}`
 (
 <#if entity.fields??>
     <#list entity.fields as field>
