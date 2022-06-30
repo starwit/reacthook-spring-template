@@ -48,7 +48,7 @@
     {
       "fileName": "V1_0__init.sql",
       "templatePath": "flyway/V1_0__init.ftl",
-      "targetPath": "persistence/src/main/resources/db/test/",
+      "targetPath": "persistence/src/test/resources/db/test/",
       "category": "ENTITY"
     },
     {
