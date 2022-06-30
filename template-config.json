@@ -46,6 +46,12 @@
       "category": "ENTITY"
     },
     {
+      "fileName": "V1_0__init.sql",
+      "templatePath": "flyway/V1_0__init.ftl",
+      "targetPath": "persistence/src/main/resources/db/test/",
+      "category": "ENTITY"
+    },
+    {
       "fileName": "${entity.name}Service.java",
       "templatePath": "service/Service.ftl",
       "targetPath": "service/src/main/java/de/${app.packageName?lower_case}/service/impl/",

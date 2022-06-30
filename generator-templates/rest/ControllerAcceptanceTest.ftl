@@ -12,9 +12,10 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import de.${app.packageName?lower_case}.persistence.entity.${entity.name}Entity;
-/**
- * Acceptance tests for ${entity.name}Controller
- */
+
+@SpringBootTest
+@EnableAutoConfiguration
+@AutoConfigureMockMvc(addFilters = false)
 public class ${entity.name}ControllerAcceptanceTest extends AbstractControllerAcceptanceTest<${entity.name}Entity> {
 
 
