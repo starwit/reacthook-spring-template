@@ -24,8 +24,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import de.starwit.persistence.entity.AbstractEntity;
 
-
-
 @WithMockUser(username = "admin", roles = { "ADMIN", "PBUSER" })
 @WebMvcTest()
 @Import({})
@@ -38,7 +36,6 @@ public abstract class AbstractControllerIntegrationTest<ENTITY extends AbstractE
 
     @Autowired
     protected ObjectMapper mapper;
-
 
     @BeforeEach
     public void setup() {
@@ -77,5 +74,5 @@ public abstract class AbstractControllerIntegrationTest<ENTITY extends AbstractE
         LOG.info(response.getContentAsString());
         return response;
     }
-    
+
 }

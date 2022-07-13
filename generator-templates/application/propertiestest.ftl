@@ -14,7 +14,6 @@ spring.datasource.url=jdbc:h2:mem:${app.baseName?lower_case};DB_CLOSE_DELAY=-1;D
 spring.datasource.driverClassName=org.h2.Driver
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 spring.jpa.show-sql=true
-spring.jpa.hibernate.ddl-auto=none
 spring.datasource.username=${app.baseName?lower_case}
 spring.datasource.password=${app.baseName?lower_case}
 

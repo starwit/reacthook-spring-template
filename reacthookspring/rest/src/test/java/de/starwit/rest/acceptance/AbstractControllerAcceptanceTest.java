@@ -18,9 +18,6 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,9 +28,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import de.starwit.persistence.entity.AbstractEntity;
 
-@SpringBootTest
-@EnableAutoConfiguration
-@AutoConfigureMockMvc(addFilters = false)
 public abstract class AbstractControllerAcceptanceTest<ENTITY extends AbstractEntity<Long>> {
 
     final static Logger LOG = LoggerFactory.getLogger(AbstractControllerAcceptanceTest.class);
@@ -60,7 +54,7 @@ public abstract class AbstractControllerAcceptanceTest<ENTITY extends AbstractEn
 
     @Test
     public abstract void canCreate() throws Exception;
- 
+
     @Test
     public abstract void canRetrieveById() throws Exception;
 
@@ -69,7 +63,6 @@ public abstract class AbstractControllerAcceptanceTest<ENTITY extends AbstractEn
 
     @Test
     public abstract void canDelete() throws Exception;
-
 
     protected ENTITY readFromFile(String path) throws Exception {
         try {
@@ -89,12 +82,10 @@ public abstract class AbstractControllerAcceptanceTest<ENTITY extends AbstractEn
             File file = new File(res.getFile());
 
             StringBuilder contentBuilder = new StringBuilder();
-            try (BufferedReader br = new BufferedReader(new FileReader(file))) 
-            {
-     
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+
                 String sCurrentLine;
-                while ((sCurrentLine = br.readLine()) != null) 
-                {
+                while ((sCurrentLine = br.readLine()) != null) {
                     contentBuilder.append(sCurrentLine);
                 }
             }
@@ -107,30 +98,28 @@ public abstract class AbstractControllerAcceptanceTest<ENTITY extends AbstractEn
 
     protected MockHttpServletResponse create(ENTITY entity) throws Exception {
         String applicationString = getJsonTester().write(entity).getJson();
-        MockHttpServletRequestBuilder builder =
-        MockMvcRequestBuilders.post(getRestPath())
-                              .contentType(MediaType.APPLICATION_JSON_VALUE)
-                              .accept(MediaType.APPLICATION_JSON)
-                              .characterEncoding("UTF-8")
-                              .content(applicationString);
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post(getRestPath())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(applicationString);
 
         MockHttpServletResponse response = mvc.perform(builder)
-            .andReturn().getResponse();
+                .andReturn().getResponse();
 
         LOG.info(response.getContentAsString());
         return response;
     }
 
     protected MockHttpServletResponse createFromString(String applicationString) throws Exception {
-        MockHttpServletRequestBuilder builder =
-        MockMvcRequestBuilders.post(getRestPath())
-                              .contentType(MediaType.APPLICATION_JSON_VALUE)
-                              .accept(MediaType.APPLICATION_JSON)
-                              .characterEncoding("UTF-8")
-                              .content(applicationString);
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post(getRestPath())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(applicationString);
 
         MockHttpServletResponse response = mvc.perform(builder)
-            .andReturn().getResponse();
+                .andReturn().getResponse();
 
         LOG.info(response.getContentAsString());
         return response;
@@ -138,15 +127,14 @@ public abstract class AbstractControllerAcceptanceTest<ENTITY extends AbstractEn
 
     protected MockHttpServletResponse update(ENTITY entity) throws Exception {
         String applicationString = getJsonTester().write(entity).getJson();
-        MockHttpServletRequestBuilder builder =
-        MockMvcRequestBuilders.put(getRestPath())
-                              .contentType(MediaType.APPLICATION_JSON_VALUE)
-                              .accept(MediaType.APPLICATION_JSON)
-                              .characterEncoding("UTF-8")
-                              .content(applicationString);
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.put(getRestPath())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .content(applicationString);
 
         MockHttpServletResponse response = mvc.perform(builder)
-            .andReturn().getResponse();
+                .andReturn().getResponse();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 
         LOG.info(response.getContentAsString());
@@ -155,9 +143,9 @@ public abstract class AbstractControllerAcceptanceTest<ENTITY extends AbstractEn
 
     protected MockHttpServletResponse retrieveById(Long id) throws Exception {
         MockHttpServletResponse response = mvc.perform(
-        get(getRestPath() + id)
-            .contentType(MediaType.APPLICATION_JSON))
-            .andReturn().getResponse();
+                get(getRestPath() + id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
 
         LOG.info(response.getContentAsString());
         return response;
@@ -165,10 +153,10 @@ public abstract class AbstractControllerAcceptanceTest<ENTITY extends AbstractEn
 
     protected MockHttpServletResponse delete(Long id) throws Exception {
         MockHttpServletResponse response = mvc.perform(
-            MockMvcRequestBuilders.delete(getRestPath() + id)
-            .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andReturn().getResponse();
+                MockMvcRequestBuilders.delete(getRestPath() + id)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn().getResponse();
 
         LOG.info(response.getContentAsString());
         return response;

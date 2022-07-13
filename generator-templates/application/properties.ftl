@@ -14,8 +14,8 @@ management.info.git.mode=full
 
 # MySQL
 spring.datasource.hikari.connection-timeout=10000
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.datasource.url=jdbc:mysql://localhost:3306/${app.baseName?lower_case}?useLegacyDatetimeCode=false&serverTimezone=CET
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+spring.datasource.url=jdbc:mariadb://localhost:3306/${app.baseName?lower_case}?useLegacyDatetimeCode=false&serverTimezone=CET
 spring.jpa.hibernate.naming.physical-strategy=de.${app.packageName?lower_case}.persistence.config.DatabasePhysicalNamingStrategy
 #spring.jpa.hibernate.ddl-auto=create
 spring.datasource.username=${app.baseName?lower_case}

@@ -16,9 +16,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 </#if>
 import org.springframework.stereotype.Repository;
-<#if additionalQueries>
 import de.${app.packageName?lower_case}.persistence.entity.${entity.name}Entity;
-</#if>
 
 /**
  * ${entity.name} Repository class

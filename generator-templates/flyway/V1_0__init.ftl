@@ -1,5 +1,5 @@
 <#list app.entities as entity>
-CREATE TABLE IF NOT EXISTS `${entity.name?upper_case}`
+CREATE TABLE `${entity.name?upper_case}`
 (
 <#if entity.fields??>
     <#list entity.fields as field>
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `${entity.name?upper_case}`
     <#--  <#if field.fieldValidateRulesMaxlength??>, length=${field.fieldValidateRulesMaxlength}</#if>)  -->
         </#if>
         <#if field.fieldType == "Integer">
-    `${field.fieldName?upper_case}` int(11)<#if field.required> NOT NULL </#if>,
+    `${field.fieldName?upper_case}` integer<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "BigDecimal"> 
     `${field.fieldName?upper_case}` decimal(19,2)<#if field.required> NOT NULL </#if>,
@@ -38,7 +38,8 @@ CREATE TABLE IF NOT EXISTS `${entity.name?upper_case}`
   </#if>
   </#list>
 </#if>
-    `ID` bigint(20) NOT NULL AUTO_INCREMENT PRIMARY KEY
+    `ID` bigint NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (`ID`)
 );
 
 </#list>
