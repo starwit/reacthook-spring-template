@@ -77,10 +77,12 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     // entity relations
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToMany">
+    @JsonFilter("filterId")
     @OneToMany(mappedBy = "${relation.otherEntityRelationshipName}")
     private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
 
   <#elseif relation.relationshipType == "ManyToOne">
+    @JsonFilter("filterId")
     @ManyToOne
     @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
@@ -93,7 +95,6 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
     <#else>
-    @JsonFilter("filterId")
     @OneToOne(mappedBy = "${relation.otherEntityRelationshipName}")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
@@ -162,7 +163,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
         this.${relation.relationshipName} = ${relation.relationshipName};
     }
 
-  <#elseif relation.relationshipType == "OneToMany" || relation.relationshipType == "OneToOne">
+  <#elseif relation.relationshipType == "ManyToOne" || relation.relationshipType == "OneToOne">
     public ${relation.otherEntityName}Entity get${relation.relationshipName?cap_first}() {
         return ${relation.relationshipName};
     }
