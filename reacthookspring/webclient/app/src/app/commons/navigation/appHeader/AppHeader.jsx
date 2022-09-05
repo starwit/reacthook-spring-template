@@ -22,10 +22,10 @@ function AppHeader(props) {
                     </Typography>
                     <div className={headerStyles.spacer}/>
                     {menuItems.map(item => (
-                        <Button key={item.title} color="secondary" disableRipple className={headerStyles.linkButton}
+                        <Button key={item.title} color="inherit" disableRipple className={headerStyles.linkButton}
                             onClick={() => history.push(item.link)}>{t(item.title)}</Button>
                     ))}
-                    <IconButton color="secondary" disableRipple className={headerStyles.linkButton}
+                    <IconButton color="inherit" disableRipple className={headerStyles.linkButton}
                         onClick={() => history.push("/logout")}><Logout/></IconButton>
                 </Toolbar>
             </AppBar>
