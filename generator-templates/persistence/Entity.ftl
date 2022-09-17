@@ -3,6 +3,7 @@ package de.${app.packageName?lower_case}.persistence.entity;
 <#list (imports) as import> 
 ${import}
 </#list>
+import javax.persistence.CascadeType;
 
 /**
  * ${entity.name} Entity class
