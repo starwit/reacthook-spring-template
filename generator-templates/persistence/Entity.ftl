@@ -1,8 +1,9 @@
 package de.${app.packageName?lower_case}.persistence.entity;
 
-<#list (imports) as import> 
+<#list (imports) as import>
 ${import}
 </#list>
+import de.${app.packageName?lower_case}.persistence.serializer.ZonedDateTimeSerializer;
 
 /**
  * ${entity.name} Entity class
@@ -14,10 +15,10 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 
 <#if entity.fields??>
     // entity fields
-  <#list (entity.fields) as field> 
+  <#list (entity.fields) as field>
   <#if field.fieldValidateRulesPattern?? && field.fieldValidateRulesPattern?length &gt; 0 && field.fieldType == "String">
     @Pattern(regexp = "${field.fieldValidateRulesPattern}")
-  </#if>    
+  </#if>
   <#if field.fieldType == "String">
             <#if field.required>
     @NotBlank
@@ -45,21 +46,22 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
   <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp">
     @Temporal(TemporalType.${field.fieldType?upper_case})
     @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
-    private Date ${field.fieldName};
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
+    private ${field.fieldType} ${field.fieldName};
   <#else>
-        <#if field.fieldType == "String"> 
+        <#if field.fieldType == "String">
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if><#if field.max??>, length=${field.max}</#if>)
         </#if>
-        <#if field.fieldType == "Integer"> 
+        <#if field.fieldType == "Integer">
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
-        <#if field.fieldType == "BigDecimal"> 
+        <#if field.fieldType == "BigDecimal">
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
-        <#if field.fieldType == "Double"> 
+        <#if field.fieldType == "Double">
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
-        <#if field.fieldType == "Enum"> 
+        <#if field.fieldType == "Enum">
     @Enumerated(EnumType.STRING)
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
@@ -104,8 +106,8 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     @JsonFilter("filterId")
     @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(
-        name = "${entity.name?upper_case}_${relation.relationshipName?upper_case}", 
-        joinColumns = @JoinColumn(name = "${entity.name?upper_case}_ID"), 
+        name = "${entity.name?upper_case}_${relation.relationshipName?upper_case}",
+        joinColumns = @JoinColumn(name = "${entity.name?upper_case}_ID"),
         inverseJoinColumns = @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID"))
     private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
 
@@ -120,8 +122,8 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 </#if>
 <#if entity.fields??>
     // entity fields getters and setters
-  <#list (entity.fields) as field> 
-  <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp"> 
+  <#list (entity.fields) as field>
+  <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp">
     public Date get${field.fieldName?cap_first}() {
         return ${field.fieldName};
     }
