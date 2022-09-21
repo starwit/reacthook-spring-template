@@ -133,11 +133,11 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     // entity fields getters and setters
   <#list (entity.fields) as field>
   <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp">
-    public Date get${field.fieldName?cap_first}() {
+    public ZonedDateTime get${field.fieldName?cap_first}() {
         return ${field.fieldName};
     }
 
-    public void set${field.fieldName?cap_first}(Date ${field.fieldName}) {
+    public void set${field.fieldName?cap_first}(ZonedDateTime ${field.fieldName}) {
         this.${field.fieldName} = ${field.fieldName};
     }
 
