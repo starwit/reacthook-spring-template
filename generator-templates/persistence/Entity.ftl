@@ -3,7 +3,11 @@ package de.${app.packageName?lower_case}.persistence.entity;
 <#list (imports) as import>
 ${import}
 </#list>
+import java.time.ZonedDateTime;
+
 import de.${app.packageName?lower_case}.persistence.serializer.ZonedDateTimeSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 
 /**
  * ${entity.name} Entity class
@@ -47,7 +51,8 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     @Temporal(TemporalType.${field.fieldType?upper_case})
     @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
-    private ${field.fieldType} ${field.fieldName};
+    private ZonedDateTime ${field.fieldName};
+
   <#else>
         <#if field.fieldType == "String">
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if><#if field.max??>, length=${field.max}</#if>)
@@ -65,6 +70,9 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     @Enumerated(EnumType.STRING)
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
+        <#if field.fieldType == "Boolean">
+    @Column(name = "${field.fieldName?upper_case}")
+        </#if>
         <#if field.fieldType == "Enum">
     private ${field.enumDef.name} ${field.fieldName};
 
@@ -73,6 +81,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 
         </#if>
   </#if>
+
   </#list>
 </#if>
 <#if entity.relationships??>
