@@ -49,7 +49,7 @@ services:
       - ./keycloak/imports:/opt/jboss/keycloak/imports
       - ./keycloak/local-test-users.json:/opt/jboss/keycloak/standalone/configuration/keycloak-add-user.json
     depends_on:
-      db-keycloak:
+      reacthookspring-db-keycloak:
         condition: service_healthy
     restart: on-failure
     environment:
