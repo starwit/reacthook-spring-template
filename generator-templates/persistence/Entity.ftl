@@ -48,7 +48,6 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
             </#if>
   </#if>
   <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp">
-    @Temporal(TemporalType.${field.fieldType?upper_case})
     @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     private ZonedDateTime ${field.fieldName};
