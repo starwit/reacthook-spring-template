@@ -6,7 +6,9 @@ ${import}
 import java.time.ZonedDateTime;
 
 import de.${app.packageName?lower_case}.persistence.serializer.ZonedDateTimeSerializer;
+import de.${app.packageName?lower_case}.persistence.serializer.ZonedDateTimeDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 
 /**
@@ -50,6 +52,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
   <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp">
     @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
+    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
     private ZonedDateTime ${field.fieldName};
 
   <#else>

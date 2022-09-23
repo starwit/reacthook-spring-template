@@ -55,7 +55,7 @@ services:
     environment:
       KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm.json
       DB_VENDOR: mariadb
-      DB_ADDR: db-keycloak
+      DB_ADDR: reacthookspring-db-keycloak
       DB_PORT: 3307
       DB_USER: 'keycloak'
       DB_PASSWORD: 'keycloak'
