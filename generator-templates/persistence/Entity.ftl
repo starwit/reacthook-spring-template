@@ -3,13 +3,13 @@ package de.${app.packageName?lower_case}.persistence.entity;
 <#list (imports) as import>
 ${import}
 </#list>
-import java.time.ZonedDateTime;
 
+import java.time.ZonedDateTime;
 import de.${app.packageName?lower_case}.persistence.serializer.ZonedDateTimeSerializer;
 import de.${app.packageName?lower_case}.persistence.serializer.ZonedDateTimeDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
+import javax.persistence.CascadeType;
 
 /**
  * ${entity.name} Entity class
