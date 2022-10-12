@@ -9,7 +9,7 @@
     "@mui/lab": "^5.0.0-alpha.63",
     "@mui/material": "^5.0.0",
     "@mui/styles": "^5.0.0",
-    "@starwit/react-starwit": "0.0.6-6",
+    "@starwit/react-starwit": "0.0.6-10",
     "axios": "^0.24.0",
     "i18next": "^21.0.1",
     "i18next-browser-languagedetector": "^6.1.2",
@@ -23,7 +23,10 @@
     "react-router-dom": "^5.3.0",
     "react-scripts": "^5.0.1",
     "react-syntax-highlighter": "^15.4.4",
-    "use-immer": "^0.7.0"
+    "use-immer": "^0.7.0",
+    "@date-io/moment": "^2.15.0",
+    "@mui/x-date-pickers": "^5.0.1",
+    "moment": "^2.29.4"
   },
   "scripts": {
     "start": "react-scripts start",

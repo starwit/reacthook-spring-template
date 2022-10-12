@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  db:
+  reacthookspring-db:
     image: mariadb:latest
     restart: on-failure
     environment:
@@ -24,7 +24,7 @@ services:
     networks: # Networks to join (Services on the same network can communicate with each other using their name)
       - backend
 
-  db-keycloak:
+  reacthookspring-db-keycloak:
     image: mariadb:latest
     restart: on-failure
     environment:
@@ -39,23 +39,23 @@ services:
       timeout: 60s
       retries: 30
     volumes:
-      - keycloak-db-data:/var/lib/mysql
-    networks: 
+      - reacthookspring-keycloak-db-data:/var/lib/mysql
+    networks:
       - backend
 
-  keycloak:
+  reacthookspring-keycloak:
     image: jboss/keycloak
     volumes:
       - ./keycloak/imports:/opt/jboss/keycloak/imports
       - ./keycloak/local-test-users.json:/opt/jboss/keycloak/standalone/configuration/keycloak-add-user.json
     depends_on:
-      db-keycloak:
+      reacthookspring-db-keycloak:
         condition: service_healthy
     restart: on-failure
     environment:
       KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm.json
-      DB_VENDOR: mariadb 
-      DB_ADDR: db-keycloak
+      DB_VENDOR: mariadb
+      DB_ADDR: reacthookspring-db-keycloak
       DB_PORT: 3307
       DB_USER: 'keycloak'
       DB_PASSWORD: 'keycloak'
@@ -64,13 +64,13 @@ services:
     ports:
       # <Port exposed> : < MySQL Port running inside container>
       - '8080:8080'
-    networks: 
+    networks:
       - backend
 
 # Names our volume
 volumes:
   reacthookspringv2-db-data:
-  keycloak-db-data:
+  reacthookspring-keycloak-db-data:
 
  # Networks to be created to facilitate communication between containers
 networks:

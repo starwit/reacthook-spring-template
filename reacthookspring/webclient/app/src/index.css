@@ -16,8 +16,3 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-button {
-    margin: 5px !important;
-    width: 7rem !important;
-}

@@ -3,14 +3,14 @@ CREATE TABLE `${entity.name?upper_case}`
 (
 <#if entity.fields??>
     <#list entity.fields as field>
-    <#if field.fieldType == "String" || field.fieldType == "Enum"> 
+    <#if field.fieldType == "String" || field.fieldType == "Enum">
     `${field.fieldName?upper_case}` varchar(255)<#if field.required> NOT NULL </#if>,
     <#--  <#if field.fieldValidateRulesMaxlength??>, length=${field.fieldValidateRulesMaxlength}</#if>)  -->
         </#if>
         <#if field.fieldType == "Integer">
     `${field.fieldName?upper_case}` integer<#if field.required> NOT NULL </#if>,
         </#if>
-        <#if field.fieldType == "BigDecimal"> 
+        <#if field.fieldType == "BigDecimal">
     `${field.fieldName?upper_case}` decimal(19,2)<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "Double">
@@ -24,6 +24,9 @@ CREATE TABLE `${entity.name?upper_case}`
         </#if>
         <#if field.fieldType == "Timestamp">
     `${field.fieldName?upper_case}` datetime<#if field.required> NOT NULL </#if>,
+        </#if>
+        <#if field.fieldType == "Boolean">
+    `${field.fieldName?upper_case}` tinyint(1)<#if field.required> NOT NULL </#if>,
         </#if>
     </#list>
 </#if>
@@ -50,14 +53,14 @@ CREATE TABLE `${entity.name?upper_case}`
   <#elseif relation.relationshipType == "ManyToOne">
 ALTER TABLE `${entity.name?upper_case}`
     ADD CONSTRAINT `FK_${entity.name?upper_case}_${relation.relationshipName?upper_case}`
-    FOREIGN KEY (`${relation.otherEntityName?upper_case}_ID`) 
+    FOREIGN KEY (`${relation.otherEntityName?upper_case}_ID`)
     REFERENCES `${relation.otherEntityName?upper_case}` (`ID`);
 
   <#elseif relation.relationshipType == "OneToOne">
     <#if relation.ownerSide>
 ALTER TABLE `${entity.name?upper_case}`
     ADD CONSTRAINT `FK_${entity.name?upper_case}_${relation.relationshipName?upper_case}`
-    FOREIGN KEY (`${relation.otherEntityName?upper_case}_ID`) 
+    FOREIGN KEY (`${relation.otherEntityName?upper_case}_ID`)
     REFERENCES `${relation.otherEntityName?upper_case}` (`ID`);
 
     <#else>
@@ -72,12 +75,12 @@ CREATE TABLE `${entity.name?upper_case}_${relation.relationshipName?upper_case}`
 
 ALTER TABLE `${entity.name?upper_case}_${relation.relationshipName?upper_case}`
     ADD CONSTRAINT `FK_${entity.name?upper_case}_${relation.relationshipName?upper_case}`
-    FOREIGN KEY (`${entity.name?upper_case}_ID`) 
+    FOREIGN KEY (`${entity.name?upper_case}_ID`)
     REFERENCES `${entity.name?upper_case}` (`ID`);
 
 ALTER TABLE `${entity.name?upper_case}_${relation.relationshipName?upper_case}`
     ADD CONSTRAINT `FK_${relation.otherEntityName?upper_case}_${relation.relationshipName?upper_case}`
-    FOREIGN KEY (`${relation.otherEntityName?upper_case}_ID`) 
+    FOREIGN KEY (`${relation.otherEntityName?upper_case}_ID`)
     REFERENCES `${relation.otherEntityName?upper_case}` (`ID`);
 
     </#if>

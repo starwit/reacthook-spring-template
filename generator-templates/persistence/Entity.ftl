@@ -1,8 +1,14 @@
 package de.${app.packageName?lower_case}.persistence.entity;
 
-<#list (imports) as import> 
+<#list (imports) as import>
 ${import}
 </#list>
+
+import java.time.ZonedDateTime;
+import de.${app.packageName?lower_case}.persistence.serializer.ZonedDateTimeSerializer;
+import de.${app.packageName?lower_case}.persistence.serializer.ZonedDateTimeDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javax.persistence.CascadeType;
 
 /**
@@ -15,10 +21,10 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 
 <#if entity.fields??>
     // entity fields
-  <#list (entity.fields) as field> 
+  <#list (entity.fields) as field>
   <#if field.fieldValidateRulesPattern?? && field.fieldValidateRulesPattern?length &gt; 0 && field.fieldType == "String">
     @Pattern(regexp = "${field.fieldValidateRulesPattern}")
-  </#if>    
+  </#if>
   <#if field.fieldType == "String">
             <#if field.required>
     @NotBlank
@@ -44,25 +50,30 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
             </#if>
   </#if>
   <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp">
-    @Temporal(TemporalType.${field.fieldType?upper_case})
     @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
-    private Date ${field.fieldName};
+    @JsonSerialize(using = ZonedDateTimeSerializer.class)
+    @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
+    private ZonedDateTime ${field.fieldName};
+
   <#else>
-        <#if field.fieldType == "String"> 
+        <#if field.fieldType == "String">
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if><#if field.max??>, length=${field.max}</#if>)
         </#if>
-        <#if field.fieldType == "Integer"> 
+        <#if field.fieldType == "Integer">
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
-        <#if field.fieldType == "BigDecimal"> 
+        <#if field.fieldType == "BigDecimal">
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
-        <#if field.fieldType == "Double"> 
+        <#if field.fieldType == "Double">
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
-        <#if field.fieldType == "Enum"> 
+        <#if field.fieldType == "Enum">
     @Enumerated(EnumType.STRING)
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+        </#if>
+        <#if field.fieldType == "Boolean">
+    @Column(name = "${field.fieldName?upper_case}")
         </#if>
         <#if field.fieldType == "Enum">
     private ${field.enumDef.name} ${field.fieldName};
@@ -72,6 +83,7 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 
         </#if>
   </#if>
+
   </#list>
 </#if>
 <#if entity.relationships??>
@@ -105,8 +117,8 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     @JsonFilter("filterId")
     @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(
-        name = "${entity.name?upper_case}_${relation.relationshipName?upper_case}", 
-        joinColumns = @JoinColumn(name = "${entity.name?upper_case}_ID"), 
+        name = "${entity.name?upper_case}_${relation.relationshipName?upper_case}",
+        joinColumns = @JoinColumn(name = "${entity.name?upper_case}_ID"),
         inverseJoinColumns = @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID"))
     private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
 
@@ -121,13 +133,13 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
 </#if>
 <#if entity.fields??>
     // entity fields getters and setters
-  <#list (entity.fields) as field> 
-  <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp"> 
-    public Date get${field.fieldName?cap_first}() {
+  <#list (entity.fields) as field>
+  <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp">
+    public ZonedDateTime get${field.fieldName?cap_first}() {
         return ${field.fieldName};
     }
 
-    public void set${field.fieldName?cap_first}(Date ${field.fieldName}) {
+    public void set${field.fieldName?cap_first}(ZonedDateTime ${field.fieldName}) {
         this.${field.fieldName} = ${field.fieldName};
     }
 
