@@ -46,10 +46,10 @@ function UserOverview() {
             <Typography variant={"h2"} gutterBottom>{t("${entity.name?uncap_first}.title")}</Typography>
             <Stack spacing={2} direction={"row"}>
                 <Button onClick={goToCreate} variant="contained" color="secondary">{t("button.create")}</Button>
-                <Button onClick={goToUpdate} variant="contained" color="primary" disabled={!selected?.id} >
+                <Button onClick={goToUpdate} variant="contained" color="secondary" disabled={!selected?.id} >
                     {t("button.update")}
                 </Button>
-                <Button onClick={handleDelete} variant="contained" color="primary" disabled={!selected?.id}>
+                <Button onClick={handleDelete} variant="contained" color="secondary" disabled={!selected?.id}>
                     {t("button.delete")}
                 </Button>
             </Stack>
