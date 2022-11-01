@@ -1,4 +1,4 @@
-import {Container, Typography, Button} from "@mui/material";
+import {Container, Typography, Button, Stack} from "@mui/material";
 import React, {useState, useMemo, useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import {OverviewTable} from "@starwit/react-starwit";
@@ -44,13 +44,15 @@ function UserOverview() {
     return (
         <Container>
             <Typography variant={"h2"} gutterBottom>{t("${entity.name?uncap_first}.title")}</Typography>
-            <Button onClick={goToCreate} variant="contained" color="secondary">{t("button.create")}</Button>
-            <Button onClick={goToUpdate} variant="contained" color="primary" disabled={!selected?.id} >
-                {t("button.update")}
-            </Button>
-            <Button onClick={handleDelete} variant="contained" color="primary" disabled={!selected?.id}>
-                {t("button.delete")}
-            </Button>
+            <Stack spacing={2} direction={"row"}>
+                <Button onClick={goToCreate} variant="contained" color="secondary">{t("button.create")}</Button>
+                <Button onClick={goToUpdate} variant="contained" color="secondary" disabled={!selected?.id} >
+                    {t("button.update")}
+                </Button>
+                <Button onClick={handleDelete} variant="contained" color="secondary" disabled={!selected?.id}>
+                    {t("button.delete")}
+                </Button>
+            </Stack>
             <OverviewTable
                 entities={${entity.name?uncap_first}All}
                 prefix={"${entity.name?uncap_first}"}
