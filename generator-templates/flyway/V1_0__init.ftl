@@ -28,6 +28,9 @@ CREATE TABLE `${entity.name?upper_case}`
         <#if field.fieldType == "Boolean">
     `${field.fieldName?upper_case}` tinyint(1)<#if field.required> NOT NULL </#if>,
         </#if>
+        <#if field.fieldType == "Long">
+    `${field.fieldName?upper_case}` bigint<#if field.required> NOT NULL </#if>,
+        </#if>
     </#list>
 </#if>
 <#if entity.relationships??>
