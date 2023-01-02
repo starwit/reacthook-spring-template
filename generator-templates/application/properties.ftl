@@ -12,14 +12,14 @@ management.endpoints.web.exposure.include=*
 # show full git properties
 management.info.git.mode=full
 
-# MySQL
+# Postgres
 spring.datasource.hikari.connection-timeout=10000
-spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
-spring.datasource.url=jdbc:mariadb://localhost:3306/${app.baseName?lower_case}?useLegacyDatetimeCode=false&serverTimezone=CET
+spring.datasource.url=jdbc:postgresql://localhost:5433/${app.baseName?lower_case}?useLegacyDatetimeCode=false&serverTimezone=CET
 spring.jpa.hibernate.naming.physical-strategy=de.${app.packageName?lower_case}.persistence.config.DatabasePhysicalNamingStrategy
-#spring.jpa.hibernate.ddl-auto=create
 spring.datasource.username=${app.baseName?lower_case}
 spring.datasource.password=${app.baseName?lower_case}
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.hibernate.ddl-auto=create
 
 # Flyway
 spring.flyway.user=${r"${spring.datasource.username}"}

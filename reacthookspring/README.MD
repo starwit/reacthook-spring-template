@@ -70,7 +70,7 @@ Username:starwit
 Database:starwit
 Password:starwit
 ```
-MySQLWorkbench is recommended to access database for development purpose.
+PGAdmin is recommended to access database for development purpose. It can be deployed via docker-compose file.
 
 ### Starting without keycloak
 

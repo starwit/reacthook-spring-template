@@ -44,9 +44,11 @@ CREATE TABLE `${entity.name?upper_case}`
   </#if>
   </#list>
 </#if>
-    `ID` bigint NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY (`ID`)
+    `ID` bigint NOT NULL DEFAULT nextval('`${entity.name?upper_case}`_ID_SEQ'::regclass),
+    CONSTRAINT '`${entity.name?upper_case}`_PKEY' PRIMARY KEY (id)
 );
+
+CREATE SEQUENCE IF NOT EXISTS '`${entity.name?upper_case}`_ID_SEQ';
 
 </#list>
 <#list app.entities as entity>
