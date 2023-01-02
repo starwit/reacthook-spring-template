@@ -1,45 +1,56 @@
 version: "3.9"
 services:
-  reacthookspring-db:
-    image: mariadb:latest
-    restart: on-failure
+  postgres:
+    container_name: reacthookspring-db
+    image: postgres:latest
     environment:
-      MYSQL_DATABASE: 'reacthookspring'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'reacthookspring'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'reacthookspring'
-      # Password for root access
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-    ports:
-      # <Port exposed> : < MySQL Port running inside container>
-      - '3306:3306'
+      POSTGRES_DB: reacthookspring
+      POSTGRES_USER: reacthookspring
+      POSTGRES_PASSWORD: reacthookspring
+      PGDATA: /var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "mysql" ,"-h", "localhost", "-P", "3306", "-u", "root", "-e", "select 1", "reacthookspring"]
+      test: ['CMD-SHELL', 'pg_isready -U reacthookspring'] # <<<---
       interval: 5s
       timeout: 60s
       retries: 30
     volumes:
-      - reacthookspringv2-db-data:/var/lib/mysql
-    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - reacthookspring-db:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
       - backend
+    restart: unless-stopped
+  
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+       - reacthookspring-pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - backend
+    restart: unless-stopped
 
   reacthookspring-db-keycloak:
-    image: mariadb:latest
+    image: postgres:latest
     restart: on-failure
     environment:
-      MYSQL_DATABASE: 'keycloak'
-      MYSQL_USER: 'keycloak'
-      MYSQL_PASSWORD: 'keycloak'
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-      MYSQL_TCP_PORT: 3307
+      POSTGRES_DB: 'keycloak'
+      POSTGRES_USER: 'keycloak'
+      POSTGRES_PASSWORD: 'keycloak'
+      PGDATA: /var/lib/postgresql/data
     healthcheck:
-      test: ["CMD", "mysql" ,"-h", "localhost", "-P", "3307", "-u", "root", "-e", "select 1", "keycloak"]
+      test: ['CMD-SHELL', 'pg_isready -U keycloak'] 
       interval: 5s
       timeout: 60s
       retries: 30
     volumes:
-      - reacthookspring-keycloak-db-data:/var/lib/mysql
+      - reacthookspring-keycloak-db:/var/lib/postgresql/data
     networks:
       - backend
 
@@ -54,9 +65,9 @@ services:
     restart: on-failure
     environment:
       KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm.json
-      DB_VENDOR: mariadb
+      DB_VENDOR: postgres
       DB_ADDR: reacthookspring-db-keycloak
-      DB_PORT: 3307
+      DB_PORT: 5432
       DB_USER: 'keycloak'
       DB_PASSWORD: 'keycloak'
       PROXY_ADDRESS_FORWARDING: 'true'
@@ -67,11 +78,11 @@ services:
     networks:
       - backend
 
-# Names our volume
-volumes:
-  reacthookspringv2-db-data:
-  reacthookspring-keycloak-db-data:
-
- # Networks to be created to facilitate communication between containers
 networks:
   backend:
+
+volumes:
+  reacthookspring-db:
+  reacthookspring-pgadmin:
+  reacthookspring-keycloak-db:
+
