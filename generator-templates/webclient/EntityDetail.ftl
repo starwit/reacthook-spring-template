@@ -65,12 +65,14 @@ function ${entity.name}Detail() {
         Promise.all(functions).then(values => {
 <#if entity.relationships??>
   <#assign seen_rest3 = []>
+  <#assign selectedIndex = 0>
   <#list (entity.relationships) as relation>
   <#if relation.ownerSide>
   <#if seen_rest3?seq_contains(relation.otherEntityName)>
   <#else>
   <#assign seen_rest3 = seen_rest3 + [relation.otherEntityName]>
-            selectLists.push({name: "${relation.relationshipName}", data: values[${relation?index}].data});
+            selectLists.push({name: "${relation.relationshipName}", data: values[${selectedIndex}].data});
+  <#assign selectedIndex = selectedIndex + 1>
   </#if>
   </#if>
   </#list>
