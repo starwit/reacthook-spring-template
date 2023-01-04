@@ -16,16 +16,16 @@ CREATE TABLE "${entity.name?lower_case}"
     "${field.fieldName?lower_case}" DECIMAL(19,2)<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "Double">
-    "${field.fieldName?lower_case}" DOUBLE<#if field.required> NOT NULL </#if>,
+    "${field.fieldName?lower_case}" DOUBLE PRECISION<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "Date">
     "${field.fieldName?lower_case}" DATE<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "Time">
-    "${field.fieldName?lower_case}" TIME<#if field.required> NOT NULL </#if>,
+    "${field.fieldName?lower_case}" TIME WITH TIME ZONE<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "Timestamp">
-    "${field.fieldName?lower_case}" DATETIME<#if field.required> NOT NULL </#if>,
+    "${field.fieldName?lower_case}" TIMESTAMP WITH TIME ZONE<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "Boolean">
     "${field.fieldName?lower_case}" BOOLEAN<#if field.required> NOT NULL </#if>,
