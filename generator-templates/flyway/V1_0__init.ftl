@@ -1,53 +1,53 @@
 <#list app.entities as entity>
-CREATE SEQUENCE IF NOT EXISTS "${entity.name?upper_case}_ID_SEQ";
+CREATE SEQUENCE IF NOT EXISTS "${entity.name?lower_case}_id_seq";
 
-CREATE TABLE "${entity.name?upper_case}"
+CREATE TABLE "${entity.name?lower_case}"
 (
 <#if entity.fields??>
     <#list entity.fields as field>
     <#if field.fieldType == "String" || field.fieldType == "Enum">
-    "${field.fieldName?upper_case}" varchar(255)<#if field.required> NOT NULL </#if>,
+    "${field.fieldName?lower_case}" VARCHAR(255)<#if field.required> NOT NULL </#if>,
     <#--  <#if field.fieldValidateRulesMaxlength??>, length=${field.fieldValidateRulesMaxlength}</#if>)  -->
         </#if>
         <#if field.fieldType == "Integer">
-    "${field.fieldName?upper_case}" integer<#if field.required> NOT NULL </#if>,
+    "${field.fieldName?lower_case}" INTEGER<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "BigDecimal">
-    "${field.fieldName?upper_case}" decimal(19,2)<#if field.required> NOT NULL </#if>,
+    "${field.fieldName?lower_case}" DECIMAL(19,2)<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "Double">
-    "${field.fieldName?upper_case}" double<#if field.required> NOT NULL </#if>,
+    "${field.fieldName?lower_case}" DOUBLE<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "Date">
-    "${field.fieldName?upper_case}" date<#if field.required> NOT NULL </#if>,
+    "${field.fieldName?lower_case}" DATE<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "Time">
-    "${field.fieldName?upper_case}" time<#if field.required> NOT NULL </#if>,
+    "${field.fieldName?lower_case}" TIME<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "Timestamp">
-    "${field.fieldName?upper_case}" datetime<#if field.required> NOT NULL </#if>,
+    "${field.fieldName?lower_case}" DATETIME<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "Boolean">
-    "${field.fieldName?upper_case}" boolean<#if field.required> NOT NULL </#if>,
+    "${field.fieldName?lower_case}" BOOLEAN<#if field.required> NOT NULL </#if>,
         </#if>
         <#if field.fieldType == "Long">
-    "${field.fieldName?upper_case}" bigint<#if field.required> NOT NULL </#if>,
+    "${field.fieldName?lower_case}" BIGINT<#if field.required> NOT NULL </#if>,
         </#if>
     </#list>
 </#if>
 <#if entity.relationships??>
   <#list entity.relationships as relation>
   <#if relation.relationshipType == "ManyToOne">
-    "${relation.otherEntityName?upper_case}_ID" bigint,
+    "${relation.otherEntityName?lower_case}_id" BIGINT,
   <#elseif relation.relationshipType == "OneToOne">
     <#if relation.ownerSide>
-    "${relation.otherEntityName?upper_case}_ID" bigint UNIQUE,
+    "${relation.otherEntityName?lower_case}_id" BIGINT UNIQUE,
     </#if>
   </#if>
   </#list>
 </#if>
-    "ID" bigint NOT NULL DEFAULT nextval('${entity.name?upper_case}_ID_SEQ'),
-    CONSTRAINT "${entity.name?upper_case}_PKEY" PRIMARY KEY ("ID")
+    "id" BIGINT NOT NULL DEFAULT nextval('${entity.name?lower_case}_id_seq'),
+    CONSTRAINT "${entity.name?lower_case}_pkey" PRIMARY KEY ("id")
 );
 
 </#list>
@@ -56,37 +56,37 @@ CREATE TABLE "${entity.name?upper_case}"
   <#list entity.relationships as relation>
   <#if relation.relationshipType == "OneToMany">
   <#elseif relation.relationshipType == "ManyToOne">
-ALTER TABLE "${entity.name?upper_case}"
-    ADD CONSTRAINT "FK_${entity.name?upper_case}_${relation.relationshipName?upper_case}"
-    FOREIGN KEY ("${relation.otherEntityName?upper_case}_ID")
-    REFERENCES "${relation.otherEntityName?upper_case}" ("ID");
+ALTER TABLE "${entity.name?lower_case}"
+    ADD CONSTRAINT "fk_${entity.name?lower_case}_${relation.relationshipName?lower_case}"
+    FOREIGN KEY ("${relation.otherEntityName?lower_case}_id")
+    REFERENCES "${relation.otherEntityName?lower_case}" ("id");
 
   <#elseif relation.relationshipType == "OneToOne">
     <#if relation.ownerSide>
-ALTER TABLE "${entity.name?upper_case}"
-    ADD CONSTRAINT "FK_${entity.name?upper_case}_${relation.relationshipName?upper_case}"
-    FOREIGN KEY ("${relation.otherEntityName?upper_case}_ID")
-    REFERENCES "${relation.otherEntityName?upper_case}" ("ID");
+ALTER TABLE "${entity.name?lower_case}"
+    ADD CONSTRAINT "fk_${entity.name?lower_case}_${relation.relationshipName?lower_case}"
+    FOREIGN KEY ("${relation.otherEntityName?lower_case}_id")
+    REFERENCES "${relation.otherEntityName?lower_case}" ("id");
 
     <#else>
     </#if>
   <#elseif relation.relationshipType == "ManyToMany">
     <#if relation.ownerSide>
-CREATE TABLE "${entity.name?upper_case}_${relation.relationshipName?upper_case}" (
-    "${entity.name?upper_case}_ID" BIGINT NOT NULL,
-    "${relation.otherEntityName?upper_case}_ID" BIGINT NOT NULL,
-    PRIMARY KEY ("${entity.name?upper_case}_ID", "${relation.otherEntityName?upper_case}_ID")
+CREATE TABLE "${entity.name?lower_case}_${relation.relationshipName?lower_case}" (
+    "${entity.name?lower_case}_id" BIGINT NOT NULL,
+    "${relation.otherEntityName?lower_case}_id" BIGINT NOT NULL,
+    PRIMARY KEY ("${entity.name?lower_case}_id", "${relation.otherEntityName?lower_case}_id")
 );
 
-ALTER TABLE "${entity.name?upper_case}_${relation.relationshipName?upper_case}"
-    ADD CONSTRAINT "FK_${entity.name?upper_case}_${relation.relationshipName?upper_case}"
-    FOREIGN KEY ("${entity.name?upper_case}_ID")
-    REFERENCES "${entity.name?upper_case}" ("ID");
+ALTER TABLE "${entity.name?lower_case}_${relation.relationshipName?lower_case}"
+    ADD CONSTRAINT "fk_${entity.name?lower_case}_${relation.relationshipName?lower_case}"
+    FOREIGN KEY ("${entity.name?lower_case}_id")
+    REFERENCES "${entity.name?lower_case}" ("id");
 
-ALTER TABLE "${entity.name?upper_case}_${relation.relationshipName?upper_case}"
-    ADD CONSTRAINT "FK_${relation.otherEntityName?upper_case}_${relation.relationshipName?upper_case}"
-    FOREIGN KEY ("${relation.otherEntityName?upper_case}_ID")
-    REFERENCES "${relation.otherEntityName?upper_case}" ("ID");
+ALTER TABLE "${entity.name?lower_case}_${relation.relationshipName?lower_case}"
+    ADD CONSTRAINT "fk_${relation.otherEntityName?lower_case}_${relation.relationshipName?lower_case}"
+    FOREIGN KEY ("${relation.otherEntityName?lower_case}_id")
+    REFERENCES "${relation.otherEntityName?lower_case}" ("id");
 
     </#if>
   </#if>
