@@ -4,6 +4,12 @@
   "imageUrl": "https://raw.githubusercontent.com/starwit/reacthook-spring-template/main/screenshot.png",
   "templateFiles": [
     {
+      "fileName": "mysqllocal-docker-compose.yml",
+      "templatePath": "deployment/mysqllocal-docker-compose.ftl",
+      "targetPath": "deployment/",
+      "category": "DEPLOYMENT"
+    },
+    {
       "fileName": "${entity.name}Entity.java",
       "templatePath": "persistence/Entity.ftl",
       "targetPath": "persistence/src/main/java/de/${app.packageName?lower_case}/persistence/entity/",
