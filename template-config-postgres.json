@@ -71,13 +71,13 @@
     },
     {
       "fileName": "V1_0__init.sql",
-      "templatePath": "flyway/V1_0__init-postgres.ftl",
+      "templatePath": "postgres/flyway/V1_0__init-postgres.ftl",
       "targetPath": "persistence/src/main/resources/db/migration/",
       "category": "ENTITY"
     },
     {
       "fileName": "V1_0__init.sql",
-      "templatePath": "flyway/V1_0__init-postgres.ftl",
+      "templatePath": "postgres/flyway/V1_0__init-postgres.ftl",
       "targetPath": "persistence/src/test/resources/db/test/",
       "category": "ENTITY"
     },
