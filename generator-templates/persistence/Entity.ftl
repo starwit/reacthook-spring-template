@@ -68,6 +68,9 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
         <#if field.fieldType == "Double">
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
         </#if>
+        <#if field.fieldType == "Long">
+    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+        </#if>
         <#if field.fieldType == "Enum">
     @Enumerated(EnumType.STRING)
     @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
