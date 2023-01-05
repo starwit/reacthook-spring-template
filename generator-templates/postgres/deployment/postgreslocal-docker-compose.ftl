@@ -1,20 +1,20 @@
 version: "3.9"
 services:
   postgres:
-    container_name: {app.baseName?lower_case}-db
+    container_name: ${app.baseName?lower_case}-db
     image: postgres:latest
     environment:
-      POSTGRES_DB: {app.baseName?lower_case}
-      POSTGRES_USER: {app.baseName?lower_case}
-      POSTGRES_PASSWORD: {app.baseName?lower_case}
+      POSTGRES_DB: ${app.baseName?lower_case}
+      POSTGRES_USER: ${app.baseName?lower_case}
+      POSTGRES_PASSWORD: ${app.baseName?lower_case}
       PGDATA: /var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U {app.baseName?lower_case}'] # <<<---
+      test: ['CMD-SHELL', 'pg_isready -U ${app.baseName?lower_case}'] # <<<---
       interval: 5s
       timeout: 60s
       retries: 30
     volumes:
-      - {app.baseName?lower_case}-db:/var/lib/postgresql/data
+      - ${app.baseName?lower_case}-db:/var/lib/postgresql/data
     ports:
       - "5433:5432"
     networks:
@@ -29,7 +29,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: admin
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
-       - {app.baseName?lower_case}-pgadmin:/var/lib/pgadmin
+       - ${app.baseName?lower_case}-pgadmin:/var/lib/pgadmin
     ports:
       - "5050:80"
     networks:
@@ -40,5 +40,5 @@ networks:
   backend:
 
 volumes:
-  {app.baseName?lower_case}-db:
-  {app.baseName?lower_case}-pgadmin:
+  ${app.baseName?lower_case}-db:
+  ${app.baseName?lower_case}-pgadmin:

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>de.starwit</groupId>
-        <artifactId>{app.baseName?lower_case}</artifactId>
+        <artifactId>${app.baseName?lower_case}</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
