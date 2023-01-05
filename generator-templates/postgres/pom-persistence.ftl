@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>de.starwit</groupId>
+        <groupId>de.${app.packageName?lower_case}</groupId>
         <artifactId>${app.baseName?lower_case}</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>

@@ -9,7 +9,7 @@
         <version>2.6.6</version>
     </parent>
 
-    <groupId>de.starwit</groupId>
+    <groupId>de.${app.packageName?lower_case}</groupId>
     <artifactId>${app.baseName?lower_case}</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <description>App template from test @ spring</description>
