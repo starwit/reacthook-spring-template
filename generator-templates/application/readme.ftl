@@ -61,7 +61,7 @@ NPM server starts under localhost:3000/starwit/ by default
 
 You can start the spring boot application in debug mode. See Spring Boot documentation for further details. The easiest way is, to use debug functionality integrated with your IDE like VS Code.
 
-### MariaDB Client
+### Postgres Client
 
 The database is available under localhost:3006
 
@@ -70,7 +70,7 @@ Username:starwit
 Database:starwit
 Password:starwit
 ```
-MySQLWorkbench is recommended to access database for development purpose.
+PGAdmin is recommended to access database for development purpose. It can be deployed via docker-compose file.
 
 ### Starting without keycloak
 

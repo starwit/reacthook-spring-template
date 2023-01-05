@@ -4,8 +4,38 @@
   "imageUrl": "https://raw.githubusercontent.com/starwit/reacthook-spring-template/main/screenshot.png",
   "templateFiles": [
     {
+      "fileName": "pom.xml",
+      "templatePath": "application/pom.ftl",
+      "targetPath": "/",
+      "category": "ENTITY"
+    },
+    {
+      "fileName": "pom.xml",
+      "templatePath": "application/pom-persistence.ftl",
+      "targetPath": "persistence/",
+      "category": "ENTITY"
+    },
+    {
+      "fileName": "README.MD",
+      "templatePath": "application/readme.ftl",
+      "targetPath": "/",
+      "category": "ENTITY"
+    },
+    {
+      "fileName": "localenv-docker-compose.yml",
+      "templatePath": "application/localenv-docker-compose.ftl",
+      "targetPath": "deployment/",
+      "category": "ENTITY"
+    },
+    {
+      "fileName": "postgreslocal-docker-compose.yml",
+      "templatePath": "application/postgreslocal-docker-compose.ftl",
+      "targetPath": "deployment/",
+      "category": "ENTITY"
+    },
+    {
       "fileName": "${entity.name}Entity.java",
-      "templatePath": "persistence/Entity.ftl",
+      "templatePath": "persistence/Entity-lowercaseIdentifier.ftl",
       "targetPath": "persistence/src/main/java/de/${app.packageName?lower_case}/persistence/entity/",
       "category": "ENTITY"
     },
