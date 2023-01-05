@@ -14,6 +14,7 @@ management.info.git.mode=full
 
 # Postgres
 spring.datasource.hikari.connection-timeout=10000
+spring.datasource.driver-class-name=org.postgresql.Driver
 spring.datasource.url=jdbc:postgresql://localhost:5433/${app.baseName?lower_case}?useLegacyDatetimeCode=false&serverTimezone=CET
 spring.jpa.hibernate.naming.physical-strategy=de.${app.packageName?lower_case}.persistence.config.DatabasePhysicalNamingStrategy
 spring.datasource.username=${app.baseName?lower_case}
