@@ -46,6 +46,12 @@
       "category": "APP"
     },
     {
+      "fileName": "application.properties",
+      "templatePath": "postgres/application/propertiestestpersistence.ftl",
+      "targetPath": "persistence/src/test/resources/",
+      "category": "APP"
+    },
+    {
       "fileName": "${entity.name}Entity.java",
       "templatePath": "persistence/Entity-lowercaseIdentifier.ftl",
       "targetPath": "persistence/src/main/java/de/${app.packageName?lower_case}/persistence/entity/",
