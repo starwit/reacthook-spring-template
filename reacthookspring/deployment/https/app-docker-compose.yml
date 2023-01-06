@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  db:
+  reacthookspring-db:
     image: mariadb:latest
     restart: on-failure
     environment:
@@ -29,7 +29,7 @@ services:
   reacthookspring:
     image: starwitorg/reacthookspring:v0.2.13-9
     depends_on:
-      db:
+      reacthookspring-db:
         condition: service_healthy
     restart: on-failure
     environment:
