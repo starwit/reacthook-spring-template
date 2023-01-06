@@ -17,8 +17,8 @@ services:
 
   certbot:
     image: certbot/certbot:latest
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait ${r"${$${!}"}; done;'"
-    command: "/bin/sh -c 'while :; do sleep 6h & wait ${r"${$${!}"}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait ${r"$${!}"}; done;'"
+    command: "/bin/sh -c 'while :; do sleep 6h & wait ${r"$${!}"}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt
       - ./certbot/logs:/var/log/letsencrypt
@@ -78,6 +78,10 @@ services:
       KEYCLOAK_FRONTEND_URL: 'https://${r"${DOMAIN}"}/auth'
     networks: 
       - backend
+
+volumes:
+  templatetest-pgadmin:
+  templatetest-keycloak-db:
 
  # Networks to be created to facilitate communication between containers
 networks:

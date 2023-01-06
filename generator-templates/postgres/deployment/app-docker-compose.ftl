@@ -21,15 +21,15 @@ services:
       - backend
     restart: unless-stopped
       
-  reacthookspring:
-    image: starwitorg/reacthookspring:v0.2.13-9
+  ${app.baseName?lower_case}:
+    image: ${app.baseName?lower_case}:latest
     depends_on:
       ${app.baseName?lower_case}-db:
         condition: service_healthy
     restart: on-failure
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://reacthookspring:5433/${app.baseName?lower_case}?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
-      SPRING_DATASOURCE_USERNAME: reacthookspring
+      SPRING_DATASOURCE_URL: jdbc:postgresql://${app.baseName?lower_case}:5433/${app.baseName?lower_case}?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      SPRING_DATASOURCE_USERNAME: ${app.baseName?lower_case}
       SPRING_DATASOURCE_PASSWORD: ${r"${DB_PW_"}${app.baseName}${r"}"}
       KEYCLOAK_AUTH-SERVER-URL: https://${r"${DOMAIN}"}/auth
       SERVER_USE_FORWARD_HEADERS: "true"
