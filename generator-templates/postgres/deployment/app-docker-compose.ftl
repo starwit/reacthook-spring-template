@@ -15,8 +15,9 @@ services:
       retries: 30
     volumes:
       - ${app.baseName?lower_case}-db:/var/lib/postgresql/data
-    ports:
-      - "5433:5432"
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
     networks:
       - backend
     restart: unless-stopped
@@ -28,7 +29,7 @@ services:
         condition: service_healthy
     restart: on-failure
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://${app.baseName?lower_case}:5433/${app.baseName?lower_case}?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+      SPRING_DATASOURCE_URL: jdbc:postgresql://${app.baseName?lower_case}:5432/${app.baseName?lower_case}?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
       SPRING_DATASOURCE_USERNAME: ${app.baseName?lower_case}
       SPRING_DATASOURCE_PASSWORD: ${r"${DB_PW_"}${app.baseName}${r"}"}
       KEYCLOAK_AUTH-SERVER-URL: https://${r"${DOMAIN}"}/auth
