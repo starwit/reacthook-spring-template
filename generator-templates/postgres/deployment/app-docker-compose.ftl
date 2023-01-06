@@ -24,7 +24,7 @@ services:
   reacthookspring:
     image: starwitorg/reacthookspring:v0.2.13-9
     depends_on:
-      db:
+      ${app.baseName?lower_case}-db:
         condition: service_healthy
     restart: on-failure
     environment:
