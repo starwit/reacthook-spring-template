@@ -34,6 +34,18 @@
       "category": "DEPLOYMENT"
     },
     {
+      "fileName": "app-docker-compose.yml",
+      "templatePath": "postgres/deployment/app-docker-compose.ftl",
+      "targetPath": "deployment/https/",
+      "category": "DEPLOYMENT"
+    },
+    {
+      "fileName": "env-docker-compose.yml",
+      "templatePath": "postgres/deployment/env-docker-compose.ftl",
+      "targetPath": "deployment/https/",
+      "category": "DEPLOYMENT"
+    },
+    {
       "fileName": "application.properties",
       "templatePath": "postgres/application/properties.ftl",
       "targetPath": "application/src/main/resources/",
