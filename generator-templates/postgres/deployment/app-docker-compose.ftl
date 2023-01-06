@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  postgres:
+  ${app.baseName?lower_case}-db:
     container_name: ${app.baseName?lower_case}-db
     image: postgres:latest
     environment:
@@ -36,6 +36,9 @@ services:
       SERVER_FORWARD_HEADERS_STRATEGY: FRAMEWORK
     networks: # Networks to join (Services on the same network can communicate with each other using their name)
       - backend
+
+volumes:
+  ${app.baseName?lower_case}-db:
 
  # Networks to be created to facilitate communication between containers
 networks:
