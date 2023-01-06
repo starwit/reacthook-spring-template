@@ -75,7 +75,7 @@ services:
       DB_USER: 'keycloak'
       DB_PASSWORD: ${r"${DB_PW_KEYCLOAK}"}
       PROXY_ADDRESS_FORWARDING: 'true'
-      KEYCLOAK_FRONTEND_URL: 'https://${DOMAIN}/auth'
+      KEYCLOAK_FRONTEND_URL: 'https://${r"${DOMAIN}"}/auth'
     networks: 
       - backend
 
