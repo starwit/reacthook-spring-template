@@ -4,14 +4,56 @@
   "imageUrl": "https://raw.githubusercontent.com/starwit/reacthook-spring-template/main/screenshot.png",
   "templateFiles": [
     {
-      "fileName": "mysqllocal-docker-compose.yml",
-      "templatePath": "deployment/mysqllocal-docker-compose.ftl",
+      "fileName": "pom.xml",
+      "templatePath": "postgres/pom.ftl",
+      "targetPath": "/",
+      "category": "BUILD"
+    },
+    {
+      "fileName": "pom.xml",
+      "templatePath": "postgres/pom-persistence.ftl",
+      "targetPath": "persistence/",
+      "category": "BUILD"
+    },
+    {
+      "fileName": "README.MD",
+      "templatePath": "postgres/readme.ftl",
+      "targetPath": "/",
+      "category": "DOC"
+    },
+    {
+      "fileName": "localenv-docker-compose.yml",
+      "templatePath": "postgres/deployment/localenv-docker-compose.ftl",
       "targetPath": "deployment/",
       "category": "DEPLOYMENT"
     },
     {
+      "fileName": "postgreslocal-docker-compose.yml",
+      "templatePath": "postgres/deployment/postgreslocal-docker-compose.ftl",
+      "targetPath": "deployment/",
+      "category": "DEPLOYMENT"
+    },
+    {
+      "fileName": "application.properties",
+      "templatePath": "postgres/application/properties.ftl",
+      "targetPath": "application/src/main/resources/",
+      "category": "APP"
+    },
+    {
+      "fileName": "application.properties",
+      "templatePath": "postgres/application/propertiestest.ftl",
+      "targetPath": "rest/src/test/resources/",
+      "category": "APP"
+    },
+    {
+      "fileName": "application.properties",
+      "templatePath": "postgres/application/propertiestestpersistence.ftl",
+      "targetPath": "persistence/src/test/resources/",
+      "category": "APP"
+    },
+    {
       "fileName": "${entity.name}Entity.java",
-      "templatePath": "persistence/Entity.ftl",
+      "templatePath": "persistence/Entity-lowercaseIdentifier.ftl",
       "targetPath": "persistence/src/main/java/de/${app.packageName?lower_case}/persistence/entity/",
       "category": "ENTITY"
     },
@@ -20,18 +62,6 @@
       "templatePath": "persistence/Enum.ftl",
       "targetPath": "persistence/src/main/java/de/${app.packageName?lower_case}/persistence/entity/",
       "category": "ENTITY"
-    },
-    {
-      "fileName": "application.properties",
-      "templatePath": "application/properties.ftl",
-      "targetPath": "application/src/main/resources/",
-      "category": "ENTITY"
-    },
-    {
-      "fileName": "application.properties",
-      "templatePath": "application/propertiestest.ftl",
-      "targetPath": "rest/src/test/resources/",
-      "category": "REST"
     },
     {
       "fileName": "${entity.name}Repository.java",
@@ -47,13 +77,13 @@
     },
     {
       "fileName": "V1_0__init.sql",
-      "templatePath": "flyway/V1_0__init.ftl",
+      "templatePath": "postgres/flyway/V1_0__init-postgres.ftl",
       "targetPath": "persistence/src/main/resources/db/migration/",
       "category": "ENTITY"
     },
     {
       "fileName": "V1_0__init.sql",
-      "templatePath": "flyway/V1_0__init.ftl",
+      "templatePath": "postgres/flyway/V1_0__init-postgres.ftl",
       "targetPath": "persistence/src/test/resources/db/test/",
       "category": "ENTITY"
     },
