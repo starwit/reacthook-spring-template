@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: ${app.baseName?lower_case}
       PGDATA: /var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${app.baseName?lower_case}'] # <<<---
+      test: ['CMD-SHELL', 'pg_isready -U ${app.baseName?lower_case}']
       interval: 5s
       timeout: 60s
       retries: 30
@@ -73,7 +73,6 @@ services:
       PROXY_ADDRESS_FORWARDING: 'true'
       KEYCLOAK_FRONTEND_URL: 'http://localhost:8080/auth'
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
       - '8080:8080'
     networks:
       - backend
