@@ -3,7 +3,7 @@ const entityDefault = {
 <#list (entity.fields) as field>
     <#if field.fieldType == "Enum">
     ${field.fieldName}: "",
-    <#elseif field.fieldType == "timestamp" || field.fieldType == "date" || field.fieldType == "time">
+    <#elseif field.fieldType == "Timestamp" || field.fieldType == "Date" || field.fieldType == "Time">
     ${field.fieldName}: null,
     <#else>
     ${field.fieldName}: "",
