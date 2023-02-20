@@ -5,11 +5,14 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(pb.starwit.de)
+domains=($DOMAIN)
 rsa_key_size=4096
 data_path="./data/certbot"
-email="anett.huebner@starwit.de" # Adding a valid address is strongly recommended
+email=$EMAIL # Adding a valid address is strongly recommended
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
+
+sed -i "s/DOMAIN/$DOMAIN/g" nginx.conf
+sed -i "s/DOMAIN/$DOMAIN/g" nginx-init-letsencrypt.conf
 
 if [ -d "$data_path" ]; then
   read -p "Existing data found for $domains. Continue and replace existing certificate? (y/N) " decision

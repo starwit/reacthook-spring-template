@@ -1,32 +1,35 @@
 version: "3.9"
 services:
-  postgres:
-    container_name: ${app.baseName?lower_case}-db
-    image: postgres:latest
-    environment:
-      POSTGRES_DB: ${app.baseName?lower_case}
-      POSTGRES_USER: ${app.baseName?lower_case}
-      POSTGRES_PASSWORD: ${app.baseName?lower_case}
-      PGDATA: /var/lib/postgresql/data
-    healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${app.baseName?lower_case}']
-      interval: 5s
-      timeout: 60s
-      retries: 30
+  nginx:
+    image: nginx:latest
+    restart: always
     volumes:
-      - ${app.baseName?lower_case}-db:/var/lib/postgresql/data
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+      - ./conf.d:/etc/nginx/conf.d
+      - ./content:/var/www/html
     ports:
-      - "5433:5432"
-    networks:
+      - 80:80
+      - 443:443
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
       - backend
-    restart: unless-stopped
-  
+
+  certbot:
+    image: certbot/certbot:latest
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait ${r"$${!}"}; done;'"
+    command: "/bin/sh -c 'while :; do sleep 6h & wait ${r"$${!}"}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./certbot/logs:/var/log/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+
   pgadmin:
     container_name: pgadmin_container
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
-      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_DEFAULT_PASSWORD: ${r"${DB_PW_ROOT}"}
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
        - ${app.baseName?lower_case}-pgadmin:/var/lib/pgadmin
@@ -42,7 +45,7 @@ services:
     environment:
       POSTGRES_DB: 'keycloak'
       POSTGRES_USER: 'keycloak'
-      POSTGRES_PASSWORD: 'keycloak'
+      POSTGRES_PASSWORD: ${r"${DB_PW_KEYCLOAK}"}
       PGDATA: /var/lib/postgresql/data
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U keycloak'] 
@@ -57,31 +60,30 @@ services:
   ${app.baseName?lower_case}-keycloak:
     image: jboss/keycloak
     volumes:
-      - ./keycloak/imports:/opt/jboss/keycloak/imports
-      - ./keycloak/local-test-users.json:/opt/jboss/keycloak/standalone/configuration/keycloak-add-user.json
+      - ./imports:/opt/jboss/keycloak/imports
     depends_on:
       ${app.baseName?lower_case}-db-keycloak:
         condition: service_healthy
     restart: on-failure
     environment:
       KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm.json
+      KEYCLOAK_USER: ${r"${KEYCLOAK_USER}"}
+      KEYCLOAK_PASSWORD: ${r"${KEYCLOAK_PW}"}
       DB_VENDOR: postgres
       DB_ADDR: ${app.baseName?lower_case}-db-keycloak
       DB_PORT: 5432
       DB_USER: 'keycloak'
-      DB_PASSWORD: 'keycloak'
+      DB_PASSWORD: ${r"${DB_PW_KEYCLOAK}"}
       PROXY_ADDRESS_FORWARDING: 'true'
-      KEYCLOAK_FRONTEND_URL: 'http://localhost:8080/auth'
-    ports:
-      - '8080:8080'
-    networks:
+      KEYCLOAK_FRONTEND_URL: 'https://${r"${DOMAIN}"}/auth'
+    networks: 
       - backend
 
+volumes:
+  templatetest-pgadmin:
+  templatetest-keycloak-db:
+
+ # Networks to be created to facilitate communication between containers
 networks:
   backend:
-
-volumes:
-  ${app.baseName?lower_case}-db:
-  ${app.baseName?lower_case}-pgadmin:
-  ${app.baseName?lower_case}-keycloak-db:
 
