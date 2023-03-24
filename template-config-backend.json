@@ -74,12 +74,6 @@
       "templatePath": "rest/ControllerIntegrationTest.ftl",
       "targetPath": "rest/src/test/java/de/${app.packageName?lower_case}/rest/integration/",
       "category": "REST"
-    },
-    {
-      "fileName": ".public-env",
-      "templatePath": "webclient/.public-env.ftl",
-      "targetPath": "webclient/.public-env",
-      "category": "FRONTEND"
     }
   ]
 }

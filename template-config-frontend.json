@@ -17,7 +17,7 @@
     },
     {
       "fileName": "${entity.name}Rest.js",
-      "templatePath": "webclient/EntityRest.ftl",
+      "templatePath": "webclient/EntityRestStandalone.ftl",
       "targetPath": "src/app/services/",
       "category": "FRONTEND"
     },
