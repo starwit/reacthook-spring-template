@@ -1,4 +1,4 @@
-package de.city.application.config;
+package de.starwit.application.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -13,8 +13,7 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedMethods("*")
-                .allowedOrigins("http://localhost:8080", "http://localhost:8081", "http://localhost:8083",
-                        "http://localhost:3001", "http://localhost:3000", "*")
+                .allowedOrigins("http://localhost:8080", "http://localhost:8081")
                 .allowedHeaders("*")
                 .allowCredentials(false);
     }
