@@ -1,5 +1,5 @@
 {
-  "templateName": "reacthookspring",
+  "templateName": "reacthookspring-backend",
   "packagePlaceholder": "starwit",
   "imageUrl": "https://raw.githubusercontent.com/starwit/reacthook-spring-template/main/screenshot.png",
   "templateFiles": [
@@ -74,54 +74,6 @@
       "templatePath": "rest/ControllerIntegrationTest.ftl",
       "targetPath": "rest/src/test/java/de/${app.packageName?lower_case}/rest/integration/",
       "category": "REST"
-    },
-    {
-      "fileName": "AppConfig.js",
-      "templatePath": "webclient/AppConfig.ftl",
-      "targetPath": "webclient/app/src/app/",
-      "category": "FRONTEND"
-    },
-    {
-      "fileName": "translation-en-EN.js",
-      "templatePath": "webclient/translationEnEN.ftl",
-      "targetPath": "webclient/app/src/localization/",
-      "category": "FRONTEND"
-    },
-    {
-      "fileName": "${entity.name}Rest.js",
-      "templatePath": "webclient/EntityRest.ftl",
-      "targetPath": "webclient/app/src/app/services/",
-      "category": "FRONTEND"
-    },
-    {
-      "fileName": "${entity.name}Modifier.js",
-      "templatePath": "webclient/EntityModifier.ftl",
-      "targetPath": "webclient/app/src/app/modifiers/",
-      "category": "FRONTEND"
-    },
-    {
-      "fileName": "MainContentRouter.jsx",
-      "templatePath": "webclient/MainContentRouter.ftl",
-      "targetPath": "webclient/app/src/app/",
-      "category": "FRONTEND"
-    },
-    {
-      "fileName": "${entity.name}Main.jsx",
-      "templatePath": "webclient/EntityMain.ftl",
-      "targetPath": "webclient/app/src/app/features/${entity.name?uncap_first}/",
-      "category": "FRONTEND"
-    },
-    {
-      "fileName": "${entity.name}Detail.jsx",
-      "templatePath": "webclient/EntityDetail.ftl",
-      "targetPath": "webclient/app/src/app/features/${entity.name?uncap_first}/",
-      "category": "FRONTEND"
-    },
-    {
-      "fileName": "${entity.name}Overview.jsx",
-      "templatePath": "webclient/EntityOverview.ftl",
-      "targetPath": "webclient/app/src/app/features/${entity.name?uncap_first}/",
-      "category": "FRONTEND"
     },
     {
       "fileName": ".public-env",

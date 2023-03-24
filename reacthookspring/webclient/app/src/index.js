@@ -7,13 +7,29 @@ import {HashRouter as Router} from "react-router-dom";
 import "./localization/i18n";
 import {SnackbarProvider} from "notistack";
 import MainTheme from "./app/assets/themes/MainTheme";
+import BearerProvider from "./commons/BearerProvider/BearerProvider";
+import {AuthProvider} from "oidc-react";
 
 ReactDOM.render((
         <Router>
             <MainTheme>
-                <SnackbarProvider maxSnack={5}>
-                    <App/>
-                </SnackbarProvider>
+                <AuthProvider
+                    authority={window._env_.AUTH_AUTHORITY}
+                    clientId={window._env_.AUTH_CLIENT_ID}
+                    redirectUri={window.location.href}
+                    autoSignIn={true}
+                    automaticSilentRenew={true}
+                    scope={"openid profile"}
+                    onSignIn={() => {
+                        console.log("on signin");
+                    }}
+                >
+                    <BearerProvider>
+                        <SnackbarProvider maxSnack={5}>
+                            <App/>
+                        </SnackbarProvider>
+                    </BearerProvider>
+                </AuthProvider>
             </MainTheme>
         </Router>
     ),

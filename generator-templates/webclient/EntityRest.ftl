@@ -13,7 +13,7 @@ import axios from "axios";
 
 class ${entity.name}Rest extends CrudRest {
     constructor() {
-        super(window.location.pathname + "api/${entity.name?lower_case}");
+        super(window._env_.API_URL + "api/${entity.name?lower_case}");
     }
 <#if entity.relationships??>
   <#list (entity.relationships) as relation>

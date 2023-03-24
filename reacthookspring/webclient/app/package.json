@@ -26,7 +26,8 @@
     "use-immer": "^0.7.0",
     "@date-io/moment": "^2.15.0",
     "@mui/x-date-pickers": "^5.0.1",
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "oidc-react": "^3.0.3"
   },
   "scripts": {
     "start": "react-scripts start",

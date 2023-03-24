@@ -1,0 +1,3 @@
+API_URL=http://127.0.0.1:8081/citydashboard/
+AUTH_AUTHORITY=http://localhost:8080/auth/realms/citydashboard
+AUTH_CLIENT_ID=citydashboard
