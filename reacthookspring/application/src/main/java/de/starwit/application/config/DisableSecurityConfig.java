@@ -1,4 +1,4 @@
-package de.starwit.application.config;
+package de.city.application.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
