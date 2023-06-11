@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>de.${app.packageName?lower_case}</groupId>
-        <artifactId>${app.baseName?lower_case}</artifactId>
+        <artifactId>${app.baseName}</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
