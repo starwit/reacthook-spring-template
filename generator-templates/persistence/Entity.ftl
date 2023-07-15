@@ -9,7 +9,7 @@ import de.${app.packageName?lower_case}.persistence.serializer.ZonedDateTimeSeri
 import de.${app.packageName?lower_case}.persistence.serializer.ZonedDateTimeDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import javax.persistence.CascadeType;
+import jakarta.persistence.CascadeType;
 
 /**
  * ${entity.name} Entity class
