@@ -14,7 +14,6 @@ import jakarta.persistence.CascadeType;
 /**
  * ${entity.name} Entity class
  */
-@XmlRootElement
 @Entity
 @Table(name = "${entity.name?upper_case}")
 public class ${entity.name}Entity extends AbstractEntity<Long> {

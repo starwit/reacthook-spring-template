@@ -52,8 +52,8 @@ services:
         condition: service_healthy
     restart: on-failure
     environment:
-      KC_DB_URL: jdbc:postgresql://reacthookspring-db-keycloak:5432/keycloak
-      KC_DB: postgres
+      KC_DB_URL: jdbc:mariadb://reacthookspring-db-keycloak:3307/keycloak
+      KC_DB: mariadb
       KC_DB_USERNAME: keycloak
       KC_DB_PASSWORD: keycloak
       KEYCLOAK_ADMIN: admin

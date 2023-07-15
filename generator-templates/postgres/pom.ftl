@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.6</version>
+        <version>3.1.1</version>
     </parent>
 
     <groupId>de.${app.packageName?lower_case}</groupId>
@@ -18,10 +18,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot-version>2.6.6</spring-boot-version>
-        <spring-version>5.3.27</spring-version>
-        <log4j2.version>2.17.2</log4j2.version>
-        <openapi-version>1.6.7</openapi-version>
+        <spring-boot-version>3.1.1</spring-boot-version>
+        <spring-version>6.0.1</spring-version>
+        <openapi-version>2.1.0</openapi-version>
         <jackson-2-version>2.7.4</jackson-2-version>
     </properties>
 

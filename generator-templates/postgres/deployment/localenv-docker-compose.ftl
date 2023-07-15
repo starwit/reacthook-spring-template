@@ -55,27 +55,26 @@ services:
       - backend
 
   ${app.baseName?lower_case}-keycloak:
-    image: jboss/keycloak
+    image: quay.io/keycloak/keycloak
     volumes:
-      - ./keycloak/imports:/opt/jboss/keycloak/imports
-      - ./keycloak/local-test-users.json:/opt/jboss/keycloak/standalone/configuration/keycloak-add-user.json
+      - ./keycloak/imports:/opt/keycloak/data/import
     depends_on:
       ${app.baseName?lower_case}-db-keycloak:
         condition: service_healthy
     restart: on-failure
     environment:
-      KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm.json
-      DB_VENDOR: postgres
-      DB_ADDR: ${app.baseName?lower_case}-db-keycloak
-      DB_PORT: 5432
-      DB_USER: 'keycloak'
-      DB_PASSWORD: 'keycloak'
-      PROXY_ADDRESS_FORWARDING: 'true'
-      KEYCLOAK_FRONTEND_URL: 'http://localhost:8080/auth'
+      KC_DB_URL: jdbc:postgresql://${app.baseName?lower_case}-db-keycloak:5432/keycloak
+      KC_DB: postgres
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HTTP_RELATIVE_PATH: /auth/
     ports:
       - '8080:8080'
     networks:
       - backend
+
 
 networks:
   backend:
