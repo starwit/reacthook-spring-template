@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.1</version>
+        <version>2.6.6</version>
     </parent>
 
-    <groupId>de.starwit</groupId>
-    <artifactId>reacthookspring</artifactId>
+    <groupId>de.${app.packageName?lower_case}</groupId>
+    <artifactId>${app.baseName}</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <description>App template from test @ spring</description>
     <packaging>pom</packaging>
@@ -16,10 +18,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot-version>3.1.1</spring-boot-version>
-        <spring-version>6.0.1</spring-version>
+        <spring-boot-version>2.6.6</spring-boot-version>
+        <spring-version>5.3.27</spring-version>
         <log4j2.version>2.17.2</log4j2.version>
-        <openapi-version>2.1.0</openapi-version>
+        <openapi-version>1.6.7</openapi-version>
         <jackson-2-version>2.7.4</jackson-2-version>
     </properties>
 
@@ -36,12 +38,19 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
-                <version>${spring-version}</version>
+                <version>${r"${spring-version}"}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.keycloak.bom</groupId>
+                <artifactId>keycloak-adapter-bom</artifactId>
+                <version>15.0.2</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
-                <version>${spring-boot-version}</version>
+                <version>${r"${spring-boot-version}"}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.springframework.boot</groupId>
@@ -52,7 +61,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-oauth2-client</artifactId>
-                <version>${spring-boot-version}</version>
+                <version>${r"${spring-boot-version}"}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.springframework.boot</groupId>
@@ -63,7 +72,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-security</artifactId>
-                <version>${spring-boot-version}</version>
+                <version>${r"${spring-boot-version}"}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.springframework.boot</groupId>
@@ -75,7 +84,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
                 <scope>test</scope>
-                <version>${spring-boot-version}</version>
+                <version>${r"${spring-boot-version}"}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.springframework.boot</groupId>
@@ -86,7 +95,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-actuator</artifactId>
-                <version>${spring-boot-version}</version>
+                <version>${r"${spring-boot-version}"}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.springframework.boot</groupId>
@@ -97,7 +106,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-validation</artifactId>
-                <version>${spring-boot-version}</version>
+                <version>${r"${spring-boot-version}"}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.springframework.boot</groupId>
@@ -108,7 +117,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
-                <version>${spring-boot-version}</version>
+                <version>${r"${spring-boot-version}"}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.springframework.boot</groupId>
@@ -119,7 +128,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-rest</artifactId>
-                <version>${spring-boot-version}</version>
+                <version>${r"${spring-boot-version}"}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.springframework.boot</groupId>
@@ -130,17 +139,17 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-log4j2</artifactId>
-                <version>${spring-boot-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.data</groupId>
-                <artifactId>spring-data-jpa</artifactId>
-                <version>${spring-boot-version}</version>
+                <version>${r"${spring-boot-version}"}</version>
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-                <version>${openapi-version}</version>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${r"${openapi-version}"}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-security</artifactId>
+                <version>${r"${openapi-version}"}</version>
             </dependency>
             <dependency>
                 <groupId>com.h2database</groupId>
@@ -149,19 +158,14 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>org.mariadb.jdbc</groupId>
-                <artifactId>mariadb-java-client</artifactId>
-                <version>3.0.4</version>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>42.5.1</version>
                 <scope>runtime</scope>
             </dependency>
             <dependency>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-core</artifactId>
-                <version>8.5.8</version>
-            </dependency>
-            <dependency>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-mysql</artifactId>
                 <version>8.5.8</version>
             </dependency>
             <dependency>
@@ -183,29 +187,29 @@
             </dependency>
 
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>${r"${project.groupId}"}</groupId>
                 <artifactId>application</artifactId>
-                <version>${project.version}</version>
+                <version>${r"${project.version}"}</version>
             </dependency>
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>${r"${project.groupId}"}</groupId>
                 <artifactId>rest</artifactId>
-                <version>${project.version}</version>
+                <version>${r"${project.version}"}</version>
             </dependency>
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>${r"${project.groupId}"}</groupId>
                 <artifactId>service</artifactId>
-                <version>${project.version}</version>
+                <version>${r"${project.version}"}</version>
             </dependency>
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>${r"${project.groupId}"}</groupId>
                 <artifactId>generator</artifactId>
-                <version>${project.version}</version>
+                <version>${r"${project.version}"}</version>
             </dependency>
             <dependency>
-                <groupId>${project.groupId}</groupId>
+                <groupId>${r"${project.groupId}"}</groupId>
                 <artifactId>persistence</artifactId>
-                <version>${project.version}</version>
+                <version>${r"${project.version}"}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

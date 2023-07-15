@@ -6,7 +6,7 @@ import ${entity.name}Rest from "../../services/${entity.name}Rest";
 import {useHistory} from "react-router";
 import {${entity.name?uncap_first}OverviewFields} from "../../modifiers/${entity.name}Modifier";
 
-function UserOverview() {
+function ${entity.name}Overview() {
     const [selected, setSelected] = useState(undefined);
     const {t} = useTranslation();
     const ${entity.name?lower_case}Rest = useMemo(() => new ${entity.name}Rest(), []);
@@ -63,4 +63,4 @@ function UserOverview() {
     );
 }
 
-export default UserOverview;
+export default ${entity.name}Overview;

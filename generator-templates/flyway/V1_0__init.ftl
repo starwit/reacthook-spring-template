@@ -3,9 +3,8 @@ CREATE TABLE `${entity.name?upper_case}`
 (
 <#if entity.fields??>
     <#list entity.fields as field>
-    <#if field.fieldType == "String" || field.fieldType == "Enum">
+        <#if field.fieldType == "String" || field.fieldType == "Enum">
     `${field.fieldName?upper_case}` varchar(255)<#if field.required> NOT NULL </#if>,
-    <#--  <#if field.fieldValidateRulesMaxlength??>, length=${field.fieldValidateRulesMaxlength}</#if>)  -->
         </#if>
         <#if field.fieldType == "Integer">
     `${field.fieldName?upper_case}` integer<#if field.required> NOT NULL </#if>,
