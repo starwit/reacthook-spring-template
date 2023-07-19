@@ -31,7 +31,7 @@ import io.swagger.v3.oas.annotations.Operation;
  * Have a look at the RequestMapping!!!!!!
  */
 @RestController
-@RequestMapping("${r"${rest.base-path}"}/${entity.name?lower_case}")
+@RequestMapping(path = "${r"${rest.base-path}"}/${entity.name?lower_case}")
 public class ${entity.name}Controller {
 
     static final Logger LOG = LoggerFactory.getLogger(${entity.name}Controller.class);

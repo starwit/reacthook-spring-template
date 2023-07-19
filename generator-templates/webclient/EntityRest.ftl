@@ -21,7 +21,7 @@ class ${entity.name}Rest extends CrudRest {
 
     findAllWithout${relation.relationshipName?cap_first}(selected) {
         if (isNaN(selected)) {
-            return axios.get(this.baseUrl + "/find-without-${relation.relationshipName}/");
+            return axios.get(this.baseUrl + "/find-without-${relation.relationshipName}");
         } else {
             return axios.get(this.baseUrl + "/find-without-other-${relation.relationshipName}/" + selected);
         }

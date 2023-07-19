@@ -20,6 +20,7 @@ spring.jpa.hibernate.naming.physical-strategy=de.${app.packageName?lower_case}.p
 #spring.jpa.hibernate.ddl-auto=create
 spring.datasource.username=${app.baseName?lower_case}
 spring.datasource.password=${app.baseName?lower_case}
+spring.data.rest.detection-strategy=annotated
 
 # Flyway
 spring.flyway.user=${r"${spring.datasource.username}"}

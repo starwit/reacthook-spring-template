@@ -20,6 +20,7 @@ spring.jpa.hibernate.naming.physical-strategy=de.${app.packageName?lower_case}.p
 spring.datasource.username=${app.baseName?lower_case}
 spring.datasource.password=${app.baseName?lower_case}
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.data.rest.detection-strategy=annotated
 #spring.jpa.hibernate.ddl-auto=create
 
 # Flyway
