@@ -25,6 +25,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.*;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.cors.CorsConfiguration;
@@ -91,6 +92,10 @@ public class SecurityConfig {
                         .requestMatchers("/**").hasAnyRole("admin", "user", "reader")
                         .requestMatchers("/", "/login/**", "/oauth2/**").permitAll()
                         .anyRequest().authenticated()
+                )
+                .logout((logout) -> logout
+                        .logoutSuccessHandler(oidcLogoutSuccessHandler())
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 )
                 // Maybe https://stackoverflow.com/questions/74939220/classnotfoundexception-org-springframework-security-oauth2-server-resource-web
                 .oauth2Login(Customizer.withDefaults());
