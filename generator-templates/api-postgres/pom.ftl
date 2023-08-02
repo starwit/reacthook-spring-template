@@ -40,13 +40,6 @@
                 <version>${r"${spring-version}"}</version>
             </dependency>
             <dependency>
-                <groupId>org.keycloak.bom</groupId>
-                <artifactId>keycloak-adapter-bom</artifactId>
-                <version>15.0.2</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
                 <version>${r"${spring-boot-version}"}</version>
@@ -59,7 +52,7 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-oauth2-client</artifactId>
+                <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
                 <version>${r"${spring-boot-version}"}</version>
                 <exclusions>
                     <exclusion>
@@ -141,13 +134,18 @@
                 <version>${r"${spring-boot-version}"}</version>
             </dependency>
             <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-jpa</artifactId>
+                <version>${r"${spring-boot-version}"}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-ui</artifactId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 <version>${r"${openapi-version}"}</version>
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-security</artifactId>
+                <artifactId>springdoc-openapi-starter-common</artifactId>
                 <version>${r"${openapi-version}"}</version>
             </dependency>
             <dependency>
