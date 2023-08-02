@@ -70,6 +70,7 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_HTTP_RELATIVE_PATH: /auth/
+    command: start-dev --import-realm
     ports:
       - '8080:8080'
     networks:

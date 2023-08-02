@@ -1,9 +1,9 @@
 ### Prerequisites
 
-* Java JDK 14 or later
+* Java JDK 17 or later
 * Maven 3
 * NodeJs (16.9.1) and NPM (8.3.2) - [NodeJS Install](https://nodejs.org/en/download/package-manager/)
-* mariaDB 10.6 (available for development via docker-compose scripts)
+* Postgres (available for development via docker-compose scripts)
 * using Keycloak is optional
 
 ### Installation Steps
@@ -90,5 +90,5 @@ Start the database without keycloak:
 
 ```bash
 cd deployment
-docker-compose -f mysqllocal-docker-compose.yml up
+docker-compose -f postgreslocal-docker-compose.yml up
 ```
