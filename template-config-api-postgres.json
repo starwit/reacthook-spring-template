@@ -5,61 +5,61 @@
   "templateFiles": [
     {
       "fileName": "pom.xml",
-      "templatePath": "postgres/pom.ftl",
+      "templatePath": "api-postgres/pom.ftl",
       "targetPath": "/",
       "category": "BUILD"
     },
     {
       "fileName": "pom.xml",
-      "templatePath": "postgres/pom-persistence.ftl",
+      "templatePath": "api-postgres/pom-persistence.ftl",
       "targetPath": "persistence/",
       "category": "BUILD"
     },
     {
       "fileName": "README.MD",
-      "templatePath": "postgres/readme.ftl",
+      "templatePath": "api-postgres/readme.ftl",
       "targetPath": "/",
       "category": "DOC"
     },
     {
       "fileName": "localenv-docker-compose.yml",
-      "templatePath": "postgres/deployment/localenv-docker-compose.ftl",
+      "templatePath": "api-postgres/deployment/localenv-docker-compose.ftl",
       "targetPath": "deployment/",
       "category": "DEPLOYMENT"
     },
     {
       "fileName": "postgreslocal-docker-compose.yml",
-      "templatePath": "postgres/deployment/postgreslocal-docker-compose.ftl",
+      "templatePath": "api-postgres/deployment/postgreslocal-docker-compose.ftl",
       "targetPath": "deployment/",
       "category": "DEPLOYMENT"
     },
     {
       "fileName": "app-docker-compose.yml",
-      "templatePath": "postgres/deployment/app-docker-compose.ftl",
+      "templatePath": "api-postgres/deployment/app-docker-compose.ftl",
       "targetPath": "deployment/https/",
       "category": "DEPLOYMENT"
     },
     {
       "fileName": "env-docker-compose.yml",
-      "templatePath": "postgres/deployment/env-docker-compose.ftl",
+      "templatePath": "api-postgres/deployment/env-docker-compose.ftl",
       "targetPath": "deployment/https/",
       "category": "DEPLOYMENT"
     },
     {
       "fileName": "application.properties",
-      "templatePath": "postgres/application/properties.ftl",
+      "templatePath": "api-postgres/application/properties.ftl",
       "targetPath": "application/src/main/resources/",
       "category": "APP"
     },
     {
       "fileName": "application.properties",
-      "templatePath": "postgres/application/propertiestest.ftl",
+      "templatePath": "api-postgres/application/propertiestest.ftl",
       "targetPath": "rest/src/test/resources/",
       "category": "APP"
     },
     {
       "fileName": "application.properties",
-      "templatePath": "postgres/application/propertiestestpersistence.ftl",
+      "templatePath": "api-postgres/application/propertiestestpersistence.ftl",
       "targetPath": "persistence/src/test/resources/",
       "category": "APP"
     },
@@ -89,13 +89,13 @@
     },
     {
       "fileName": "V1_0__init.sql",
-      "templatePath": "postgres/flyway/V1_0__init-postgres.ftl",
+      "templatePath": "api-postgres/flyway/V1_0__init-postgres.ftl",
       "targetPath": "persistence/src/main/resources/db/migration/",
       "category": "ENTITY"
     },
     {
       "fileName": "V1_0__init.sql",
-      "templatePath": "postgres/flyway/V1_0__init-postgres.ftl",
+      "templatePath": "api-postgres/flyway/V1_0__init-postgres.ftl",
       "targetPath": "persistence/src/test/resources/db/test/",
       "category": "ENTITY"
     },
