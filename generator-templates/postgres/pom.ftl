@@ -136,17 +136,17 @@
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-jpa</artifactId>
-                <version>${spring-boot-version}</version>
+                <version>${r"${spring-boot-version}"}</version>
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-                <version>${openapi-version}</version>
+                <version>${r"${openapi-version}"}</version>
             </dependency>
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-common</artifactId>
-                <version>${openapi-version}</version>
+                <version>${r"${openapi-version}"}</version>
             </dependency>
             <dependency>
                 <groupId>com.h2database</groupId>
