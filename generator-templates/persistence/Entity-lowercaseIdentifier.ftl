@@ -16,7 +16,7 @@ import javax.persistence.CascadeType;
  */
 @XmlRootElement
 @Entity
-@Table(name = "${entity.name?upper_case}")
+@Table(name = "${entity.name?lower_case}")
 public class ${entity.name}Entity extends AbstractEntity<Long> {
 
 <#if entity.fields??>
@@ -50,33 +50,33 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
             </#if>
   </#if>
   <#if field.fieldType == "Date" || field.fieldType == "Time" || field.fieldType == "Timestamp">
-    @Column(name="${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name="${field.fieldName?lower_case}"<#if field.required>, nullable = false</#if>)
     @JsonSerialize(using = ZonedDateTimeSerializer.class)
     @JsonDeserialize(using = ZonedDateTimeDeserializer.class)
     private ZonedDateTime ${field.fieldName};
 
   <#else>
         <#if field.fieldType == "String">
-    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if><#if field.max??>, length=${field.max}</#if>)
+    @Column(name = "${field.fieldName?lower_case}"<#if field.required>, nullable = false</#if><#if field.max??>, length=${field.max}</#if>)
         </#if>
         <#if field.fieldType == "Integer">
-    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name = "${field.fieldName?lower_case}"<#if field.required>, nullable = false</#if>)
         </#if>
         <#if field.fieldType == "BigDecimal">
-    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name = "${field.fieldName?lower_case}"<#if field.required>, nullable = false</#if>)
         </#if>
         <#if field.fieldType == "Double">
-    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name = "${field.fieldName?lower_case}"<#if field.required>, nullable = false</#if>)
         </#if>
         <#if field.fieldType == "Long">
-    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name = "${field.fieldName?lower_case}"<#if field.required>, nullable = false</#if>)
         </#if>
         <#if field.fieldType == "Enum">
     @Enumerated(EnumType.STRING)
-    @Column(name = "${field.fieldName?upper_case}"<#if field.required>, nullable = false</#if>)
+    @Column(name = "${field.fieldName?lower_case}"<#if field.required>, nullable = false</#if>)
         </#if>
         <#if field.fieldType == "Boolean">
-    @Column(name = "${field.fieldName?upper_case}")
+    @Column(name = "${field.fieldName?lower_case}")
         </#if>
         <#if field.fieldType == "Enum">
     private ${field.enumDef.name} ${field.fieldName};
@@ -100,14 +100,14 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
   <#elseif relation.relationshipType == "ManyToOne">
     @JsonFilter("filterId")
     @ManyToOne
-    @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID")
+    @JoinColumn(name = "${relation.otherEntityName?lower_case}_id")
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
   <#elseif relation.relationshipType == "OneToOne">
     <#if relation.ownerSide>
     @JsonFilter("filterId")
     @OneToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID", referencedColumnName = "ID", unique = true)
+    @JoinColumn(name = "${relation.otherEntityName?lower_case}_id", referencedColumnName = "id", unique = true)
     private ${relation.otherEntityName}Entity ${relation.relationshipName};
 
     <#else>
@@ -120,9 +120,9 @@ public class ${entity.name}Entity extends AbstractEntity<Long> {
     @JsonFilter("filterId")
     @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(
-        name = "${entity.name?upper_case}_${relation.relationshipName?upper_case}",
-        joinColumns = @JoinColumn(name = "${entity.name?upper_case}_ID"),
-        inverseJoinColumns = @JoinColumn(name = "${relation.otherEntityName?upper_case}_ID"))
+        name = "${entity.name?lower_case}_${relation.relationshipName?lower_case}",
+        joinColumns = @JoinColumn(name = "${entity.name?lower_case}_id"),
+        inverseJoinColumns = @JoinColumn(name = "${relation.otherEntityName?lower_case}_id"))
     private Set<${relation.otherEntityName}Entity> ${relation.relationshipName};
 
     <#else>
