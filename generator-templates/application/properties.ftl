@@ -31,9 +31,14 @@ spring.flyway.locations=classpath:db/migration
 spring.flyway.encoding=UTF-8
 spring.flyway.placeholder-replacement=false
 
-#logging.level.org.springframework.security=DEBUG
-
+# Authentication
 spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8080/auth/realms/${app.baseName?lower_case}
 spring.security.oauth2.client.registration.keycloak.client-id=${app.baseName?lower_case}
 spring.security.oauth2.client.registration.keycloak.client-secret=${app.baseName?lower_case}
 spring.security.oauth2.client.registration.keycloak.scope=openid
+
+# OpenApi
+springdoc.swagger-ui.csrf.enabled=true
+
+# logging.level.org.springframework.security=DEBUG
+# logging.level.org.springframework.web=DEBUG
