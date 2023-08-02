@@ -73,6 +73,7 @@ services:
       KEYCLOAK_ADMIN: ${r"${KEYCLOAK_USER}"}
       KEYCLOAK_ADMIN_PASSWORD: ${r"${KEYCLOAK_PW}"}
       KC_HTTP_RELATIVE_PATH: /auth/
+    command: start-dev --import-realm
     networks:
       - backend
 
