@@ -20,6 +20,7 @@ spring.jpa.hibernate.naming.physical-strategy=de.${app.packageName?lower_case}.p
 #spring.jpa.hibernate.ddl-auto=create
 spring.datasource.username=${app.baseName?lower_case}
 spring.datasource.password=${app.baseName?lower_case}
+spring.data.rest.detection-strategy=annotated
 
 # Flyway
 spring.flyway.user=${r"${spring.datasource.username}"}
@@ -30,16 +31,14 @@ spring.flyway.locations=classpath:db/migration
 spring.flyway.encoding=UTF-8
 spring.flyway.placeholder-replacement=false
 
-springdoc.swagger-ui.disable-swagger-default-url=true
-springdoc.api-docs.path=/api-docs
-springdoc.swagger-ui.path=/swagger-ui.html
+# Authentication
+spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8080/auth/realms/${app.baseName?lower_case}
+spring.security.oauth2.client.registration.keycloak.client-id=${app.baseName?lower_case}
+spring.security.oauth2.client.registration.keycloak.client-secret=${app.baseName?lower_case}
+spring.security.oauth2.client.registration.keycloak.scope=openid
+
+# OpenApi
 springdoc.swagger-ui.csrf.enabled=true
 
-#logging.level.org.springframework.security=DEBUG
-
-keycloak.auth-server-url=http://localhost:8080/auth
-keycloak.realm=${app.baseName?lower_case}
-keycloak.resource=${app.baseName?lower_case}
-keycloak.principal-attribute=preferred_username
-keycloak.public-client=true
-keycloak.enabled=true
+# logging.level.org.springframework.security=DEBUG
+# logging.level.org.springframework.web=DEBUG

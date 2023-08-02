@@ -2,8 +2,8 @@ package de.${app.packageName?lower_case}.rest.controller;
 
 import java.util.List;
 
-import javax.persistence.EntityNotFoundException;
-import javax.validation.Valid;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,7 @@ import io.swagger.v3.oas.annotations.Operation;
  * Have a look at the RequestMapping!!!!!!
  */
 @RestController
-@RequestMapping("${r"${rest.base-path}"}/${entity.name?lower_case}")
+@RequestMapping(path = "${r"${rest.base-path}"}/${entity.name?lower_case}")
 public class ${entity.name}Controller {
 
     static final Logger LOG = LoggerFactory.getLogger(${entity.name}Controller.class);
@@ -49,13 +49,13 @@ public class ${entity.name}Controller {
   <#list (entity.relationships) as relation>
   <#if relation.relationshipType == "OneToOne" || relation.relationshipType == "ManyToOne">
     @Operation(summary = "Get all ${entity.name?lower_case} without ${relation.relationshipName}")
-    @GetMapping(value = "find-without-${relation.relationshipName}")
+    @GetMapping(value = "/find-without-${relation.relationshipName}")
     public List<${entity.name}Entity> findAllWithout${relation.relationshipName?cap_first}() {
         return ${entity.name?lower_case}Service.findAllWithout${relation.relationshipName?cap_first}();
     }
 
     @Operation(summary = "Get all ${entity.name?lower_case} without other ${relation.relationshipName}")
-    @GetMapping(value = "find-without-other-${relation.relationshipName}/{id}")
+    @GetMapping(value = "/find-without-other-${relation.relationshipName}/{id}")
     public List<${entity.name}Entity> findAllWithoutOther${relation.relationshipName?cap_first}(@PathVariable("id") Long id) {
         return ${entity.name?lower_case}Service.findAllWithoutOther${relation.relationshipName?cap_first}(id);
     }

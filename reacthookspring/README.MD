@@ -1,6 +1,6 @@
 ### Prerequisites
 
-* Java JDK 14 or later
+* Java JDK 17 or later
 * Maven 3
 * NodeJs (16.9.1) and NPM (8.3.2) - [NodeJS Install](https://nodejs.org/en/download/package-manager/)
 * mariaDB 10.6 (available for development via docker-compose scripts)
