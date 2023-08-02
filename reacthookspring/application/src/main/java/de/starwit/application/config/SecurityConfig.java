@@ -29,11 +29,26 @@ import java.io.IOException;
 import java.util.*;
 import java.util.function.Supplier;
 
+@Profile("!dev")
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     static final Logger LOG = LoggerFactory.getLogger(SecurityConfig.class);
+
+    @Autowired
+    private ClientRegistrationRepository clientRegistrationRepository;
+
+    LogoutSuccessHandler oidcLogoutSuccessHandler() {
+        OidcClientInitiatedLogoutSuccessHandler oidcLogoutSuccessHandler =
+                new OidcClientInitiatedLogoutSuccessHandler(this.clientRegistrationRepository);
+
+        // Sets the location that the End-User's User Agent will be redirected to
+        // after the logout has been performed at the Provider
+        // oidcLogoutSuccessHandler.setPostLogoutRedirectUri(contextPath+"/");
+
+        return oidcLogoutSuccessHandler;
+    }
 
     private static final String[] AUTH_WHITELIST = {
             // -- Swagger UI v2
