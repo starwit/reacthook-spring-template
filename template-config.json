@@ -28,6 +28,12 @@
       "category": "ENTITY"
     },
     {
+      "fileName": "application-auth.properties",
+      "templatePath": "application/propertiesAuth.ftl",
+      "targetPath": "application/src/main/resources/",
+      "category": "ENTITY"
+    },
+    {
       "fileName": "application.properties",
       "templatePath": "application/propertiestest.ftl",
       "targetPath": "rest/src/test/resources/",

@@ -1,4 +1,4 @@
-spring.profiles.active=@spring.profiles.active@
+spring.profiles.active=auth
 spring.banner.location=classpath:banner.txt
 server.servlet.context-path=/${app.baseName?lower_case}
 rest.base-path=/api
@@ -30,12 +30,6 @@ spring.flyway.baseline-on-migrate=true
 spring.flyway.locations=classpath:db/migration
 spring.flyway.encoding=UTF-8
 spring.flyway.placeholder-replacement=false
-
-# Authentication
-spring.security.oauth2.client.provider.keycloak.issuer-uri=http://localhost:8080/auth/realms/${app.baseName?lower_case}
-spring.security.oauth2.client.registration.keycloak.client-id=${app.baseName?lower_case}
-spring.security.oauth2.client.registration.keycloak.client-secret=${app.baseName?lower_case}
-spring.security.oauth2.client.registration.keycloak.scope=openid
 
 # OpenApi
 springdoc.swagger-ui.csrf.enabled=true
