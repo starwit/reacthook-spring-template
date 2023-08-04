@@ -36,7 +36,7 @@ import java.util.*;
 import java.util.function.Supplier;
 
 
-@Profile("!dev")
+@Profile("auth")
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
