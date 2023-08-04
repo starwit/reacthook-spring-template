@@ -1,4 +1,4 @@
-spring.profiles.active=@spring.profiles.active@
+spring.profiles.active=auth
 spring.banner.location=classpath:banner.txt
 server.servlet.context-path=/${app.baseName?lower_case}
 rest.base-path=/api
