@@ -52,6 +52,12 @@
       "category": "APP"
     },
     {
+      "fileName": "application-auth.properties",
+      "templatePath": "application/propertiesAuth.ftl",
+      "targetPath": "application/src/main/resources/",
+      "category": "ENTITY"
+    },
+    {
       "fileName": "application.properties",
       "templatePath": "postgres/application/propertiestest.ftl",
       "targetPath": "rest/src/test/resources/",

@@ -58,25 +58,23 @@ services:
       - backend
 
   ${app.baseName?lower_case}-keycloak:
-    image: jboss/keycloak
+    image: quay.io/keycloak/keycloak
     volumes:
-      - ./imports:/opt/jboss/keycloak/imports
+      - ./keycloak/imports:/opt/keycloak/data/import
     depends_on:
       ${app.baseName?lower_case}-db-keycloak:
         condition: service_healthy
     restart: on-failure
     environment:
-      KEYCLOAK_IMPORT: /opt/jboss/keycloak/imports/realm.json
-      KEYCLOAK_USER: ${r"${KEYCLOAK_USER}"}
-      KEYCLOAK_PASSWORD: ${r"${KEYCLOAK_PW}"}
-      DB_VENDOR: postgres
-      DB_ADDR: ${app.baseName?lower_case}-db-keycloak
-      DB_PORT: 5432
-      DB_USER: 'keycloak'
-      DB_PASSWORD: ${r"${DB_PW_KEYCLOAK}"}
-      PROXY_ADDRESS_FORWARDING: 'true'
-      KEYCLOAK_FRONTEND_URL: 'https://${r"${DOMAIN}"}/auth'
-    networks: 
+      KC_DB_URL: jdbc:postgresql://${app.baseName?lower_case}-db-keycloak:5432/keycloak
+      KC_DB: postgres
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: ${r"${DB_PW_KEYCLOAK}"}
+      KEYCLOAK_ADMIN: ${r"${KEYCLOAK_USER}"}
+      KEYCLOAK_ADMIN_PASSWORD: ${r"${KEYCLOAK_PW}"}
+      KC_HTTP_RELATIVE_PATH: /auth/
+    command: start-dev --import-realm
+    networks:
       - backend
 
 volumes:
