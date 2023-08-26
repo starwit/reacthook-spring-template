@@ -78,7 +78,7 @@ public class ${entity.name}Service implements ServiceInterface<${entity.name}Ent
             ${entity.name}Entity entityPrev = this.findById(entity.getId());
             <#list (oneToManyRelations) as oneToMany>
             for (${oneToMany.otherEntityName}Entity item : entityPrev.get${oneToMany.relationshipName?cap_first}()) {
-                ${oneToMany.otherEntityName}Entity existingItem = ${oneToMany.otherEntityName?lower_case}Repository.getById(item.getId());
+                ${oneToMany.otherEntityName}Entity existingItem = ${oneToMany.otherEntityName?lower_case}Repository.getReferenceById(item.getId());
                 existingItem.set${oneToMany.otherEntityRelationshipName?cap_first}(null);
                 this.${oneToMany.otherEntityName?lower_case}Repository.save(existingItem);
             }
@@ -94,13 +94,13 @@ public class ${entity.name}Service implements ServiceInterface<${entity.name}Ent
         <#list (oneToManyRelations) as oneToMany>
         if (${oneToMany.relationshipName}ToSave != null && !${oneToMany.relationshipName}ToSave.isEmpty()) {
             for (${oneToMany.otherEntityName}Entity item : ${oneToMany.relationshipName}ToSave) {
-                ${oneToMany.otherEntityName}Entity newItem = ${oneToMany.otherEntityName?lower_case}Repository.getById(item.getId());
+                ${oneToMany.otherEntityName}Entity newItem = ${oneToMany.otherEntityName?lower_case}Repository.getReferenceById(item.getId());
                 newItem.set${oneToMany.otherEntityRelationshipName?cap_first}(entity);
                 ${oneToMany.otherEntityName?lower_case}Repository.save(newItem);
             }
         }
         </#list>
-        return this.getRepository().getById(entity.getId());
+        return this.getRepository().getReferenceById(entity.getId());
     }
 </#if>
 }
