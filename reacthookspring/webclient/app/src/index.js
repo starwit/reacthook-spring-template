@@ -9,14 +9,14 @@ import {SnackbarProvider} from "notistack";
 import MainTheme from "./app/assets/themes/MainTheme";
 
 ReactDOM.render((
-        <Router>
-            <MainTheme>
-                <SnackbarProvider maxSnack={5}>
-                    <App/>
-                </SnackbarProvider>
-            </MainTheme>
-        </Router>
-    ),
+    <Router>
+        <MainTheme>
+            <SnackbarProvider maxSnack={5}>
+                <App />
+            </SnackbarProvider>
+        </MainTheme>
+    </Router>
+),
     document.getElementById("root")
 );
 

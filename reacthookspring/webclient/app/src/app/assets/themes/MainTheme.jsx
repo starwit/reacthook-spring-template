@@ -7,7 +7,7 @@ function MainTheme(props) {
         <ThemeProvider theme={ComponentTheme}>
             {props.children}
         </ThemeProvider>
-    )
+    );
 }
 
 export default MainTheme;

@@ -57,7 +57,6 @@ const ColorTheme = createTheme({
 
     overrides: {}
 
-
-})
+});
 
 export default ColorTheme;
