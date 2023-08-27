@@ -15,13 +15,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 <#if additionalQueries>
 import org.springframework.data.jpa.repository.Query;
 </#if>
-import org.springframework.stereotype.Repository;
 import de.${app.packageName?lower_case}.persistence.entity.${entity.name}Entity;
 
 /**
  * ${entity.name} Repository class
  */
-@Repository
 public interface ${entity.name}Repository extends JpaRepository<${entity.name}Entity, Long> {
 
 <#if entity.relationships??>
