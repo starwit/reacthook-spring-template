@@ -1,0 +1,3 @@
+const appItems = [];
+
+export {appItems};
