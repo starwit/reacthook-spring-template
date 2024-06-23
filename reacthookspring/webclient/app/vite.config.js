@@ -5,10 +5,10 @@ export default defineConfig(({ command }) => {
     if (command === "serve") {
         return {
             plugins: [react()],
-            base: "/shopapp/",
+            base: "/reacthookspring/",
             server: {
                 proxy: {
-                    "/shopapp/api": "http://localhost:8081"
+                    "/reacthookspring/api": "http://localhost:8081"
                 }
             }
         };
