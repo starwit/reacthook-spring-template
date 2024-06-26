@@ -36,7 +36,7 @@ import java.util.*;
 import java.util.function.Supplier;
 
 
-@Profile("auth")
+@Profile({"auth", "auth-dev"})
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -53,7 +53,7 @@ public class SecurityConfig {
         // Sets the location that the End-User's User Agent will be redirected to
         // after the logout has been performed at the Provider
         // oidcLogoutSuccessHandler.setPostLogoutRedirectUri(contextPath+"/");
-
+        oidcLogoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}");
         return oidcLogoutSuccessHandler;
     }
 
